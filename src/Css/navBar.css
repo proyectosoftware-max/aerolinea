@@ -1,0 +1,351 @@
+.navbarEscritorio {
+    background-color: white;
+    height: 80px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    -webkit-box-shadow: -4px 7px 18px 0px rgba(0,0,0,0.1);
+-moz-box-shadow: -4px 7px 18px 0px rgba(0,0,0,0.1);
+box-shadow: -4px 7px 18px 0px rgba(0,0,0,0.1);
+}
+
+.navbarModificarBusqueda {
+    background-color: white;
+    margin-top: 60px !important;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    width: 90%;
+    margin: 0 auto;
+    -webkit-box-shadow: -4px 7px 18px 0px rgba(0,0,0,0.1);
+-moz-box-shadow: -4px 7px 18px 0px rgba(0,0,0,0.1);
+box-shadow: -4px 7px 18px 0px rgba(0,0,0,0.1);
+
+}
+
+.logo{
+    margin-left: 70px;
+}
+
+.navbarEscritorioPasos {
+    height: 80px;
+    background-color: white;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.233);
+}
+.imagenAviancaPasos{
+    margin-left: 50px;
+}
+
+.ciudad1 .ciudad2 {
+    font-size: 14px;
+}
+
+.a {
+    margin-left: 4px;
+    margin-right: 4px;
+
+
+}
+
+.navbar-brand {
+    margin-right: 50px !important;
+}
+
+.nav1 {
+   
+    margin-left: 300px;
+    font-size: 18px;
+
+}
+
+.label_seleccion{
+  font-size: 15px;
+}
+
+.label_viaje{
+    font-size: 15px;
+}
+
+.label_pago{
+    font-size: 15px;
+}
+
+.nav2 {
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    margin-top: -5px;
+}
+
+.fecha {
+    margin-left: 15px;
+}
+
+.adulto {
+    margin-left: 50px !important;
+    margin-right: 30px;
+    font-size: 15px;
+}
+
+.letra_editar {
+    text-decoration: underline !important;
+    color: rgb(90, 142, 155) !important;
+    font-size: 15px !important;
+}
+
+.letra_editar:hover {
+    font-weight: bold;
+}
+
+.pasos {
+    font-size: 16px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.boton_cop {
+    font-weight: bold;
+    width: 200px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: white;
+    border-radius: 20px;
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.label_cero {
+    font-size: 17px;
+}
+
+.barra {
+    width: 130px;
+    color: blue !important;
+}
+
+.barra .progress-bar {
+    background-color: rgb(16, 214, 16) !important;
+    color: blue;
+}
+
+
+.container1 {
+    /*border: 1px solid blue;*/
+    margin-left: 30px !important;
+
+}
+
+.container2 {
+    /*border: 1px solid red;*/
+    width: 620px !important;
+
+}
+
+
+.fondoPaso1 {
+    background-color:rgb(255, 255, 255);
+    margin: 0 auto;
+    margin-top: 200px;
+    width: 87%;
+}
+
+.fondoContenido{
+    background-color: white;
+    width: 90%;
+    overflow: visible;
+    margin: 0 auto;
+}
+
+
+
+.td_ciudad{
+    width: 50%;
+}
+
+.input_ciudad{
+ display: flex;
+}
+
+.div_ciudadOrigen{
+    position: absolute;
+    margin-top: 150px;
+    margin-left: 100px;
+    border-radius: 10px;
+    overflow: visible;
+    z-index: 5;
+    background-color: white;
+    width: 20%;
+    
+}
+
+.div_ciudadDestino{
+    position: absolute;
+    margin-top: 150px;
+    border-radius: 5px;
+    margin-left: 280px;
+    overflow: visible;
+    z-index: 5;
+    background-color: white;
+    width: 20%;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background-color: green;
+    position: fixed;
+}
+
+li {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    background-color: black;
+    color: white;
+    margin-left: -30px;
+    position: fixed;
+}
+
+li:hover {
+    background-color: black;
+    color: white
+}
+
+.label_aeropuerto{
+   font-size: 14px;
+   
+}
+
+.label_abreviatura{
+   margin-left: 15px;
+}
+
+.td_botonBuscar{
+  width: 12%;
+}
+
+
+.botonBuscar{
+background-color: black;
+color: white;
+font-size: 20px;
+font-weight: bold;
+border-radius: 50px;
+width: 100%;
+padding: 8px;
+
+}
+
+.div_origenDestino {
+    display: flex;
+
+}
+
+.fechaOrigen {
+    margin-top: -10px;
+   
+
+}
+
+.botonModificar {
+    border-radius: 30px;
+    font-size: 18px;
+    width: 250px;
+    height: 50px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 30px;
+}
+
+.fecha_desdeHacia {
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.596);
+}
+
+
+
+.datepicker{
+   margin-top: -15px !important;
+   
+}
+
+.desdeHacia {
+    font-size: 13px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.596);
+}
+
+.textField {
+    margin-top: -15px !important;
+    background-color: white;
+}
+
+.botonPasajeros{
+   background-color: black;
+   color: white;
+   width: 90%;
+   margin: 0 auto; 
+   border-radius: 30px; 
+   font-size: 13px;
+   padding-top : 10px;
+   padding-bottom: 10px;
+}
+
+.p_pasajeros{
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 25px;
+  margin-left: 15px;
+  
+  
+}
+
+
+
+.botonCerrarPasajeros{
+    border: none;
+    margin-top: 20px;
+    margin-right: 20px;
+    background-color: transparent;
+    font-size: 23px;
+    
+}
+
+.contenedorPasajeros{
+    margin-top: 15px !important;
+}
+
+.tituloPasajero{
+ 
+  font-size: 18px;
+  
+}
+
+.subtituloPasajero{
+  margin-top: -20px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.555);
+  font-weight: bold;
+}
+
+
+#filled-number{
+    width: 280px;
+    height: 10px;
+    font-size: 23px;
+    margin-top: -20px;
+    padding-bottom: 20px;
+    background-color: white;
+}
+
+.p_salida{
+    padding-top: 20px;
+    margin-left: 25px;
+    font-weight: bold;
+    font-size: 25px;
+
+}

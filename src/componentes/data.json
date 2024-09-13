@@ -1,0 +1,7 @@
+[
+    { "id": 1, "name": "Barranquilla(BAQ)", "aeropuerto":"Aeropuerto Ernesto Cortissoz", "pais": "(Colombia)", "abreviatura": "BAQ" },
+    { "id": 2, "name": "Medellín(MDE)", "aeropuerto":"Aeropuerto Jose Maria Cordova", "pais": "(Colombia)", "abreviatura": "MDE"},
+    { "id": 3, "name": "Santa Marta(SMR)", "aeropuerto":"Aeropuerto de la Palma",  "pais": "(Colombia)", "abreviatura": "SMR" },
+    { "id": 4, "name": "Bogotá(BOG)", "aeropuerto":"Aeropuerto El Dorado",  "pais": "(Colombia)", "abreviatura": "BOG" },
+    { "id": 5, "name": "Cartagena(CTG)", "aeropuerto":"Aeropuerto Rafael Nuñez",  "pais": "(Colombia)", "abreviatura": "CTG" }
+]

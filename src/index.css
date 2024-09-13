@@ -1,0 +1,155 @@
+
+
+
+.div_ordenar_por{
+    margin-top: 50px;
+}
+
+.img_icono{
+ margin-left: 55px;
+}
+
+.label_recomendado{
+  
+   margin-right: 10px;
+   font-weight: bold;
+   font-size: 16px;
+}
+
+.boton_mejor_precio{
+    background-color: white;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 7px;
+    border-radius: 20px;
+    width: 150px;
+    
+}
+
+.boton_vuelos_directos{
+    background-color: white;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 7px;
+    border-radius: 20px;
+    width: 180px;
+}
+
+
+
+
+ .th{
+    font-weight: bold;
+ }
+
+ .TypographyparrafoNegrita{
+    font-size: 18px !important;
+    font-weight: bold;
+    margin-left: 50px !important;
+ }
+
+ .TypographyparrafoPrimero{
+    font-size: 16px !important;
+    position: relative;
+    padding-left: 20px;
+    margin-left: 50px !important;
+    margin-right: 50px !important;
+ }
+
+ .Typographyparrafo{
+    font-size: 16px !important;
+    position: relative;
+    padding-left: 20px;
+    margin-left: 50px !important;
+    margin-right: 50px !important;
+ }
+
+ .Typographyparrafo::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: #80b0c0; /* Azul claro */
+    border-radius: 50%; /* Hace que el punto sea circular */
+  }
+
+ .tabla1{
+    width: 60%; 
+    border-collapse: collapse;
+    font-size: 17px;
+    justify-content: center ;
+    margin: 0 auto;
+    border: none;
+ }
+ .tabla2{
+    width: 40%;
+    border-collapse: collapse;
+    font-size: 17px;
+    margin: 0 auto;
+    border: none;
+ }
+
+ .setenta{
+    font-weight: bold;
+ }
+
+ .div_piePagina{
+   background-color: white;
+   width: 100%;
+   height: 40px;
+    margin-top: 70px;
+    width: 100%;
+    padding-top: 10px;
+    padding-left: 60px;
+    padding-right: 60px;
+ }
+
+ .label_piePagina1{
+    float: left;
+    font-size: 15px;
+ }
+
+ .label_piePagina2{
+    float: right;
+    font-size: 12px;
+ }
+
+
+ /*
+ .popover-container {
+   position: relative;
+   display: inline-block;
+ 
+ }
+ 
+ .popover-button {
+   padding: 8px 16px;
+   font-size: 16px;
+   cursor: pointer;
+ }
+ 
+ .popover-content {
+   position: absolute;
+   bottom: 100%; 
+   left: 50%;
+   transform: translateX(-50%);
+   background-color: white;
+   border: 1px solid #ddd;
+   border-radius: 4px;
+   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+   z-index: 1000; 
+   width: 200px;
+  
+ }
+ 
+ .popover-close {
+   margin-top: 8px;
+   padding: 6px 12px;
+   font-size: 14px;
+   cursor: pointer;
+ } */

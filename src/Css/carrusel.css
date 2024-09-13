@@ -1,0 +1,74 @@
+.carousel-wrapper {
+    display: flex;
+    justify-content: center; /* Centra el carrusel horizontalmente */
+    position: relative;
+    width: 95%;
+    overflow: hidden; /* Oculta el contenido que se desborda del contenedor */
+    margin-left: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  
+  .carousel-container {
+    display: flex;
+    overflow: hidden;
+    position: relative; /* Necesario para posicionar los controles de navegación */
+  }
+  
+  .carousel-content {
+    display: flex;
+    transition: transform 0.3s ease;
+  }
+  
+  .carousel-item-content {
+    flex: 0 0 auto; /* Evita que los elementos se estiren */
+    width: 145px; /* Ajusta el ancho de cada elemento */
+    height: 80px;
+    margin-left: 5px !important;
+    padding-top: 20px !important;
+    padding-bottom: 70px !important;
+    text-align: center; /* Centra el texto dentro de cada elemento */
+    border-radius: 8px; /* Bordes redondeados para cada cuadro */
+    padding: 10px;
+    background-color: #f8f9fa; /* Color de fondo para cada elemento */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera para cada elemento */
+    margin: 0; /* Elimina el margen entre los cuadros */
+
+  }
+  
+  .carousel-control {
+    background: gray;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    color: white;/* Color de las flechas de navegación */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); /* Centra verticalmente las flechas */
+    z-index: 10; /* Asegura que las flechas estén sobre el contenido del carrusel */
+ 
+    border-radius: 100%;
+  }
+  
+  .carousel-control.prev {
+    width: 30px;
+    left: 1px; /* Ajusta el espacio a la izquierda del carrusel */
+  }
+  
+  .carousel-control.next {
+    width: 30px;
+    right: 1px; /* Ajusta el espacio a la derecha del carrusel */
+  }
+
+  .label_fecha{
+    font-size: 16px;;
+  }
+  
+  .label_copCarrusel{
+   font-size: 12px;
+  }
+  
+  .label_precioCarrusel{
+    margin-left: 2px;
+   font-size: 12px;
+  }

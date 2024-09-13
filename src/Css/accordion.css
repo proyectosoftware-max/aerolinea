@@ -1,0 +1,183 @@
+.div_accordion{
+ margin-top: 50px !important;
+ margin: 0 auto;
+ width: 95%;
+}
+
+.accordion{
+/* background-color: red !important;*/
+ border-radius: 10px !important;
+ width: 100%;
+ margin-top: 40px;
+ box-shadow: 1px 5px 10px 5px rgba(0, 0, 0, 0.16) !important; 
+ -moz-box-shadow: 1px 5px 10px 5px rgba(0, 0, 0, 0.16)!important; 
+ -webkit-box-shadow: 1px 5px 15px 5px rgba(0, 0, 0, 0.16)!important;
+}
+
+.accordionTarifas{
+ border-radius: 10px !important;
+ background-color: rgba(236, 232, 232, 0.014) !important;
+ width: 95%;
+ box-shadow: 1px 3px 10px 3px rgba(0, 0, 0, 0.16) !important; 
+ -moz-box-shadow: 1px 3px 3px 3px rgba(0, 0, 0, 0.16)!important; 
+ -webkit-box-shadow: 1px 3px 13px 3px rgba(0, 0, 0, 0.16)!important;
+}
+.custom-card {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+ 
+  border: none;
+  width: 120px;
+ 
+}
+
+.CardHeader{
+  height: 50px !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  height: 28px;
+ border: none !important;
+}
+
+.accordion-header h5 {
+  margin: 0;
+  margin-left: 50px;
+  font-size: 17px;
+  font-weight: bold;
+
+}
+
+.toggle-button {
+
+  border: none;
+  font-size: 12px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.toggle-button:focus {
+  outline: none;
+}
+
+.rotate {
+  transform: rotate(180deg);
+  transition: 0.1s;
+}
+
+.accordion-content {
+  position: absolute;
+  margin-top: 0px;
+  margin-bottom: 100px !important;
+  padding: 20px;
+  border-radius: 20px;
+  margin-left: 750px;
+  background-color: white;
+  width: 30%;
+}
+
+
+
+
+
+/* Accordión de Paso1 */
+
+
+
+.label_directo{
+margin-right: 5px;
+font-size: 12px;
+color: rgba(0, 0, 0, 0.548);
+}
+
+.codigoAvion{
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.548);
+}
+
+.label_barra{
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.548);
+}
+
+.label_detallesVuelo{
+margin-left: 5px;
+font-size: 12px;
+color: rgba(0, 0, 0, 0.548);
+cursor:pointer;
+}
+
+.img_rayaAvion{
+  display: block; 
+  margin: 0 auto; 
+  margin-left: -10px; 
+  margin-top: 10px; 
+}
+
+
+.p_titulosDetalles{
+  font-size: 30px;
+  width: 500px;
+}
+
+.label_origen{
+  font-size: 23px;
+  margin-right: 5px;
+
+  color: black;
+
+}
+
+.label_destino{
+  font-size: 23px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.label_a{
+  font-size: 23px;
+}
+
+.labelBarra{
+  font-size: 23px;
+  margin-right: 5px;
+ 
+}
+
+.labelFecha{
+  font-size: 23px;
+  
+}
+
+.label_botonDirecto{
+  border: 1px solid blue;
+  border-radius: 30px;
+  color: blue;
+  text-align: center;
+  width: 80px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.label_duracion{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.contenedor_popoverAccordion{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid black;
+ 
+}

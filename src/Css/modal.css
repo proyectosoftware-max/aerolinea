@@ -1,0 +1,224 @@
+
+.div_modal{
+    margin-bottom: 100px !important;
+}
+
+.modal{
+    width: 100% !important;
+    border: 1px solid red;
+    border-radius: 100px;
+    overflow-y: auto !important;
+  }
+
+  .header{
+    border-bottom: none;
+    border: 1px solid blue; 
+    position: relative;
+   
+  }
+
+  .custom-modal-size .modal-dialog {
+    max-width: 100% !important; /* Cambia el ancho del modal */
+    width: 100% !important; /* Asegura que el modal use todo el ancho disponible */
+    border-radius: 100px;
+  }
+  
+  .modalBody{
+    border: 1px solid blue;
+    width: 100%!important;
+    height: 250px !important;
+  }
+
+
+  .letra_editar_busqueda{
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  
+  
+   input {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      font-size: 16px;
+  }
+  
+  
+  
+  .date-picker {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+    
+    .date-input {
+      width: 45%;
+      padding: 8px;
+      font-size: 14px;
+      margin-right: 10px;
+    }
+    
+    .calendar-container {
+      position: absolute;
+      display: flex;
+      margin-top: 60px;
+      margin-left: -200px;
+      width: 60%;
+      border-radius: 15px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 20px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      overflow: hidden;
+    }
+    
+    .calendar-month {
+      margin-right: 60px;
+      margin-top: 50px;
+    }
+    
+    .month-year {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .arrow {
+      cursor: pointer;
+      user-select: none;
+    }
+    
+    .days-of-week {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      font-weight: bold;
+    }
+    
+    .days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      margin-left: 20px;
+    }
+    
+    .day {
+      text-align: center;
+      padding: 5px;
+      cursor: pointer;
+      border-radius: 50%;
+      margin-left: 10px;
+    }
+    
+    .day.blank {
+      visibility: hidden;
+    }
+    
+    .day.disabled {
+      color: #5a3c3c;
+      cursor: default;
+    }
+    
+    .day.selected {
+      background-color: black;
+      color: white;
+      border-radius: 100%;
+    }
+   
+
+    .day:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    
+    .day-of-week {
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+   .div_calendario{
+    margin-top: 10px;
+    margin-left: -250px;
+    width: 100%;
+    max-height: 100%;
+    display: flex;
+
+   }
+   .div_volar{
+    overflow-y: visible;
+    margin-top: 20px;
+    margin-left: -5px;
+    font-size: 18px;
+    font-weight: bold;
+    width: 500px !important;
+    height: 40px;
+    z-index: 2;
+
+   }
+
+   
+
+  .p1{
+    font-size: 18px;
+    text-align: left;
+  }
+
+  .p2{
+    margin-top: -20px;
+  font-size: 12px;
+  text-align: left;
+  color: gray;
+  }
+
+  .boton_mas{
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 5px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    
+  }
+ 
+    
+  .boton_menos{
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 5px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .numeros{
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  .boton_confirmar{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: black;
+    border-radius: 50px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    width: 45%;
+    height: 50px;
+  }
