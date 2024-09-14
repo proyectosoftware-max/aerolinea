@@ -485,25 +485,25 @@ const Paso1 = () => {
                         <Typography gutterBottom className='contenedor_popoverAccordion'>
                         { datosPopover? (
                             <table style={{ textAlign: 'center', width: '100%' }}>
-                                <tr style={{ border: '1px solid green' }}  >
-                                    <td style={{ border: '1px solid green' }} rowSpan='3' > <img src={barraVertical} /></td>
-                                    <td style={{ border: '1px solid green' }}><label>{datosPopover.hora_salida}</label><label>{origenNormal}</label><br />
+                                <tr   >
+                                    <td  rowSpan='3' > <img src={barraVertical} /></td>
+                                    <td ><label>{datosPopover.hora_salida}</label><label>{origenNormal}</label><br />
                                         <label>{aeropuertoOrigen.aeropuerto}</label></td>
-                                    <td style={{ border: '1px solid green' }}> <label>Operado por avianca</label><br />
+                                    <td > <label>Operado por avianca</label><br />
                                         <label>AV9332</label><label> AIRBUS A320</label>
                                     </td>
                                 </tr>
                                 <tr>
 
-                                    <td style={{ border: '1px solid green' }}>{datosPopover.tiempo_vuelo}</td>
-                                    <td style={{ border: '1px solid green' }}></td>
+                                    <td >{datosPopover.tiempo_vuelo}</td>
+                                    <td ></td>
                                 </tr>
 
                                 <tr>
 
-                                    <td style={{ border: '1px solid green' }}><label>{datosPopover.hora_llegada}</label><label>{destinoNormal}</label><br />
+                                    <td ><label>{datosPopover.hora_llegada}</label><label>{destinoNormal}</label><br />
                                         <label>{aeropuertoDestino.aeropuerto}</label></td>
-                                    <td style={{ border: '1px solid green' }}></td>
+                                    <td ></td>
                                 </tr>
                             </table>
                        ) : (

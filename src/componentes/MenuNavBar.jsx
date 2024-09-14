@@ -21,11 +21,13 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
+import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import Popover from '@mui/material/Popover';
 import dayjs from 'dayjs';
 import uno from '../material/1.jpg';
 import dos from '../material/2.jpg';
 import tres from '../material/3.jpg';
+import icono_idioma from '../material/icono_idioma.jpg';
 
 
 
@@ -54,6 +56,11 @@ const MenuNavBar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [adulto, setAdulto] = useState(1);
   const [inputAdulto, setInputAdulto] = useState(1);
+  const [language, setLanguage] = useState('Español');
+
+  const idioma = (event) => {
+    setLanguage(event.target.value);
+  };
 
 
 
@@ -421,7 +428,13 @@ const MenuNavBar = () => {
         <Container className='container1'>
           <Navbar.Brand href="" className='navbar-brand'>
             <img src={logo}  className='logo' />
-          </Navbar.Brand>
+            <img src={icono_idioma}/>
+            <select style={{border:'none', outline:'none', borderRadius:'300px'}} value={language} onChange={idioma}>
+           <option style={{border:'none'}}>Español</option>
+           <option style={{border:'none'}}>Inglés</option>
+          </select>
+  
+        </Navbar.Brand>
           <Navbar.Collapse id="bascic navbar-nav">
             <Nav className='flex-column'>
               <div className="nav1" >

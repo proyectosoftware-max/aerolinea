@@ -4,19 +4,11 @@ import Principal from './Principal';
 import Paso1 from './componentes/Paso1';
 import Paso2 from './componentes/Paso2';
 import Resumen from './componentes/Resumen';
-import './App.css';
-import './index.css';
-import './css/navbar.css';
-import './css/modal.css';
-import './css/carrusel.css';
-import './css/radio.css';
-import './css/accordion.css';
-import './css/resumen.css';
 
 function App() {
 
   return (
-    <div className='claseApp' style={{ backgroundColor: 'rgb(235, 235, 235)', border:'1px solid rgb(235, 235, 235)'}}>
+    <div classNa style={{ backgroundColor: 'rgb(235, 235, 235)', border:'1px solid rgb(235, 235, 235)'}}>
       <DataProvider>
       <BrowserRouter>
         <Routes>

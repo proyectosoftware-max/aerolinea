@@ -115,13 +115,13 @@ const id = abrir ? 'simple-popover' : undefined;
           <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '30px' }}>
             <tbody>
               <tr>
-                <td style={{ width: '10%', textAlign: 'center', verticalAlign: 'middle', border: '1px solid green' }}>
+                <td style={{ width: '10%', textAlign: 'center', verticalAlign: 'middle' }}>
                   <div>
                     <label style={{ display: 'block', fontSize: '20px', fontWeight: 'bold' }}>{salida}</label>
                     <p style={{ marginRight: '18px', fontSize: '17px' }}>{ida}</p>
                   </div>
                 </td>
-                <td style={{ width: '35%', textAlign: 'center', border: '1px solid green' }}>
+                <td style={{ width: '35%', textAlign: 'center'}}>
                   <div style={{ marginTop: '-10px' }}>
                     <p style={{ marginTop: '10px', color: ' gray', fontSize: '15px' }}>{tiempo}</p>
                     <img src={raya_avion} alt="Avion" style={{ display: 'block', margin: '0 auto' }} />
@@ -129,13 +129,13 @@ const id = abrir ? 'simple-popover' : undefined;
 
                   </div>
                 </td>
-                <td style={{ width: '10%', textAlign: 'center', verticalAlign: 'middle', border: '1px solid green' }}>
+                <td style={{ width: '10%', textAlign: 'center', verticalAlign: 'middle' }}>
                   <div style={{ marginRight: '10px' }}>
                     <label style={{ display: 'block', fontSize: '20px', fontWeight: 'bold' }}>{llegada}</label>
                     <p style={{ marginLeft: '18px', fontSize: '17px' }}>{vuelta}</p>
                   </div>
                 </td>
-                <td style={{ width: '11%', border: '1px solid green' }}>
+                <td style={{ width: '11%'}}>
                   <div style={{}}>
                     <label style={{}}><img src={logoAviancaResumen}/>AV 8520</label><br />
                     <label style={{}}>
@@ -144,7 +144,7 @@ const id = abrir ? 'simple-popover' : undefined;
                     </label>
                   </div>
                 </td>
-                <td style={{ width: '25%', textAlign: 'center', verticalAlign: 'middle', border: '1px solid green' }}>
+                <td style={{ width: '25%', textAlign: 'center', verticalAlign: 'middle'}}>
                   <div style={{ marginLeft: '-100px' }}>
                     <label style={{ display: 'block', marginLeft: '180px', marginRight: '150px', marginBottom: '5px', textAlign: 'center', backgroundColor: 'red', color: 'white', borderRadius: '5px', fontWeight: 'bold', width: '70px' }}>Basic</label>
                     <label style={{ margin: 0, fontSize: '20px', fontWeight: 'bold', marginTop: '-15px' }}>
@@ -205,25 +205,25 @@ const id = abrir ? 'simple-popover' : undefined;
                         <Typography gutterBottom className='contenedor_popoverAccordion'>
                         
                             <table style={{ textAlign: 'center', width: '100%' }}>
-                                <tr style={{ border: '1px solid green' }}  >
-                                    <td style={{ border: '1px solid green' }} rowSpan='3' > <img src={barraVertical} /></td>
-                                    <td style={{ border: '1px solid green' }}><label>{salida}</label><label>{origenNormal}</label><br />
+                                <tr   >
+                                    <td  rowSpan='3' > <img src={barraVertical} /></td>
+                                    <td ><label>{salida}</label><label>{origenNormal}</label><br />
                                         <label>{ao}</label></td>
-                                    <td style={{ border: '1px solid green' }}> <label>Operado por avianca</label><br />
+                                    <td > <label>Operado por avianca</label><br />
                                         <label>AV9332</label><label> AIRBUS A320</label>
                                     </td>
                                 </tr>
                                 <tr>
 
-                                    <td style={{ border: '1px solid green' }}>{tiempo}</td>
-                                    <td style={{ border: '1px solid green' }}></td>
+                                    <td >{tiempo}</td>
+                                    <td ></td>
                                 </tr>
 
                                 <tr>
 
-                                    <td style={{ border: '1px solid green' }}><label>{llegada}</label><label>{destinoNormal}</label><br />
+                                    <td ><label>{llegada}</label><label>{destinoNormal}</label><br />
                                         <label>{ad}</label></td>
-                                    <td style={{ border: '1px solid green' }}></td>
+                                    <td ></td>
                                 </tr>
                             </table>
                     
@@ -252,7 +252,7 @@ const id = abrir ? 'simple-popover' : undefined;
           </label>
         
         <label className='label_boton'>  
-          <button className='boton_continua' onClick={Paso2}>
+          <button className='boton_continua'>
           Continua personalizando tu viaje
         </button></label>
          
