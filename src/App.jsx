@@ -5,10 +5,11 @@ import Paso1 from './componentes/Paso1';
 import Paso2 from './componentes/Paso2';
 import Resumen from './componentes/Resumen';
 
+
 function App() {
 
   return (
-    <div classNa style={{ backgroundColor: 'rgb(235, 235, 235)', border:'1px solid rgb(235, 235, 235)'}}>
+    <div className='claseApp' style={{ backgroundColor: 'rgb(235, 235, 235)', border:'1px solid rgb(235, 235, 235)'}}>
       <DataProvider>
       <BrowserRouter>
         <Routes>
