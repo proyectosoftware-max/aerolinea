@@ -1,8 +1,8 @@
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import { useState } from 'react';
 import logo from '../material/logo.png';
-import uno from '../material/1.jpg';
-import dos from '../material/2.jpg';
+import unoAprobado from '../material/1aprobado.jpg';
+import dosResaltado from '../material/2resaltado.jpg';
 import tres from '../material/3.jpg';
 import icono_idioma from '../material/icono_idioma.jpg';
 
@@ -37,9 +37,9 @@ const MenuNavBar = () => {
           <Navbar.Collapse id="bascic navbar-nav">
             <Nav className='flex-column'>
               <div className="nav1" >
-                <img src={uno}/>
+                <img src={unoAprobado}/>
                 <label className='label_seleccion'>Selección de vuelos</label>
-                <img src={dos}/>
+                <img src={dosResaltado}/>
                 <label className='label_viaje'>Personaliza tu viaje</label>
                 <img src={tres}/>
                 <label className='label_pago'>Pagos</label>

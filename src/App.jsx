@@ -15,8 +15,9 @@ function App() {
         <Routes>
           <Route path='/' element={<Principal />} />
           <Route path='/paso1' element={<Paso1 />} />
-          <Route path='/resumen/:corigen/:cdestino/:ida/:vuelta/:tiempo/:precio/:salida/:llegada/:ao/:ad' element={<Resumen/>} />
           <Route path='/paso2' element={<Paso2 />} />
+          <Route path='/resumen/:corigen/:cdestino/:ida/:vuelta/:tiempo/:precio/:salida/:llegada/:ao/:ad' element={<Resumen/>} />
+          
         </Routes>
       </BrowserRouter>
       </DataProvider>

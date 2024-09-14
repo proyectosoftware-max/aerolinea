@@ -431,7 +431,6 @@ const MenuNavBar = () => {
             <img src={icono_idioma}/>
             <select style={{border:'none', outline:'none', borderRadius:'300px'}} value={language} onChange={idioma}>
            <option style={{border:'none'}}>Español</option>
-           <option style={{border:'none'}}>Inglés</option>
           </select>
   
         </Navbar.Brand>

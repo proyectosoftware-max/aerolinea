@@ -105,7 +105,7 @@ const id = abrir ? 'simple-popover' : undefined;
     <>
       <MenuNavBar />
       <p className='p_resumen'><label style={{ marginLeft: '5px', marginRight: '5px'}}>Resumen de viaje</label></p>
-      <div className='fondoResumen' style={{ marginBottom: '150px' }}>
+      <div className='fondoResumen' style={{ marginBottom: '25px' }}>
         <img src={success} style={{float:'right', marginLeft:'20px'}}/>
 
         <p className='p_ida'><img src={iconoAvion}/>Vuelo de ida: {corigen} <label style={{ marginLeft: '5px', marginRight: '5px' }}>a</label>{cdestino}<label style={{ marginLeft: '5px' }}>-</label><label style={{ marginLeft: '5px' }}>{formatDate(selectedDate)}</label></p>
