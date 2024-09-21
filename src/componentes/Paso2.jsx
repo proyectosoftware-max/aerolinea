@@ -28,6 +28,7 @@ import signoMas from '../material/signoMas.jpg';
 import signoEquis from '../material/signoEquis.jpg';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import ErrorIcon from '@mui/icons-material/Error';
 import dayjs from 'dayjs';
 import 'dayjs/locale/es';
 
@@ -110,6 +111,10 @@ const Paso2 = () => {
     const [checkservicios, setCheckservicios] = useState(false);
     const [checkAceptar, setCheckAceptar] = useState(false);
     const [checkRecibir, setCheckRecibir] = useState(false);
+    const [errorNombre, setErrorNombre] = useState(false);
+    const [errorApellido, setErrorApellido] = useState(false);
+    const [errorCorreo, setErrorCorreo] = useState(false);
+    const [errorTelefono, setErrorTelefono] = useState(false);
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -136,10 +141,22 @@ const Paso2 = () => {
     const changeNombre = (e) => {
         setNombrePasajero(e.target.value);
         setNombreAdulto(e.target.value);
+
+        if (e.target.value.trim() === '') {
+            setErrorNombre(true);
+          } else {
+            setErrorNombre(false);
+          }
     }
 
     const changeApellido = (e) => {
         setApellidoPasajero(e.target.value);
+
+        if (e.target.value.trim() === '') {
+            setErrorApellido(true);
+          } else {
+            setErrorApellido(false);
+          }
     }
 
     const changePaisIndicativo = (event) => {
@@ -150,6 +167,12 @@ const Paso2 = () => {
     const changeTelefono = (event) => {
         setTelefono(event.target.value);
         console.log('Valor: ' + paisIndicativo);
+
+        if (e.target.value.trim() === '') {
+            setErrorTelefono(true);
+          } else {
+            setErrorTelefono(false);
+          }
     };
 
     const changelifes = (event) => {
@@ -211,6 +234,12 @@ const Paso2 = () => {
 
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    // Función para cambiar de tab sin importar si hay validaciones
+  const cambiarTab = () => {
+    setValue(1); // Cambiar al Tab 2
+  };
+
     return (
         <>
             <div className="paso2"  >
@@ -242,7 +271,10 @@ const Paso2 = () => {
                                         }}
 
                                     >
-                                        <Tab icon={<Adulto />} label={nombreAdulto} {...a11yProps(0)}
+                                        <Tab icon={<Adulto />} label={nombreAdulto} 
+                                        
+                                        
+                                        {...a11yProps(0)}
                                             onChange={changeNombre}
                                             iconPosition="start"
 
@@ -279,6 +311,8 @@ const Paso2 = () => {
                                         <label>Ingresa el nombre y primer apellido (de cada pasajero) tal y como aparecen en el pasaporte o documento de identidad.</label>
                                         <div>
                                             <TextField id="outlined-basic" label="Nombre" variant="standard"
+                                                 error={errorNombre}
+                                                 helperText={errorNombre ? 'Por favor, ingresa tu primer nombre.' : ''}
                                                 onChange={changeNombre}
                                                 InputLabelProps={{
                                                     style: {
@@ -299,6 +333,8 @@ const Paso2 = () => {
 
                                             />
                                             <TextField id="outlined-basic" label="Apellido" variant="standard"
+                                                 error={errorApellido}
+                                                 helperText={errorApellido ? 'Por favor, ingresa tu primer apellido.' : ''}
                                                 onChange={changeApellido}
                                                 InputLabelProps={{
                                                     style: {
@@ -396,7 +432,8 @@ const Paso2 = () => {
                                                         </FormControl>
 
                                                         <TextField id="outlined-basic" label="Número de teléfono" variant="standard"
-
+                                                             error={error}
+                                                             helperText={error ? 'Este campo es requerido' : ''}
                                                             InputLabelProps={{
                                                                 style: {
                                                                     fontSize: '24px', // Tamaño inicial del label
@@ -449,14 +486,18 @@ const Paso2 = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <button className="boton_infoContacto">Información de contacto</button>
+                                   {/*<button className="boton_infoContacto" onChange={cambiarTab}>Información de contacto</button>*/}
                                 </CustomTabPanel>
+                                {value === 1 && (
                                 <CustomTabPanel value={value} index={1}>
+                                
                                     <div>
                                         <label>Información de contacto {paisIndicativo}</label><br />
                                         <label>Utilizaremos este correo para informarte sobre tu reserva, administrar cambios y reembolsos. Al continuar aceptas nuestra política de privacidad.</label>
                                         <div>
                                             <TextField id="outlined-basic" label="Correo" variant="standard"
+                                                 error={errorCorreo}
+                                                 helperText={errorCorreo ? 'Por favor, ingresa tu correo electrónico.' : ''}
                                                 InputLabelProps={{
                                                     style: {
                                                         fontSize: '24px', // Tamaño inicial del label
@@ -538,7 +579,8 @@ const Paso2 = () => {
                                             </FormControl>
 
                                             <TextField id="outlined-basic" label="Número de teléfono" variant="standard"
-
+                                                 error={errorTelefono}
+                                                 helperText={errorTelefono ? 'Este campo es obligatorio.' : ''}
                                                 onChange={changeTelefono}
                                                 value={telefono}
                                                 InputLabelProps={{
@@ -602,7 +644,7 @@ const Paso2 = () => {
 
 
                                     </div>
-                                </CustomTabPanel>
+                                </CustomTabPanel>)}
                             </Box>
 
 
@@ -638,7 +680,7 @@ const Paso2 = () => {
                         </div>
                         <div className='div_boton_continuaPaso2'>
 
-                            <button className='boton_continuaPaso2' onClick={enviar}>
+                            <button className='boton_continuaPaso2' disabled={true} >
                                 Continuar y pagar
                             </button>
                         </div>
@@ -672,7 +714,7 @@ const Paso2 = () => {
                         </div>
                         <div className='div_boton_continuaPaso2'>
 
-                            <button className='boton_continuaPaso2' onClick={enviar}>
+                            <button className='boton_continuaPaso2' disabled={true} >
                                 Continuar y pagar
                             </button>
                         </div>
