@@ -49,8 +49,8 @@ const Paso3 = () =>{
     const { selectedDate } = useContext(DataContext);
 
     const enviarBanco =()=>{
-        window.location.href = `https://bancoaerolinea.onrender.com/?nombre=${encodeURIComponent(nombre)}&apellido=${encodeURIComponent(apellido)}`;
-          
+        window.location.href = `https://banco-wuei.onrender.com/?nombre=${encodeURIComponent(nombre)}&apellido=${encodeURIComponent(apellido)}`;
+            
     }
 
     return(
