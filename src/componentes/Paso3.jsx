@@ -50,7 +50,7 @@ const Paso3 = () =>{
 
     const enviarBanco =()=>{
         window.location.href = `https://bancoaerolinea.onrender.com/?nombre=${encodeURIComponent(nombre)}&apellido=${encodeURIComponent(apellido)}`;
-      
+          
     }
 
     return(
