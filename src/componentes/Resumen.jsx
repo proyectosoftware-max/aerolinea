@@ -70,6 +70,9 @@ const Resumen = () => {
   const {corigen, cdestino, ida, vuelta, tiempo, precio, salida, llegada, ao, ad} = useParams();
   const [origenNormal, setOrigenNormal] = useState('');
   const [destinoNormal, setDestinoNormal] = useState('');
+  const [nombre, setNombre] = useState('nombre');
+  const [apellido, setApelldio] = useState('apellido');
+  const [telefono, setTelefono] = useState('telefono');
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
 
@@ -100,6 +103,11 @@ const cerrarVentana = () => {
 
 const abrir = Boolean(anchorEl);
 const id = abrir ? 'simple-popover' : undefined;
+
+
+ const enviar = () =>{
+    navigate(`/paso2/${ida}/${vuelta}/${precio}/${salida}/${llegada}/${tiempo}/${nombre}/${apellido}/${telefono}`);
+ }
 
   return (
     <>
@@ -252,7 +260,7 @@ const id = abrir ? 'simple-popover' : undefined;
           </label>
         
         <label className='label_boton'>  
-          <button className='boton_continua'>
+          <button className='boton_continua' onClick={enviar} >
           Continua personalizando tu viaje
         </button></label>
          

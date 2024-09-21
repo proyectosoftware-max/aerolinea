@@ -1,0 +1,26 @@
+const lifesMiles = [
+    { nombre: "lifemiles"},
+    { nombre: "Aeroplan"},
+    { nombre: "AirPoints"},
+    { nombre: "Ana Mileage Club"},
+    { nombre: "Asiana Club"},
+    { nombre: "Connect Miles"},
+    { nombre: "Egyptair Plus"},
+    { nombre: "EuroBonus"},
+    { nombre: "Flying returns"},
+    { nombre: "Iberia Plus"},
+    { nombre: "Infinity Mileage Lands"},
+    { nombre: "KrisFlyer"},
+    { nombre: "Mileage Plus"},
+    { nombre: "Miles&Bonus"},
+    { nombre: "Miles&Go"},
+    { nombre: "Miles&More"},
+    { nombre: "Miles&Smiles"},
+    { nombre: "Phoenix Miles"},
+    { nombre: "Royal Orchid Plus"},
+    { nombre: "ShebaMiles"},
+    { nombre: "Smiles"},
+    { nombre: "voyager"},
+  ];
+
+  export default lifesMiles;

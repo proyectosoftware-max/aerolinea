@@ -1,5 +1,4 @@
 
-@import url('./App.scss');
 @import url('./css/navbar.scss');
 @import url('./css/modal.scss');
 @import url('./css/carrusel.scss');
@@ -7,10 +6,13 @@
 @import url('./css/accordion.scss');
 @import url('./css/resumen.scss');
 @import url('./css/paso2.scss');
+@import url('./css/adicionales.scss');
+@import url('./css/paso3.scss');
 
+/*
 .claseApp{
    display: none;
-}
+}*/
 
 .div_ordenar_por{
     margin-top: 50px;
@@ -118,6 +120,7 @@
     padding-top: 10px;
     padding-left: 60px;
     padding-right: 60px;
+    bottom: 0;
  }
 
  .label_piePagina1{
@@ -130,13 +133,15 @@
     font-size: 12px;
  }
 
+ /*
 
  @media screen and (min-width: 1024px) {
    .claseApp {
-     display: block; /* Mostrar solo en pantallas de 1024px o más */
+     display: block;
+     
    }
 
-}
+}*/
 
 
  
