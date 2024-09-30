@@ -6,6 +6,11 @@
     border-radius: 5px;
 }
 
+.imagenSuccess{
+    float: right;
+    margin-left: 20px; 
+}
+
 .div_datos {
     border: 1px solid rgba(128, 128, 128, 0.479);
     border-radius: 5px;
@@ -14,6 +19,12 @@
     height: 140px;
     margin-bottom: 25px;
 }
+
+
+.div_datosMovil, .equipajeMovil,.div_sinSorpresasMovil, .div_ContenedorTotalMovil{
+  display: none;
+}
+
 
 .p_resumen {
     margin-top: 80px;
@@ -27,6 +38,11 @@
     margin-left: 25px;
     font-weight: bold;
     font-size: 25px;
+}
+
+.rayaAvionResumen {
+    display: block;
+    margin: 0 auto;
 }
 
 .equipaje {
@@ -127,5 +143,259 @@
     font-weight: bold;
     background-color: black;
     color: white;
+}
+
+.div_piePaginaResumen{
+    display: block;
+    background-color: white;
+    width: 100%;
+    height: 40px;
+    width: 100%;
+    margin-top: 20px;
+    padding-top: 10px;
+    padding-left: 60px;
+    padding-right: 60px;
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.616);
+    text-align: right;
+ 
+}
+
+@media screen and (max-width: '768px') {
+    .imagenSuccess{
+        float: right;
+        margin-left: 0;
+        width: 25px;
+    }
+    
+    .p_resumen {
+        display: none;
+    }
+
+    .p_ida {
+        display: none;
+    }
+
+
+    .div_contenedorIdaOrigenDestino {
+        margin-top: 80px;
+        margin-left: 30px;
+        margin-bottom: -80px;
+    }
+
+    .p_idaMovil {
+        font-size: 13px;
+        margin-bottom: -1px;
+    }
+
+    .p_OrigenDestinoMovilResumen {
+        font-size: 17px;
+        font-weight: bold;
+    }
+
+    .fondoResumen {
+        margin-top: 100px;
+    }
+
+    .label_rayaResumenMovil {
+        display: block;
+        width: 100%;
+        height: 1px;
+        border-top: 1px solid gray;
+        margin: 0 auto;
+        margin-left: 2px;
+        margin-top: 1px;
+    }
+
+    .div_datos {
+        display: none;
+    }
+
+    .div_datosMovil {
+        background-color: white;
+        padding-left: 5px;
+        padding-right: 5px;
+        width: 100%;
+    }
+
+    .div_datosContenedorMovil {
+        display: flex;
+        width: 100%;
+    }
+
+    .label_salidaMovilResumen {
+        display: block;
+        font-size: 15px;
+        font-weight: bold;
+
+    }
+
+    .p_codigoOrigenMovilResumen {
+        margin-right: 20px;
+        font-size: 20px;
+        display: none;
+    }
+
+
+    .div_contenedorDatosVuelosMovilResumen {
+        margin-top: -10px;
+        width: 400%;
+        height: 50px;
+        text-align: center;
+    }
+
+    .label_directoMovilResumen {
+        margin-right: 5px;
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.548);
+
+    }
+
+    .label_barraMovilResumen {
+        font-size: 10px;
+        color: rgba(0, 0, 0, 0.548);
+    }
+
+    .label_rayaMovilResumen {
+        display: block;
+        width: 100%;
+        height: 1px;
+        border-top: 1px solid gray;
+        margin: 0 auto;
+        margin-left: 2px;
+        margin-top: 1px;
+    }
+
+    .div_llegadaMovilResumen {
+        border-right: none;
+        overflow: visible;
+        height: 30px;
+        border: 1px solid green;
+    }
+
+    .label_llegadaMovilResumen {
+        display: block;
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .p_codigoDestinoMovilResumen {
+        margin-left: 2px;
+        font-size: 20px;
+        display: none;
+    }
+
+    .div_valorPasajeMovilResumen {
+        width: 100%;
+        text-align: center;
+    }
+
+    .detallesMovilResumen {
+        font-size: 13px;
+        float: left;
+        color: rgba(0, 0, 0, 0.603);
+    }
+
+    .label_valorPasajeMovilResumen {
+        font-size: 15px;
+        font-weight: bold;
+        margin-left: 50px;
+    }
+
+
+    .equipaje {
+        display: none;
+    }
+
+    .equipajeMovil {
+        background-color: rgba(0, 255, 255, 0.171);
+    }
+
+    .imagenEquipajeMovil {
+        float: right;
+        width: 80px;
+    }
+
+    .label_precioEquipajeMovil {
+        font-weight: bold;
+        margin-left: 5px;
+        font-size: 16px;
+    }
+
+    .div_continua {
+        display: none;
+    }
+    .div_datosMovil, .equipajeMovil{
+        display: block;
+      }
+    .div_sinSorpresasMovil {
+        display: block;
+        margin-top: 50px;
+        padding-top: 5px;
+        padding-bottom: 50px;
+        font-size: 15px;
+        border: 1px solid rgb(23, 190, 154);
+        border-radius: 5px;
+        width: 90%;
+        height: 50px;
+        margin: 0 auto;
+    }
+
+    .p_sorpresas, .p_todos {
+        font-size: 12px;
+    }
+
+
+
+    .div_ContenedorTotalMovil {
+        display: block;
+        margin-top: 100px;
+        background-color: white;
+        padding: 20px;
+        text-align: center;
+        margin-bottom: -40px;
+    }
+
+    .label_totalMovil {
+        float: left;
+        font-size: 14px;
+    }
+
+    .label_precioMovil {
+        float: right;
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .boton_continuaMovil {
+        margin-top: 10px;
+        width: 100%;
+        height: 45px;
+        border-radius: 30px;
+        font-size: 14px;
+        font-weight: bold;
+        background-color: black;
+        color: white;
+    }
+
+    .div_piePagina {
+        display: none
+    }
+
+    .div_piePaginaResumen{
+        display: block;
+        background-color: white;
+        width: 100%;
+        height: 40px;
+        width: 100%;
+        margin-top: 50px;
+        padding-top: 10px;
+        padding-left: 60px;
+        padding-right: 60px;
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.616);
+        text-align: center;
+     
+    }
 
 }

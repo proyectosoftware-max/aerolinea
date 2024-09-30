@@ -7,9 +7,12 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
 import { Card, CardContent, CardActions, Button, Grid, darken } from '@mui/material';
-import precio_bajo_basic from '../material/barranquilla/precio bajo/basic.jpg';
-import precio_bajo_classic from '../material/barranquilla/precio bajo/classic.jpg';
-import precio_bajo_flex from '../material/barranquilla/precio bajo/flex.jpg';
+import img_basic from '../material/barranquilla/precio bajo/basicActual.jpg';
+import img_classic from '../material/barranquilla/precio bajo/classicActual.jpg';
+import img_flex from '../material/barranquilla/precio bajo/flexActual.jpg';
+import img_basicMovil from '../material/barranquilla/precio bajo/basicMovil.jpg';
+import img_classicMovil from '../material/barranquilla/precio bajo/classicMovil.jpg';
+import img_flexMovil from '../material/barranquilla/precio bajo/flexMovil.jpg';
 import rayaAvion from '../material/rayaAvion.jpg';
 import PiePagina from './PiePagina.jsx';
 import { DataContext } from './Context';
@@ -20,6 +23,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import ListIcon from '@mui/icons-material/List';
 import imagen_opcion from '../material/opcion.jpg';
 import { useNavigate } from 'react-router-dom';
 import Popover from '@mui/material/Popover';
@@ -82,6 +86,26 @@ const formatDate = (date) => {
     return `${capitalizedWeekday}, ${day} ${capitalizedMonth}`;
 };
 
+const formatoFechaMovil = (date) => {
+    // Formato corto del día de la semana, número del día y mes
+    const formattedDate = dayjs(date).format('ddd D MMM'); // Ej: "Thu 12 Sep"
+
+    // Separar el formato en partes
+    let [weekday, day, monthAbbreviation] = formattedDate.split(' ');
+
+    // Eliminar cualquier punto en el día de la semana (si existe)
+    weekday = weekday.replace('.', '');
+
+    // Capitalizar la primera letra del día de la semana
+    const capitalizedWeekday = weekday.charAt(0).toUpperCase() + weekday.slice(1);
+
+    // Mapea la abreviación del mes al español usando el mapa personalizado
+    const capitalizedMonth = monthMap[monthAbbreviation.toLowerCase()] || monthAbbreviation;
+
+    // Retorna el formato final, por ejemplo "Jue, 12 Sept"
+    return `${capitalizedWeekday}, ${capitalizedMonth} ${day} `;
+};
+
 
 
 const formatPrice = (price) => {
@@ -91,23 +115,23 @@ const formatPrice = (price) => {
 const formatoCompleto = (date) => {
     // Formato corto del día de la semana, número del día y mes
     const formattedDate = dayjs(date).format('ddd D MMM YYYY'); // Ej: "Thu 12 Sep"
-  
+
     // Separar el formato en partes
     let [weekday, day, monthAbbreviation, year] = formattedDate.split(' ');
-  
+
     // Eliminar cualquier punto en el día de la semana (si existe)
     weekday = weekday.replace('.', '');
-  
+
     // Capitalizar la primera letra del día de la semana
     const capitalizedWeekday = weekday.charAt(0).toUpperCase() + weekday.slice(1);
-  
+
     // Mapea la abreviación del mes al español usando el mapa personalizado
     const capitalizedMonth = monthMap[monthAbbreviation.toLowerCase()] || monthAbbreviation;
-  
+
     // Retorna el formato final, por ejemplo "Jue, 12 Sept"
     return `${capitalizedWeekday}, ${capitalizedMonth} ${day}, ${year} `;
-  };
-  
+};
+
 
 
 const Paso1 = () => {
@@ -135,10 +159,13 @@ const Paso1 = () => {
     const [datosPopover, setDatosPopover] = useState('');
     const [aeropuertoOrigen, setAeropuertoOrigen] = useState('');
     const [aeropuertoDestino, setAeropuertoDestino] = useState('');
-
     const navigate = useNavigate();
 
-    const [open, setOpen] = React.useState(false);
+    
+
+
+
+    const [open, setOpen] = useState(false);
 
     const handleClickOpen = (vuelo) => {
         setVueloOrigen(vuelo.codigo_origen);
@@ -223,7 +250,7 @@ const Paso1 = () => {
     }
 
     const abrirVentana = (event, id) => {
-         
+
         const datosVuelos = datos.vuelos.find(vuelo => vuelo.origen === origen && vuelo.destino === destino);
         const horarisoVuelos = datosVuelos.horarios.find((item) => item.id === id); // Buscar el elemento seleccionado en el .json
         setDatosPopover(horarisoVuelos); // Establecer el elemento seleccionado
@@ -248,13 +275,15 @@ const Paso1 = () => {
     }
 
 
+     
 
     return (
         <>
 
             <div className='fondoPaso1'>
-                <p className='p_salida'><img src={iconoAvion}/>Salida de {origenNormal} <label style={{ marginLeft: '2px', marginRight: '5px' }}>a</label>{destinoNormal}<label style={{fontSize:'14px', marginTop:'-100px', marginLeft:'5px', marginRight:'5px', fontWeight:'bold'}}>—</label><label>{formatoCompleto(selectedDate)}</label></p>
-              
+                <p className='p_salida'><img src={iconoAvion} />Salida de {origenNormal} <label style={{ marginLeft: '2px', marginRight: '5px' }}>a</label>{destinoNormal}<label style={{ fontSize: '14px', marginTop: '-100px', marginLeft: '5px', marginRight: '5px', fontWeight: 'bold' }}>—</label><label>{formatoCompleto(selectedDate)}</label></p>
+                <p className='p_salidaMovil'>Selecciona tu vuelo de salida -{formatoFechaMovil(selectedDate)}</p>
+                <p className='p_origenDestinoMovil'>{origenNormal}<label className='label_a_movil'>a</label>{destinoNormal}</p>
                 <div className="carousel-wrapper">
                     <button className="carousel-control prev" onClick={handlePrev}>&#10094;</button>
                     <div className="carousel-container">
@@ -300,17 +329,17 @@ const Paso1 = () => {
                                 <AccordionSummary
                                     aria-controls={`panel${index}-content`}
                                     id={`panel${index}-header`}
-                                > <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                                > <table className='tabla_accordion' >
                                         <tbody>
                                             <tr>
                                                 <td style={{ width: '15%', textAlign: 'center', verticalAlign: 'middle' }}>
                                                     <div>
-                                                        <label style={{ display: 'block', fontSize: '24px', fontWeight: 'bold' }}>{vuelo.hora_salida}</label>
-                                                        <p style={{ marginRight: '20px', fontSize: '20px' }}>{vuelo.codigo_origen}</p>
+                                                        <label className='label_salida' >{vuelo.hora_salida}</label>
+                                                        <p className='p_codigoOrigen'>{vuelo.codigo_origen}</p>
                                                     </div>
                                                 </td>
                                                 <td style={{ width: '35%', textAlign: 'center'/*, border: '1px solid blue'*/ }}>
-                                                    <div style={{ marginTop: '-10px' }}>
+                                                    <div className='div_contenedorDatosVuelos'>
                                                         <label className='label_directo' >Directo {vuelo.tiempo_vuelo}</label>
                                                         <label className='codigoAvion'>codigo avión</label>
                                                         <label className='label_barra' >|</label>
@@ -320,15 +349,15 @@ const Paso1 = () => {
                                                     </div>
                                                 </td>
                                                 <td style={{ width: '25%', textAlign: 'center', verticalAlign: 'middle' }}>
-                                                    <div style={{ marginRight: '180px', borderRight: ' 1px solid gray', overflow: 'visible', paddingRight: '50px', height: '70px' }}>
-                                                        <label style={{ display: 'block', fontSize: '24px', fontWeight: 'bold' }}>{vuelo.hora_llegada}</label>
-                                                        <p style={{ marginLeft: '2px', fontSize: '20px' }}>{vuelo.codigo_destino}</p>
+                                                    <div className='div_llegada'>
+                                                        <label className='label_llegada'>{vuelo.hora_llegada}</label>
+                                                        <p className='p_codigoDestino'>{vuelo.codigo_destino}</p>
                                                     </div>
                                                 </td>
                                                 <td style={{ width: '25%', textAlign: 'center', verticalAlign: 'middle' }}>
-                                                    <div style={{ marginLeft: '-150px' }}>
+                                                    <div className='div_valorPasaje'>
 
-                                                        <label style={{ margin: 0, fontSize: '20px', fontWeight: 'bold', marginTop: '-15px' }}>
+                                                        <label className='label_valorPasaje'>
                                                             ${vuelo.valor_pasaje} COP
 
 
@@ -338,27 +367,61 @@ const Paso1 = () => {
                                             </tr>
                                         </tbody>
                                     </table>
+
+                                    <div className='div_contendedorMovil' >
+
+                                        <div>
+                                            <label className='label_salidaMovil' >{vuelo.hora_salida}</label>
+                                            <p className='p_codigoOrigenMovil'>{vuelo.codigo_origen}</p>
+                                        </div>
+
+                                        <div className='div_contenedorDatosVuelosMovil'>
+                                            <label className='label_directoMovil' >Directo {vuelo.tiempo_vuelo}</label>
+                                            <label className='codigoAvionMovil'>codigo avión</label>
+                                            <label className='label_barraMovil' >|</label>
+                                            <img src={rayaAvion} alt="Avion" className='img_rayaAvion' />
+                                            <label className='label_rayaMovil'></label>
+
+                                        </div>
+
+                                        <div className='div_llegadaMovil'>
+                                            <label className='label_llegadaMovil'>{vuelo.hora_llegada}</label>
+                                            <p className='p_codigoDestinoMovil'>{vuelo.codigo_destino}</p>
+                                        </div>
+
+                                        <div className='div_valorPasajeMovil'>
+
+                                            <label className='label_valorPasajeMovil'>
+                                                ${vuelo.valor_pasaje} COP
+
+
+                                            </label>
+                                        </div>
+
+                                    </div>
                                 </AccordionSummary>
                                 <AccordionDetails>
                                     <p style={{ textAlign: 'center', marginBottom: '30px', fontSize: '25px', fontWeight: 'bold' }}>Elige cómo quieres volar</p>
                                     <Typography>
                                         <Grid container spacing={3} >
-                                            <Grid item xs={12} sm={6} md={4} style={{ marginTop: '50px' }}>
+                                            <Grid item xs={12} sm={6} md={4} style={{ marginTop: '-10px' }}>
                                                 <Card sx={{
                                                     maxWidth: 345, margin: '0 auto', borderRadius: '15px', height: '100%', paddingBottom: '50px', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
                                                     WebkitBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
                                                     MozBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)'
-                                                }}>
+                                                }}
+                                                 className='basic'
+                                                >
                                                     <CardContent>
                                                         <Typography variant="h5" component="div">
 
                                                         </Typography>
                                                         <Typography variant="body2" color="text.secondary">
-                                                            <img src={precio_bajo_basic} style={{ marginTop: '15px', marginBottom: '-5px' }} onClick={handleClickOpen} />
+                                                            <img src={img_basic} style={{ marginTop: '-10px', marginBottom: '-5px' }} onClick={handleClickOpen} />
                                                         </Typography>
                                                     </CardContent>
-                                                    <CardActions sx={{ justifyContent: 'center' }}>
-                                                 
+                                                    <CardActions sx={{ justifyContent: 'center', marginTop:'30px' }}>
+
                                                         <Button variant="contained" sx={{
                                                             textTransform: 'none',
                                                             backgroundColor: 'rgb(226, 17, 17)',
@@ -368,10 +431,36 @@ const Paso1 = () => {
                                                             width: '250px',
                                                             '&:hover': { backgroundColor: darken('rgb(226, 17, 17)', 0.2) }
 
-                                                        }} onClick={() => handleClickOpen(vuelo)}  >${vuelo.valor_pasaje}COP</Button>
+                                                        }} onClick={() => handleClickOpen(vuelo)}  >${vuelo.valor_pasaje} COP</Button>
                                                     </CardActions>
                                                     <Typography variant="p" color="text.secondary" sx={{ marginLeft: '120px', fontSize: '12px' }}>
                                                         Precio por pasajero
+                                                    </Typography>
+
+                                                </Card>
+
+                                                <Card sx={{
+                                                    maxWidth: 345, margin: '0 auto', borderRadius: '15px', height: '100%', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                                    WebkitBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                                    MozBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)'
+                                                }}
+                                                 className='basicMovil'
+                                                >
+                                                    <CardContent>
+                                                        <Typography variant="h5" component="div">
+
+                                                        </Typography>
+                                                        <Typography variant="body2" color="text.secondary">
+                                                            <img src={img_basicMovil} style={{ marginTop: '-10px', marginBottom: '-5px' }} onClick={handleClickOpen} />
+                                                        </Typography>
+                                                    </CardContent>
+                                                    <CardActions sx={{ justifyContent: 'center', marginTop:'30px'}}>
+
+                                                        
+                                                    </CardActions>
+                                                    <Typography variant="body2" color="text.secondary" onClick={clickBotonAccordion}   sx={{ backgroundColor:'rgb(226, 17, 17)' , width:'100%',height:'50px',borderBottomLeftRadius:'15px', borderBottomRightRadius:'15px', fontSize: '12px' }}>
+                                                       <p style={{textAlign:' center', fontSize:'15px', fontWeight:'bold', color:' white', paddingTop:'10px'}}>${vuelo.valor_pasaje} COP</p>
+                                                        <p style={{textAlign:' center', fontSize:'13px',  color:' white', marginTop:'-20px'}}>Precio por pasajero</p>
                                                     </Typography>
 
                                                 </Card>
@@ -382,16 +471,18 @@ const Paso1 = () => {
                                                     maxWidth: 345, margin: '0 auto', border: '2px solid rgb(204, 51, 140)', borderRadius: '15px', height: '100%', paddingBottom: '50px', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
                                                     WebkitBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
                                                     MozBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)'
-                                                }}>
+                                                }}
+                                                className='classic'
+                                                >
                                                     <CardContent>
                                                         <Typography variant="h5" component="div">
 
                                                         </Typography>
                                                         <Typography variant="body2" color="text.secondary">
-                                                            <img src={precio_bajo_classic} style={{ marginTop: '30px', marginBottom: '-5px' }} />
+                                                            <img src={img_classic} style={{ marginTop: '30px', marginBottom: '-5px' }} />
                                                         </Typography>
                                                     </CardContent>
-                                                    <CardActions sx={{ justifyContent: 'center' }}>
+                                                    <CardActions sx={{ justifyContent: 'center', marginTop:'-10px' }}>
                                                         <Button variant="contained" sx={{
                                                             textTransform: 'none',
                                                             backgroundColor: 'rgb(204, 51, 140)',
@@ -401,29 +492,55 @@ const Paso1 = () => {
                                                             width: '250px',
                                                             '&:hover': { backgroundColor: darken('rgb(204, 51, 140)', 0.2) }
 
-                                                        }} >Seleccionar</Button>
+                                                        }} >${(parseFloat(vuelo.valor_pasaje.replace(/\./g, '')) + 70000).toLocaleString('es-CO')} COP</Button>
                                                     </CardActions>
                                                     <Typography variant="p" color="text.secondary" sx={{ marginLeft: '120px', fontSize: '12px' }}>
                                                         Precio por pasajero
                                                     </Typography>
 
                                                 </Card>
-                                            </Grid>
-                                            <Grid item xs={12} sm={6} md={4} style={{ marginTop: '50px' }}>
+
                                                 <Card sx={{
-                                                    maxWidth: 345, margin: '0 auto', border: '15px', height: '100%', paddingBottom: '50px', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                                    maxWidth: 345, margin: '0 auto', border: '2px solid rgb(204, 51, 140)', borderRadius: '15px', height: '100%',  boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
                                                     WebkitBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
                                                     MozBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)'
-                                                }}>
+                                                }}
+                                                className='classicMovil'
+                                                >
                                                     <CardContent>
                                                         <Typography variant="h5" component="div">
 
                                                         </Typography>
                                                         <Typography variant="body2" color="text.secondary">
-                                                            <img src={precio_bajo_flex} style={{ marginTop: '-15px', marginBottom: '1px' }} />
+                                                            <img src={img_classicMovil} style={{ marginTop: '30px', marginBottom: '-5px' }} />
                                                         </Typography>
                                                     </CardContent>
-                                                    <CardActions sx={{ justifyContent: 'center' }}>
+                                                    <CardActions sx={{ justifyContent: 'center', marginTop:'-10px' }}>
+                                                    </CardActions>
+                                                    <Typography variant="body2" color="text.secondary" onClick={() => handleClickOpen(vuelo)}  sx={{ backgroundColor:'rgb(204, 51, 140)' , width:'100%',height:'50px',borderBottomLeftRadius:'15px', borderBottomRightRadius:'15px', fontSize: '12px' }}>
+                                                       <p style={{textAlign:' center', fontSize:'15px', fontWeight:'bold', color:' white', paddingTop:'10px'}}>${vuelo.valor_pasaje} COP</p>
+                                                        <p style={{textAlign:' center', fontSize:'13px',  color:' white', marginTop:'-20px'}}>Precio por pasajero</p>
+                                                    </Typography>
+
+                                                </Card>
+                                            </Grid>
+                                            <Grid item xs={12} sm={6} md={4} style={{ marginTop: '-10px' }}>
+                                                <Card sx={{
+                                                    maxWidth: 345, margin: '0 auto', border: '15px', height: '100%', paddingBottom: '50px', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                                    WebkitBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                                    MozBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)'
+                                                }}
+                                                 className='flex'
+                                                >
+                                                    <CardContent>
+                                                        <Typography variant="h5" component="div">
+
+                                                        </Typography>
+                                                        <Typography variant="body2" color="text.secondary">
+                                                            <img src={img_flex} style={{ marginTop: '-15px', marginBottom: '1px' }} />
+                                                        </Typography>
+                                                    </CardContent>
+                                                    <CardActions sx={{ justifyContent: 'center', marginTop:'25px' }}>
                                                         <Button variant="contained" sx={{
                                                             textTransform: 'none',
                                                             backgroundColor: 'rgb(247, 123, 8)',
@@ -433,10 +550,34 @@ const Paso1 = () => {
                                                             width: '250px',
                                                             '&:hover': { backgroundColor: darken('rgb(247, 123, 8)', 0.2) }
 
-                                                        }} >Seleccionar</Button>
+                                                        }} >${(parseFloat(vuelo.valor_pasaje.replace(/\./g, '')) + 110000).toLocaleString('es-CO')} COP</Button>
                                                     </CardActions>
                                                     <Typography variant="p" color="text.secondary" sx={{ marginLeft: '120px', fontSize: '12px' }}>
                                                         Precio por pasajero
+                                                    </Typography>
+
+                                                </Card>
+
+                                                <Card sx={{
+                                                    maxWidth: 345, margin: '0 auto', border: '15px', height: '100%', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                                    WebkitBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                                    MozBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)'
+                                                }}
+                                                 className='flexMovil'
+                                                >
+                                                    <CardContent>
+                                                        <Typography variant="h5" component="div">
+
+                                                        </Typography>
+                                                        <Typography variant="body2" color="text.secondary">
+                                                            <img src={img_flexMovil} style={{ marginTop: '-15px', marginBottom: '1px' }} />
+                                                        </Typography>
+                                                    </CardContent>
+                                                    <CardActions sx={{ justifyContent: 'center', marginTop:'25px' }}>
+                                                    </CardActions>
+                                                    <Typography variant="body2" color="text.secondary" onClick={() => handleClickOpen(vuelo)}  sx={{ backgroundColor:'rgb(247, 123, 8)' , width:'100%',height:'50px',borderBottomLeftRadius:'15px', borderBottomRightRadius:'15px', fontSize: '12px' }}>
+                                                       <p style={{textAlign:' center', fontSize:'15px', fontWeight:'bold', color:' white', paddingTop:'10px'}}>${vuelo.valor_pasaje} COP</p>
+                                                        <p style={{textAlign:' center', fontSize:'13px',  color:' white', marginTop:'-20px'}}>Precio por pasajero</p>
                                                     </Typography>
 
                                                 </Card>
@@ -481,34 +622,34 @@ const Paso1 = () => {
 
 
                         </Typography>
-                      
+
                         <Typography gutterBottom className='contenedor_popoverAccordion'>
-                        { datosPopover? (
-                            <table style={{ textAlign: 'center', width: '100%' }}>
-                                <tr   >
-                                    <td  rowSpan='3' > <img src={barraVertical} /></td>
-                                    <td ><label>{datosPopover.hora_salida}</label><label>{origenNormal}</label><br />
-                                        <label>{aeropuertoOrigen.aeropuerto}</label></td>
-                                    <td > <label>Operado por avianca</label><br />
-                                        <label>AV9332</label><label> AIRBUS A320</label>
-                                    </td>
-                                </tr>
-                                <tr>
+                            {datosPopover ? (
+                                <table style={{ textAlign: 'center', width: '100%' }}>
+                                    <tr   >
+                                        <td rowSpan='3' > <img src={barraVertical} /></td>
+                                        <td ><label>{datosPopover.hora_salida}</label><label>{origenNormal}</label><br />
+                                            <label>{aeropuertoOrigen.aeropuerto}</label></td>
+                                        <td > <label>Operado por avianca</label><br />
+                                            <label>AV9332</label><label> AIRBUS A320</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
 
-                                    <td >{datosPopover.tiempo_vuelo}</td>
-                                    <td ></td>
-                                </tr>
+                                        <td >{datosPopover.tiempo_vuelo}</td>
+                                        <td ></td>
+                                    </tr>
 
-                                <tr>
+                                    <tr>
 
-                                    <td ><label>{datosPopover.hora_llegada}</label><label>{destinoNormal}</label><br />
-                                        <label>{aeropuertoDestino.aeropuerto}</label></td>
-                                    <td ></td>
-                                </tr>
-                            </table>
-                       ) : (
-                        <p>No hay datos disponibles</p>
-                      )}
+                                        <td ><label>{datosPopover.hora_llegada}</label><label>{destinoNormal}</label><br />
+                                            <label>{aeropuertoDestino.aeropuerto}</label></td>
+                                        <td ></td>
+                                    </tr>
+                                </table>
+                            ) : (
+                                <p>No hay datos disponibles</p>
+                            )}
 
 
                         </Typography>
@@ -528,138 +669,164 @@ const Paso1 = () => {
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
 
-                                style={{ width: '97%' }}
+                                style={{ width: '100%' }}
                             >
-                                <Typography variant="body2" paragraph style={{ marginTop: '10px', marginBottom: '10px', fontSize: '20px', fontWeight: 'bold' }}>Condiciones tarifarias</Typography>
+                                <Typography variant="body2"  paragraph className='tituloTarifas' ><ListIcon style={{ verticalAlign: 'middle', marginRight: '8px' }} />Condiciones tarifarias</Typography>
                             </AccordionSummary >
-                            <AccordionDetails >
-                                <Typography variant="h6" paragraph className='TypographyparrafoNegrita'>Cambios de vuelo</Typography>
+                            <AccordionDetails className='accordionDetails'>
+                                <Typography variant="h6" paragraph className='TypographyparrafoNegrita'><label className='flechaTarifas'>»</label>Cambios de vuelo:</Typography>
                                 <Typography variant="body2" paragraph className='TypographyparrafoPrimero'>
                                     Para las tarifas basic, light y classic se permiten cambios antes de la salida del vuelo, pero aplican los siguientes cargos adicionales:
                                 </Typography>
                                 <Typography variant="body2" paragraph className='Typographyparrafo'>
-                                    Cargo por cambio: son los cargos adicionales que se generan al cambiar tu vuelo de manera voluntaria (aplican únicamente para las tarifas basic, light y classic).
+                                    i) Cargo por cambio: son los cargos adicionales que se generan al cambiar tu vuelo de manera voluntaria (aplican únicamente para las tarifas basic, light y classic).
                                 </Typography>
                                 <Typography variant="body2" component="div">
-                                    <table border="1" cellPadding="10" cellSpacing="0" className='tabla1' >
+
+                                    <table border="1" cellPadding="10" className='tabla1' >
                                         <thead>
                                             <tr>
-                                                <th className='th'>Destino</th>
-                                                <th>Cargo</th>
+                                                <th className='th'>Vuelos nacionales en Colombia</th>
+                                                <th className='th'>Vuelos nacionales en Ecuador</th>
+                                                <th className='th'>Vuelos internacionales al interior de Suramérica</th>
+                                                <th className='th'>Otros vuelos internacionales*</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td className='th'>Vuelos nacionales en Colombia</td>
-                                                <td className='th'>120.000 COP</td>
-                                            </tr>
-                                            <tr>
-                                                <td className='th'>Vuelos nacionales en Ecuador</td>
-                                                <td>30 USD</td>
-                                            </tr>
-                                            <tr>
-                                                <td className='th'>Vuelos internacionales al interior de Suramérica</td>
-                                                <td>185 USD</td>
-                                            </tr>
-                                            <tr>
-                                                <td className='th'>Otros vuelos internacionales en las Américas y vuelos hacia Europa</td>
-                                                <td>USD/CAD 210</td>
-                                            </tr>
-                                            <tr>
-                                                <td className='th'>Desde Reino Unido</td>
-                                                <td>GBP 150</td>
-                                            </tr>
-                                            <tr>
-                                                <td className='th'>Desde el resto de Europa</td>
-                                                <td>EUR 180</td>
+                                                <td className='tr'>COP 110.000</td>
+                                                <td className='tr'>USD 28</td>
+                                                <td className='tr'>USD 170</td>
+                                                <td className='tr'>USD 200</td>
                                             </tr>
                                         </tbody>
                                     </table>
+
+                                    <table  cellPadding="10" className='tabla1Movil' >
+                                        <thead>
+                                            <tr>
+                                                <th className='thMovil'>Vuelos nacionales en Colombia</th> 
+                                                <td className='trMovil'>COP 110.000</td>
+                                                
+                                                </tr>
+                                            <tr>
+                                                <th className='thMovil'>Vuelos nacionales en Ecuador</th>
+                                                <td className='trMovil'>USD 28</td>
+                                            </tr>
+                                            <tr>
+                                                <th className='thMovil'>Vuelos internacionales al interior de Suramérica</th>
+                                                <td className='trMovil'>USD 170</td>
+                                            </tr>
+                                            <tr>
+                                                <th className='thMovil'>Otros vuelos internacionales*</th>
+                                                <td className='trMovil'>USD 200</td>
+                                                
+                                            </tr>
+                                            
+                                        </thead>
+                                    </table>
+                                </Typography><br />
+                                <Typography variant="body2" paragraph className='Typographyparrafo'>
+                                    ii) Diferencia de tarifa: es la diferencia en dinero entre la tarifa del tiquete que compraste inicialmente y la nueva opción de tarifa que estás eligiendo (aplica para todas las tarifas).
                                 </Typography>
                                 <Typography variant="body2" paragraph className='Typographyparrafo'>
-                                    Diferencia de tarifa: es la diferencia en dinero entre la tarifa del tiquete que compraste inicialmente y la nueva opción de tarifa que estás eligiendo (aplica para todas las tarifas).
-                                </Typography>
-                                <Typography variant="body2" paragraph className='Typographyparrafo'>
-                                    Diferencias generadas por impuestos: aplican según las normativas vigentes de cada país.
-                                </Typography>
-                                <Typography variant="body2" paragraph className='Typographyparrafo'>
+                                    iii) Diferencias generadas por impuestos (aplican según las normativas vigentes de cada país).
                                     Para las tarifas flex y business se permiten cambios antes de la salida del vuelo sin cargo por cambio, pero podrán aplicar cargos por diferencia de tarifa e impuestos.
                                 </Typography>
-                                <Typography variant="h6" className='TypographyparrafoNegrita'>Asientos</Typography>
+
+                                <Typography variant="h6" className='TypographyparrafoNegrita'><label className='flechaTarifas'>»</label>Asientos:</Typography>
                                 <Typography variant="body2" paragraph className='Typographyparrafo'>
-                                    Ten en cuenta que la reclinación máxima de los asientos en business class puede variar según el tipo de avión.
-                                </Typography>
-                                <Typography variant="body2" paragraph className='Typographyparrafo'>
-                                    Asiento business class, business class (Flatbed) o Premium (de acuerdo al tipo de avión que opera la ruta) están incluidos para la tarifa business con todos sus beneficios.
-                                </Typography>
-                                <Typography variant="body2" paragraph className='Typographyparrafo'>
-                                    Asientos Plus: están incluidos y sujetos a disponibilidad comprando la tarifa flex.
-                                </Typography>
-                                <Typography variant="body2" paragraph className='Typographyparrafo'>
+                                    Los asientos en business class tienen una reclinación de hasta 140° y de hasta 180° en aviones B787, y de hasta 165° en aviones A330(operados por wamos).<br />
+                                    Asientos business class: aplica solamente para tarifa businesscon todos sus beneficios.<br />
+                                    Asientos plus: están incluidos y sujetos a disponibilidad comprando la tarifa flex.<br />
                                     En algunos de nuestros aviones solo contamos con asientos Economy.
                                 </Typography>
-                                <Typography variant="h6" className='TypographyparrafoNegrita'>Reembolsos</Typography>
+                                <Typography variant="h6" className='TypographyparrafoNegrita'><label className='flechaTarifas'>»</label>Reembolsos</Typography>
                                 <Typography variant="body2" paragraph className='Typographyparrafo'>
-                                    Aplica para las tarifas flex y business, antes del vuelo.
+                                    Aplica para las tarifas flex y business, antes del vuelo. <br />
+                                    Los reembolsos después del vuelo no se permiten en ninguna tarifa, excepto ante eventos operacionales. <br />
+                                    La condición de reembolso aplica sobre el valor pagado por la tarifa. Los impuestos serán reembolsados de acuerdo con las disposiciones legales aplicables.<br />
+                                    Todas nuestras tarifas (basic, light, classic y flex), excepto la business, son tarifas promocionales.<br />
+                                    A partir del 1 de junio de 2023, los servicios adicionales que compres para tu reserva y decidas no utilizar, serán reembolsables únicamente si tu tarifa es flex o business. <br />
+                                    Los servicios adicionales no prestados por causa imputable a la aerolínea, serán reembolsables para todas las tarifas. <br />
+                                    Consulta más información sobre el derecho de retracto, desistimiento y otras leyes según el país en nuestro Centro de ayuda.<br />
+                                    Estás obligado a utilizar todos los segmentos de tu itinerario según el plan de vuelo que contrataste. No puedes quedarte en la ciudad de conexión sin continuar hacia tu destino final. Si decides no completar tu itinerario, consideraremos que has completado el viaje desde el origen hasta el destino final programado, y no tendrás derecho a reembolso por los segmentos no volados, excepto por los impuestos y tasas no causadas correspondientes a esos segmentos.<br />
+
                                 </Typography>
-                                <Typography variant="body2" paragraph className='Typographyparrafo'>
-                                    Los reembolsos después del vuelo no se permiten en ninguna tarifa, excepto ante eventos operacionales.
-                                </Typography>
-                                <Typography variant="body2" paragraph className='Typographyparrafo'>
-                                    La condición de reembolso aplica sobre el valor pagado por la tarifa. Los impuestos serán reembolsados de acuerdo con las disposiciones legales aplicables.
-                                </Typography>
-                                <Typography variant="body2" paragraph className='Typographyparrafo'>
-                                    Todas nuestras tarifas (basic, light, classic y flex), excepto la business, son tarifas promocionales.
-                                </Typography>
-                                <Typography variant="body2" paragraph>
-                                    A partir del 1 de junio de 2023, los servicios adicionales que compres para tu reserva y decidas no utilizar, serán reembolsables únicamente si tu tarifa es flex o business.
-                                </Typography>
-                                <Typography variant="body2" paragraph className='Typographyparrafo'>
-                                    Los servicios adicionales no prestados por causa imputable a la aerolínea, serán reembolsables para todas las tarifas.
-                                </Typography>
-                                <Typography variant="body2" paragraph className='Typographyparrafo'>
-                                    Consulta más información sobre el derecho de retracto, desistimiento y otras leyes según el país en nuestro Centro de ayuda.
-                                </Typography>
-                                <Typography variant="body2" paragraph className='Typographyparrafo'>
-                                    Estás obligado a utilizar todos los segmentos de tu itinerario según el plan de vuelo que contrataste. No puedes quedarte en la ciudad de conexión sin continuar hacia tu destino final. Si decides no completar tu itinerario, consideraremos que has completado el viaje desde el origen hasta el destino final programado, y no tendrás derecho a reembolso por los segmentos no volados, excepto por los impuestos y tasas no causadas correspondientes a esos segmentos.
-                                </Typography>
-                                <Typography variant="h6" className='TypographyparrafoNegrita'>Servicio prioritario</Typography>
+
+
+
+                                <Typography variant="h6" className='TypographyparrafoNegrita'><label className='flechaTarifas'>»</label>Servicio prioritario</Typography>
                                 <Typography variant="body2" paragraph className='Typographyparrafo'>
                                     La tarifa business incluye fila preferencial para atención en counter (check-in), entrega y recepción de equipaje con prioridad y abordaje prioritario.
                                 </Typography>
-                                <Typography variant="h6" className='TypographyparrafoNegrita'>Acumulación lifemiles</Typography>
+                                <Typography variant="h6" className='TypographyparrafoNegrita'><label className='flechaTarifas'>»</label>Acumulación lifemiles</Typography>
                                 <Typography variant="body2" paragraph className='Typographyparrafo'>
-                                    El precio de la tarifa tomado para el cálculo de las millas no incluye tasas, impuestos o servicios adicionales.
-                                </Typography>
-                                <Typography variant="body2" paragraph className='Typographyparrafo'>
+                                    El precio de la tarifa tomado para el cálculo de las millas no incluye tasas, impuestos o servicios adicionales.<br />
                                     Los socios elite acumulan millas adicionales, el bono elite aplica según el estatus que tenga cada socio:
-                                </Typography>
-                                <Typography variant="body2" component="div" >
-                                    <table border="1" cellPadding="10" cellSpacing="0" className='tabla2'>
+                                    <table border="1" cellPadding="10" className='tabla2'>
                                         <thead>
                                             <tr>
-                                                <th>Diamond</th>
-                                                <th>Gold</th>
-                                                <th>Silver</th>
-                                                <th>Red Plus</th>
-                                                <th>lifemiles</th>
+                                                <th className='th'>Estatus</th>
+                                                <th className='th'>Diamond</th>
+                                                <th className='th'>Gold</th>
+                                                <th className='th'>Silver</th>
+                                                <th className='th'>Red Plus</th>
+                                                <th className='th'>lifemiles</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td className='setenta'>70%</td>
-                                                <td>50%</td>
-                                                <td>30%</td>
-                                                <td>10%</td>
-                                                <td>0%</td>
+                                                <td className='th'>Bono Elite</td>
+                                                <td className='tr'>70%</td>
+                                                <td className='tr'>50%</td>
+                                                <td className='tr'>30%</td>
+                                                <td className='tr'>10%</td>
+                                                <td className='tr'>0%</td>
                                             </tr>
                                         </tbody>
+                                    </table>
+
+                                    <table cellPadding="10" className='tabla1Movil' >
+                                        <thead>
+                                            <tr>
+                                                <th className='thMovil'>Estatus</th> 
+                                                <th className='thMovil'>Bono Elite</th>
+                                                
+                                                </tr>
+                                            <tr>
+                                                <td className='thMovil'>Diamond</td>
+                                                <td className='trMovil'>70%</td>
+                                            </tr>
+                                            <tr>
+                                                <td className='thMovil'>Gold</td>
+                                                <td className='trMovil'>50%</td>
+                                            </tr>
+                                            <tr>
+                                                <td className='thMovil'>Silver</td>
+                                                <td className='trMovil'>30%</td>
+                                                
+                                            </tr>
+
+                                            <tr>
+                                                <td className='thMovil'>Red Plus</td>
+                                                <td className='trMovil'>10%</td>
+                                            </tr>
+                                            <tr>
+                                                <td className='thMovil'>lifemiles</td>
+                                                <td className='trMovil'>0%</td>
+                                                
+                                            </tr>
+                                            
+                                        </thead>
                                     </table>
                                 </Typography>
                             </AccordionDetails>
                         </Accordion>
                     </div>
                 </div>
+
+              
 
                 <React.Fragment>
 

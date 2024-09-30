@@ -4,15 +4,16 @@
 @import url('./css/carrusel.scss');
 @import url('./css/radio.scss');
 @import url('./css/accordion.scss');
+@import url('./css/paso1.scss');
 @import url('./css/resumen.scss');
 @import url('./css/paso2.scss');
 @import url('./css/adicionales.scss');
 @import url('./css/paso3.scss');
 
 
-.claseApp{
+/*.claseApp{
    display: none;
-}
+}*/
 
 .div_ordenar_por{
     margin-top: 50px;
@@ -57,59 +58,7 @@
     font-weight: bold;
  }
 
- .TypographyparrafoNegrita{
-    font-size: 18px !important;
-    font-weight: bold;
-    margin-left: 50px !important;
- }
-
- .TypographyparrafoPrimero{
-    font-size: 16px !important;
-    position: relative;
-    padding-left: 20px;
-    margin-left: 50px !important;
-    margin-right: 50px !important;
- }
-
- .Typographyparrafo{
-    font-size: 16px !important;
-    position: relative;
-    padding-left: 20px;
-    margin-left: 50px !important;
-    margin-right: 50px !important;
- }
-
- .Typographyparrafo::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 8px;
-    height: 8px;
-    background-color: #80b0c0; /* Azul claro */
-    border-radius: 50%; /* Hace que el punto sea circular */
-  }
-
- .tabla1{
-    width: 60%; 
-    border-collapse: collapse;
-    font-size: 17px;
-    justify-content: center ;
-    margin: 0 auto;
-    border: none;
- }
- .tabla2{
-    width: 40%;
-    border-collapse: collapse;
-    font-size: 17px;
-    margin: 0 auto;
-    border: none;
- }
-
- .setenta{
-    font-weight: bold;
- }
+ 
 
  .div_piePagina{
    background-color: white;
@@ -136,10 +85,10 @@
  
 
  @media screen and (min-width: 1024px) {
-   .claseApp {
+  /* .claseApp {
      display: block;
      
-   }
+   }*/
 
 }
 

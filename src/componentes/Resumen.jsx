@@ -67,7 +67,7 @@ const Resumen = () => {
 
   const { selectedDate, origen, destino, setPrecio } = useContext(DataContext);
   const [open, setOpen] = React.useState(false);
-  const {corigen, cdestino, ida, vuelta, tiempo, precio, salida, llegada, ao, ad} = useParams();
+  const { corigen, cdestino, ida, vuelta, tiempo, precio, salida, llegada, ao, ad } = useParams();
   const [origenNormal, setOrigenNormal] = useState('');
   const [destinoNormal, setDestinoNormal] = useState('');
   const [nombre, setNombre] = useState('nombre');
@@ -76,7 +76,7 @@ const Resumen = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
 
-  
+
 
   const handleClose = () => {
     setOpen(false);
@@ -95,28 +95,33 @@ const Resumen = () => {
   const abrirVentana = (event) => {
     event.stopPropagation();
     setAnchorEl(anchorEl ? null : event.currentTarget);
-};
+  };
 
-const cerrarVentana = () => {
+  const cerrarVentana = () => {
     setAnchorEl(null);
-};
+  };
 
-const abrir = Boolean(anchorEl);
-const id = abrir ? 'simple-popover' : undefined;
+  const abrir = Boolean(anchorEl);
+  const id = abrir ? 'simple-popover' : undefined;
 
 
- const enviar = () =>{
+  const enviar = () => {
     navigate(`/paso2/${ida}/${vuelta}/${precio}/${salida}/${llegada}/${tiempo}/${nombre}/${apellido}/${telefono}`);
- }
+  }
 
   return (
     <>
       <MenuNavBar />
-      <p className='p_resumen'><label style={{ marginLeft: '5px', marginRight: '5px'}}>Resumen de viaje</label></p>
-      <div className='fondoResumen' style={{ marginBottom: '25px' }}>
-        <img src={success} style={{float:'right', marginLeft:'20px'}}/>
+      <div className='div_contenedorIdaOrigenDestino'>
+        <p className='p_idaMovil'>Vuelo de ida <label style={{ marginLeft: '5px' }}>-</label><label style={{ marginLeft: '5px' }}>{formatDate(selectedDate)}</label></p>
+        <p className='p_OrigenDestinoMovilResumen'>{corigen} <label style={{ marginLeft: '1px', marginRight: '5px' }}>a</label>{cdestino}</p>
 
-        <p className='p_ida'><img src={iconoAvion}/>Vuelo de ida: {corigen} <label style={{ marginLeft: '5px', marginRight: '5px' }}>a</label>{cdestino}<label style={{ marginLeft: '5px' }}>-</label><label style={{ marginLeft: '5px' }}>{formatDate(selectedDate)}</label></p>
+      </div>
+      <p className='p_resumen'><label style={{ marginLeft: '5px', marginRight: '5px' }}>Resumen de viaje</label></p>
+      <div className='fondoResumen' style={{ marginBottom: '25px' }}>
+        <img src={success} className='imagenSuccess' style={{ float: 'right', marginLeft: '20px' }} />
+
+        <p className='p_ida'><img src={iconoAvion} />Vuelo de ida: {corigen} <label style={{ marginLeft: '5px', marginRight: '5px' }}>a</label>{cdestino}<label style={{ marginLeft: '5px' }}>-</label><label style={{ marginLeft: '5px' }}>{formatDate(selectedDate)}</label></p>
 
         <div className='div_datos'>
 
@@ -129,11 +134,11 @@ const id = abrir ? 'simple-popover' : undefined;
                     <p style={{ marginRight: '18px', fontSize: '17px' }}>{ida}</p>
                   </div>
                 </td>
-                <td style={{ width: '35%', textAlign: 'center'}}>
+                <td style={{ width: '35%', textAlign: 'center' }}>
                   <div style={{ marginTop: '-10px' }}>
-                    <p style={{ marginTop: '10px', color: ' gray', fontSize: '15px' }}>{tiempo}</p>
-                    <img src={raya_avion} alt="Avion" style={{ display: 'block', margin: '0 auto' }} />
-                    <p style={{ margin: 0, color: ' gray', fontSize: '13px' }}>Directo</p>
+                    <p className='p_tiempoResumen' style={{ marginTop: '10px', color: ' gray', fontSize: '15px' }}>{tiempo}</p>
+                    <img className='rayaAvionResumen' src={raya_avion} alt="Avion" />
+                    <p className='p_directoResumen' style={{ margin: 0, color: ' gray', fontSize: '13px' }}>Directo</p>
 
                   </div>
                 </td>
@@ -143,16 +148,16 @@ const id = abrir ? 'simple-popover' : undefined;
                     <p style={{ marginLeft: '18px', fontSize: '17px' }}>{vuelta}</p>
                   </div>
                 </td>
-                <td style={{ width: '11%'}}>
+                <td style={{ width: '11%' }}>
                   <div style={{}}>
-                    <label style={{}}><img src={logoAviancaResumen}/>AV 8520</label><br />
+                    <label style={{}}><img src={logoAviancaResumen} />AV 8520</label><br />
                     <label style={{}}>
                       <label style={{}} onClick={abrirVentana} >Detalles del vuelo</label>
 
                     </label>
                   </div>
                 </td>
-                <td style={{ width: '25%', textAlign: 'center', verticalAlign: 'middle'}}>
+                <td style={{ width: '25%', textAlign: 'center', verticalAlign: 'middle' }}>
                   <div style={{ marginLeft: '-100px' }}>
                     <label style={{ display: 'block', marginLeft: '180px', marginRight: '150px', marginBottom: '5px', textAlign: 'center', backgroundColor: 'red', color: 'white', borderRadius: '5px', fontWeight: 'bold', width: '70px' }}>Basic</label>
                     <label style={{ margin: 0, fontSize: '20px', fontWeight: 'bold', marginTop: '-15px' }}>
@@ -164,6 +169,36 @@ const id = abrir ? 'simple-popover' : undefined;
               </tr>
             </tbody>
           </table>
+        </div>
+
+
+        <div className='div_datosMovil'>
+          <div className='div_datosContenedorMovil' >
+            <div>
+              <label className='label_salidaMovilResumen' >{salida}</label>
+              <p className='p_codigoOrigenMovilResumen'>{ida}</p>
+            </div>
+
+            <div className='div_contenedorDatosVuelosMovilResumen'>
+              <label className='label_directoMovilResumen' >Directo
+                <label className='label_barraMovilResumen' >|</label>
+                {tiempo}</label>
+              <label className='label_rayaMovilResumen'></label>
+            </div>
+
+            <div className='div_llegadaMovilResumen'>
+              <label className='label_llegadaMovilResumen'>{llegada}</label>
+              <p className='p_codigoDestinoMovilResumen'>{vuelta}</p>
+            </div>
+
+
+          </div>
+          <div className='div_valorPasajeMovilResumen'>
+            <label className='detallesMovilResumen'>Detalles del vuelo</label>
+
+            <label className='label_valorPasajeMovilResumen'>
+              ${precio} COP </label>
+          </div>
         </div>
 
 
@@ -180,69 +215,74 @@ const id = abrir ? 'simple-popover' : undefined;
 
         </div>
 
+        <div className='equipajeMovil'>
+          <label className='label_precioEquipajeMovil'>$113.050 COP</label>
+          <img className='imagenEquipajeMovil' src={equipaje} />
+        </div>
+
         <Popover
-                    id={id}
-                    open={abrir}
-                    anchorEl={anchorEl}
-                    onClose={cerrarVentana}
-                    className='PopoverAccordion'
-                    anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
-                    }}
+          id={id}
+          open={abrir}
+          anchorEl={anchorEl}
+          onClose={cerrarVentana}
+          className='PopoverAccordion'
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
 
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
-                    }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
 
-                    sx={{ marginTop: '-50px', borderRadius: '30px' }}
-
-
-                ><button onClick={cerrarVentana} className='botonCerrar_popoverAccordion' style={{ float: 'right', border: 'none', fontSize: '20px', marginTop: '20px', marginRight: '30px' }}>X</button>
-                    <Typography sx={{ p: 2 }} >
-                        <p className='p_titulosDetalles' >Detalles del vuelo</p>
-                        <Typography gutterBottom className='contenedor_popoverAccordion'>
-
-                            <label className='label_origen'>{corigen}</label><label className='label_a'>a</label><label className='label_destino'>{cdestino}</label><label className='labelBarra'>|</label><label className='labelFecha'>{formatDate(selectedDate)}</label><br />
-                            <label className='label_botonDirecto'>DIRECTO</label> <label className='label_duracion' >Duración Total:</label><label className='label_tiempo'>{tiempo}</label>
+          sx={{ marginTop: '-50px', borderRadius: '30px' }}
 
 
-                        </Typography>
-                      
-                        <Typography gutterBottom className='contenedor_popoverAccordion'>
-                        
-                            <table style={{ textAlign: 'center', width: '100%' }}>
-                                <tr   >
-                                    <td  rowSpan='3' > <img src={barraVertical} /></td>
-                                    <td ><label>{salida}</label><label>{origenNormal}</label><br />
-                                        <label>{ao}</label></td>
-                                    <td > <label>Operado por avianca</label><br />
-                                        <label>AV9332</label><label> AIRBUS A320</label>
-                                    </td>
-                                </tr>
-                                <tr>
+        ><button onClick={cerrarVentana} className='botonCerrar_popoverAccordion' style={{ float: 'right', border: 'none', fontSize: '20px', marginTop: '20px', marginRight: '30px' }}>X</button>
+          <Typography sx={{ p: 2 }} >
+            <p className='p_titulosDetalles' >Detalles del vuelo</p>
+            <Typography gutterBottom className='contenedor_popoverAccordion'>
 
-                                    <td >{tiempo}</td>
-                                    <td ></td>
-                                </tr>
+              <label className='label_origen'>{corigen}</label><label className='label_a'>a</label><label className='label_destino'>{cdestino}</label><label className='labelBarra'>|</label><label className='labelFecha'>{formatDate(selectedDate)}</label><br />
+              <label className='label_botonDirecto'>DIRECTO</label> <label className='label_duracion' >Duración Total:</label><label className='label_tiempo'>{tiempo}</label>
 
-                                <tr>
 
-                                    <td ><label>{llegada}</label><label>{destinoNormal}</label><br />
-                                        <label>{ad}</label></td>
-                                    <td ></td>
-                                </tr>
-                            </table>
-                    
+            </Typography>
 
-                        </Typography>
-                        <Typography gutterBottom className='contenedor_popoverAccordion'>
-                            <button style={{ borderRadius: '30px', backgroundColor: 'black', color: 'white', fontWeight: 'bold', fontSize: '20px', float: 'right', marginBottom: '30px', width: '200px', height: '50px' }} onClick={cerrarVentana}>Cerrar</button>
+            <Typography gutterBottom className='contenedor_popoverAccordion'>
 
-                        </Typography>
-                    </Typography>
-                </Popover>
+              <table style={{ textAlign: 'center', width: '100%' }}>
+                <tr   >
+                  <td rowSpan='3' > <img src={barraVertical} /></td>
+                  <td ><label>{salida}</label><label>{origenNormal}</label><br />
+                    <label>{ao}</label></td>
+                  <td > <label>Operado por avianca</label><br />
+                    <label>AV9332</label><label> AIRBUS A320</label>
+                  </td>
+                </tr>
+                <tr>
+
+                  <td >{tiempo}</td>
+                  <td ></td>
+                </tr>
+
+                <tr>
+
+                  <td ><label>{llegada}</label><label>{destinoNormal}</label><br />
+                    <label>{ad}</label></td>
+                  <td ></td>
+                </tr>
+              </table>
+
+
+            </Typography>
+            <Typography gutterBottom className='contenedor_popoverAccordion'>
+              <button style={{ borderRadius: '30px', backgroundColor: 'black', color: 'white', fontWeight: 'bold', fontSize: '20px', float: 'right', marginBottom: '30px', width: '200px', height: '50px' }} onClick={cerrarVentana}>Cerrar</button>
+
+            </Typography>
+          </Typography>
+        </Popover>
 
 
       </div>
@@ -250,25 +290,41 @@ const id = abrir ? 'simple-popover' : undefined;
       <div className='div_continua'>
         <div className='contenedor_continua'>
           <label className='label_sorpresas'>
-          <p className='p_sorpresas'><img src={escudo}/>¡Sin sorpresas!</p>
-          <p className='p_todos'>Todos los impuestos están incluidos en el precio total</p>
+            <p className='p_sorpresas'><img src={escudo} />¡Sin sorpresas!</p>
+            <p className='p_todos'>Todos los impuestos están incluidos en el precio total</p>
           </label>
 
           <label className='label_reserva'>
-          <p className='p_total'>Total de tu reserva:</p>
-          <p className='p_precio'>${precio}<label className='label_cop'>COP</label></p>
+            <p className='p_total'>Total de tu reserva:</p>
+            <p className='p_precio'>${precio}<label className='label_cop'>COP</label></p>
           </label>
-        
-        <label className='label_boton'>  
-          <button className='boton_continua' onClick={enviar} >
-          Continua personalizando tu viaje
-        </button></label>
-         
+
+          <label className='label_boton'>
+            <button className='boton_continua' onClick={enviar} >
+              Continua personalizando tu viaje
+            </button></label>
+
         </div>
-        
-        
       </div>
-      <PiePagina />
+
+      <div className='div_sinSorpresasMovil'>
+        <p className='p_sorpresas'><img src={escudo} style={{marginLeft:'5px'}}/>¡Sin sorpresas!</p>
+        <p className='p_todos'>Todos los impuestos están incluidos en el precio total</p>
+      </div>
+
+      <div className='div_ContenedorTotalMovil'>
+      <div className='div_reservaMovil'>
+            <label className='label_totalMovil'>Total de tu reserva:</label>
+            <label className='label_precioMovil'>${precio}<label className='label_copMovil'>COP</label></label>
+          </div>
+        <button className='boton_continuaMovil' onClick={enviar} >
+          Continua personalizando tu viaje
+        </button>
+        </div>
+
+      <div className="div_piePaginaResumen">
+        <label className="label_piePaginaResumen">© Avianca S.A 2024</label>
+      </div>
     </>
   );
 

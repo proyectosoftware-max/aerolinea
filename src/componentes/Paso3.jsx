@@ -43,69 +43,95 @@ const formatDate = (date) => {
     return `${capitalizedWeekday}, ${capitalizedMonth} ${day}`;
 };
 
-const Paso3 = () =>{
+const Paso3 = () => {
 
-    const { ida, vuelta, precio, salida, llegada,tiempo, nombre, apellido, telefono } = useParams();
+    const { ida, vuelta, precio, salida, llegada, tiempo, nombre, apellido, telefono } = useParams();
     const { selectedDate } = useContext(DataContext);
 
-    const enviarBanco =()=>{
+    const enviarBanco = () => {
         window.location.href = `https://bancoaerolinea.onrender.com/?nombre=${encodeURIComponent(nombre)}&apellido=${encodeURIComponent(apellido)}`;
-            
+
     }
 
-    return(
+    return (
         <>
-        <div className="paso3"  >
-         <MenuNavBarPaso3/>
+            <div className="paso3"  >
+                <MenuNavBarPaso3 />
 
-        
-         <div className="contendorPaso3" >
-         <label className="titulo">Método de pago</label>
-            <div className="div_resumen">
-               <p className="resumenCompra">Resumen de compra</p> 
-               <label className="label_total">Total a pagar</label>
-               <label className="label_precio">${precio}<label className="label_cop_pagos">COP</label></label>
-               </div>
 
-               <div className="div_seleccion">
-                <p className="p_seleccion">Tu selección</p>
-                <p>vuelo de salida| <label>{formatDate(selectedDate)}</label></p>
-                <table style={{ width: '20%', borderCollapse: 'collapse' }}>
-                                        <tbody>
-                                            <tr>
-                                                <td style={{ width: '15%', textAlign: 'center', verticalAlign: 'middle' }}>
-                                                    <div>
-                                                        <label style={{ display: 'block', fontSize: '15px', fontWeight: 'bold' }}>{salida}</label>
-                                                        <p style={{ marginRight: '20px', fontSize: '15px' }}>{ida}</p>
-                                                    </div>
-                                                </td>
-                                                <td style={{ width: '35%', textAlign: 'center'/*, border: '1px solid blue'*/ }}>
-                                                    <div style={{ marginTop: '-10px' }}>
-                                                        <label className='label_directoPaso3' >Vuelo Directo</label>
-                                                        
-                                                      
-                                                        <img src={raya_avionSmall} />
-                                                        <p className='label_tiempoPaso3'>{tiempo}</p>
+                <div className="contendorPaso3" >
+                    <label className="titulo">Método de pago</label>
+                    <div className="div_resumen">
+                        <p className="resumenCompra">Resumen de compra</p>
+                        <label className="label_total">Total a pagar</label>
+                        <label className="label_precio">${precio}<label className="label_cop_pagos">COP</label></label>
+                    </div>
 
-                                                    </div>
-                                                </td>
-                                                <td style={{ width: '25%', textAlign: 'center', verticalAlign: 'middle' }}>
-                                                    <div style={{ marginRight: '180px',  overflow: 'visible', paddingRight: '50px', height: '70px' }}>
-                                                        <label style={{ display: 'block', fontSize: '15px', fontWeight: 'bold' }}>{llegada}</label>
-                                                        <p style={{ marginLeft: '2px', fontSize: '15px' }}>{vuelta}</p>
-                                                    </div>
-                                                </td>
-                                                
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <button className="botonPagar" onClick={enviarBanco} >Pagar</button>
-               </div>
-        
-         </div>
-        
+                    <div className="div_seleccion">
+                        <p className="p_seleccion">Tu selección</p>
+                        <p>vuelo de salida| <label>{formatDate(selectedDate)}</label></p>
+                        <table className="tabla" style={{ width: '20%', borderCollapse: 'collapse' }}>
+                            <tbody>
+                                <tr>
+                                    <td style={{ width: '15%', textAlign: 'center', verticalAlign: 'middle' }}>
+                                        <div>
+                                            <label style={{ display: 'block', fontSize: '15px', fontWeight: 'bold' }}>{salida}</label>
+                                            <p style={{ marginRight: '20px', fontSize: '15px' }}>{ida}</p>
+                                        </div>
+                                    </td>
+                                    <td style={{ width: '35%', textAlign: 'center'/*, border: '1px solid blue'*/ }}>
+                                        <div style={{ marginTop: '-10px' }}>
+                                            <label className='label_directoPaso3' >Vuelo Directo</label>
 
-         </div>
+
+                                            <img src={raya_avionSmall} />
+                                            <p className='label_tiempoPaso3'>{tiempo}</p>
+
+                                        </div>
+                                    </td>
+                                    <td style={{ width: '25%', textAlign: 'center', verticalAlign: 'middle' }}>
+                                        <div style={{ marginRight: '180px', overflow: 'visible', paddingRight: '50px', height: '70px' }}>
+                                            <label style={{ display: 'block', fontSize: '15px', fontWeight: 'bold' }}>{llegada}</label>
+                                            <p style={{ marginLeft: '2px', fontSize: '15px' }}>{vuelta}</p>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+           <div className="div_datosPaso3Movil">
+           <label style={{ display: 'block', fontSize: '15px', fontWeight: 'bold' }}>{salida}</label>
+                        <p style={{ marginRight: '20px', fontSize: '15px' }}>{ida}</p>
+
+
+                        <div style={{ marginTop: '-10px' }}>
+                            <label className='label_directoPaso3' >Vuelo Directo</label>
+
+
+                            <p><img src={raya_avionSmall} /></p>
+                            <p className='label_tiempoPaso3'>{tiempo}</p>
+
+                        </div>
+
+
+                        <div>
+                            <label style={{ display: 'block', fontSize: '15px', fontWeight: 'bold' }}>{llegada}</label>
+                            <p style={{ marginLeft: '2px', fontSize: '15px' }}>{vuelta}</p>
+                        </div>
+           </div>
+
+                        
+
+
+                        <button className="botonPagar" onClick={enviarBanco} >Pagar</button>
+                    </div>
+
+                </div>
+
+
+            </div>
         </>
     )
 }

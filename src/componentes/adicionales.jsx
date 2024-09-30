@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect, useContext} from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -96,8 +96,8 @@ const formatDate = (date) => {
     return `${capitalizedWeekday}, ${capitalizedMonth} ${day}, ${year} `;
 };
 
-const Paso2 = () => {
-    const { ida, vuelta, precio, salida, llegada,tiempo, nombre, apellido, telefono } = useParams();
+const Adicionales = () => {
+    const { ida, vuelta, precio, salida, llegada, tiempo, nombre, apellido, telefono } = useParams();
     const { selectedDate } = useContext(DataContext);
     const [value, setValue] = useState(0);
     const [age, setAge] = useState('');
@@ -171,7 +171,7 @@ const Paso2 = () => {
                 <div className='div_accordionAdicionales'>
 
                     <div className="accordionDesativado">
-                        <p className="p_serviciosAdicionales">Datos Personales</p>
+                        <p className="p_datosPersonalesAdicionales">Datos Personales</p>
                         <label className="label_verEditar" onClick={enviar} >ver/Editar</label>
                         <img src={flechaAccordion} className='img_fechaAccordion' />
                     </div>
@@ -179,7 +179,7 @@ const Paso2 = () => {
 
 
                     <div className='accordionAdicionales'>
-                        <label style={{ marginTop: '10px', marginBottom: '10px', fontSize: '28px', fontWeight: 'bold' }}>Servicios adicionales</label>
+                        <label className="label_ServiciosAdicionales" >Servicios adicionales</label>
                         <div className="contendorAdicionales">
                             <div className="div_adicionales">
 
@@ -282,6 +282,19 @@ const Paso2 = () => {
 
                     </div>
 
+                    <button className='boton_continuaAdicionalesMovil' onClick={enviarPagos} >
+                        Continuar y pagar
+                    </button>
+
+                    <div className="contenedor_datosAdicionalesMovil">
+                        <label className="TextorResumenAdicionalesViajeMovil">Resumen del viaje</label>
+                        <label className='label_precioAdicionalesMovil'>
+                            ${precio}<label className='label_copAdicionalesMovil'>COP
+                            </label>
+                            <p className="TotalReservaMovil">Total de tu reserva</p>
+                        </label>
+                    </div>
+
 
                 </div>
 
@@ -318,9 +331,24 @@ const Paso2 = () => {
 
                     </div>
 
+                    <button className='boton_continuaAdicionalesMovil' onClick={enviarPagos} >
+                        Continuar y pagar
+                    </button>
+
+                      <div className="contenedor_datosAdicionalesMovil">
+                        <label className="TextorResumenAdicionalesViajeMovil">Resumen del viaje</label>
+                        <label className='label_precioAdicionalesMovil'>
+                            ${precio}<label className='label_copAdicionalesMovil'>COP
+                            </label>
+                            <p className="TotalReservaMovil">Total de tu reserva</p>
+                        </label>
+                    </div>
 
                 </div>
-                <PiePagina />
+                <div className="div_piePaginaAdicionales">
+                    <label className="label_piePaginaAdicionales">© Avianca S.A 2024</label>
+                </div>
+
             </div>
 
         </>
@@ -329,5 +357,5 @@ const Paso2 = () => {
     );
 }
 
-export default Paso2;
+export default Adicionales;
 

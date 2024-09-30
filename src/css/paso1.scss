@@ -1,0 +1,727 @@
+.fondoPaso1 {
+    background-color: rgb(255, 255, 255);
+    margin: 0 auto;
+    margin-top: 200px;
+    width: 87%;
+}
+
+.fondoContenido {
+    background-color: white;
+    width: 90%;
+    overflow: visible;
+    margin: 0 auto;
+}
+
+
+.basic, .classic, .flex{
+  display: block !important;
+}
+
+.basicMovil, .classicMovil, .flexMovil {
+  display: none !important;
+}
+
+.td_ciudad {
+    width: 50%;
+}
+
+.input_ciudad {
+    display: flex;
+}
+
+.div_ciudadOrigen {
+    position: absolute;
+    margin-top: 150px;
+    margin-left: 100px;
+    border-radius: 10px;
+    overflow: visible;
+    z-index: 5;
+    background-color: white;
+    width: 20%;
+
+}
+
+.div_ciudadDestino {
+    position: absolute;
+    margin-top: 150px;
+    border-radius: 5px;
+    margin-left: 280px;
+    overflow: visible;
+    z-index: 5;
+    background-color: white;
+    width: 20%;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: fixed;
+}
+
+li {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    background-color: black;
+    color: white;
+    margin-left: -30px;
+    position: fixed;
+}
+
+li:hover {
+    background-color: black;
+    color: white
+}
+
+.label_aeropuerto {
+    font-size: 14px;
+
+}
+
+.label_abreviatura {
+    margin-left: 15px;
+}
+
+.td_botonBuscar {
+    width: 12%;
+}
+
+
+.botonBuscar {
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 50px;
+    width: 100%;
+    padding: 8px;
+
+}
+
+.div_origenDestino {
+    display: flex;
+
+}
+
+.fechaOrigen {
+    margin-top: -10px;
+
+
+}
+
+.div_botonModificar {
+    margin-left: 30px;
+    margin-right: -40px;
+}
+
+.botonModificar {
+    border-radius: 30px;
+    font-size: 18px;
+    width: 250px;
+    height: 50px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+
+.fecha_desdeHacia {
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.596);
+}
+
+
+
+.datepicker {
+    margin-top: 1px !important;
+    margin-left: 20px !important;
+    width: 60%;
+
+}
+
+.desde {
+    margin-left: -40px;
+}
+
+.desdeHacia {
+    font-size: 13px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.596);
+}
+
+.textField {
+    margin-top: -15px !important;
+    background-color: white;
+    font-size: 40px !important;
+}
+
+.textFieldPasajeros {
+    margin-top: -15px !important;
+    margin-left: -40px !important;
+
+}
+
+.botonPasajeros {
+    background-color: black;
+    color: rgb(39, 17, 17);
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 30px;
+    font-size: 13px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.p_pasajeros {
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 25px;
+    margin-left: 15px;
+
+
+}
+
+
+
+.botonCerrarPasajeros {
+    border: none;
+    margin-top: 20px;
+    margin-right: 20px;
+    background-color: transparent;
+    font-size: 23px;
+
+}
+
+.contenedorPasajeros {
+    margin-top: 15px !important;
+}
+
+.tituloPasajero {
+
+    font-size: 18px;
+
+}
+
+.subtituloPasajero {
+    margin-top: -20px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.555);
+    font-weight: bold;
+}
+
+
+#filled-number {
+    width: 280px;
+    height: 10px;
+    font-size: 23px;
+    margin-top: -20px;
+    padding-bottom: 20px;
+    background-color: white;
+}
+
+.tabla_accordion{
+    width: 100%;
+    border-collapse: collapse;
+    display: block;
+  }
+
+  .div_contendedorMovil{
+    display: none;
+  }
+
+.p_salida {
+    padding-top: 20px;
+    margin-left: 25px;
+    font-weight: bold;
+    font-size: 25px;
+    display: block;
+}
+
+.label_salida {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.p_codigoOrigen {
+    margin-right: 20px;
+    font-size: 20px;
+}
+
+.div_contenedorDatosVuelos {
+    margin-top: -10px;
+}
+
+.label_directo {
+    margin-right: 5px;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.548);
+}
+
+.codigoAvion {
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.548);
+}
+
+.label_barra {
+    font-size: 10px;
+    color: rgba(0, 0, 0, 0.548);
+}
+
+.label_detallesVuelo {
+    margin-left: 5px;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.548);
+    cursor: pointer;
+}
+
+.img_rayaAvion {
+    display: block;
+    margin: 0 auto;
+    margin-left: -10px;
+    margin-top: 10px;
+}
+
+.label_raya{
+    display: none;
+}
+
+.p_titulosDetalles {
+    font-size: 30px;
+    width: 500px;
+}
+
+.label_origen {
+    font-size: 23px;
+    margin-right: 5px;
+
+    color: black;
+
+}
+
+.label_destino {
+    font-size: 23px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.label_a {
+    font-size: 23px;
+}
+
+.labelBarra {
+    font-size: 23px;
+    margin-right: 5px;
+
+}
+
+.labelFecha {
+    font-size: 23px;
+
+}
+
+.label_botonDirecto {
+    border: 1px solid blue;
+    border-radius: 30px;
+    color: blue;
+    text-align: center;
+    width: 80px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.label_duracion {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.contenedor_popoverAccordion {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.247);
+
+}
+
+
+.div_llegada {
+    margin-right: 180px;
+    border-right: 1px solid gray;
+    overflow: visible;
+    padding-right: 50px;
+    height: 70px;
+}
+
+.label_llegada {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.p_codigoDestino {
+    margin-left: 2px;
+    font-size: 20px;
+}
+
+.div_valorPasaje {
+    margin-left: -150px;
+}
+
+.label_valorPasaje {
+    margin: 0, ;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: -15px;
+}
+
+.p_salida{
+    display: block;
+}
+
+.p_salidaMovil {
+    display: none;
+}
+
+.p_origenDestinoMovil {
+    display: none;
+}
+
+
+.label_a_movil {
+    display: none;
+}
+
+.tituloTarifas{
+    margin-top: 10px !important; 
+    margin-bottom: 10px !important; 
+    font-size:  18px !important;
+    font-weight: bold !important;
+}
+
+.TypographyparrafoNegrita{
+    font-size: 18px !important;
+    font-weight: bold;
+   
+ }
+
+ .TypographyparrafoPrimero{
+    font-size: 16px !important;
+    position: relative;
+    padding-left: 20px;
+   
+ }
+
+ .Typographyparrafo{
+    font-size: 16px !important;
+    position: relative;
+    padding-left: 20px;
+    
+ }
+
+ .tabla1{
+    width: 80%; 
+    border-collapse: collapse;
+    font-size: 17px;
+    text-align: center;
+    margin: 0 auto;
+ }
+
+ .th, .tr{
+   border: 1px solid black;
+ }
+
+ .tabla2{
+    width: 70%;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 17px;
+    margin: 0 auto;
+    border: none;
+ }
+
+ .tabla1Movil{
+    display: none;
+ }
+
+ .tabla2Movil{
+    display: none;
+ }
+
+ .flechaTarifas{
+    font-size: 30px;
+ }
+
+
+
+@media screen and (max-width: 768px) {
+
+    .fondoPaso1 {
+        background-color: transparent;
+        margin-top: -35px;
+    }
+
+    .basic, .classic, .flex{
+        display: none !important;
+      }
+      
+      .basicMovil, .classicMovil, .flexMovil {
+        display: block !important;
+      }
+
+    .tabla_accordion{
+    display: none;
+    }
+
+    .div_contendedorMovil{
+        display: flex;
+        border: 1px solid blue;
+        margin-top: 20px;
+        padding-top: 20px;
+        text-align: center;
+        width: 100%;
+        height: 80px;
+        margin: 0 auto;
+    }
+
+    .p_salida {
+        display: none;
+    }
+
+    .p_salidaMovil {
+        display: block;
+        font-size: 13px;
+    }
+
+    .p_origenDestinoMovil {
+        display: block;
+        margin-top: -20px;
+        font-size: 20px;
+        font-weight: bold;
+        width: 100%;
+        
+    }
+
+    .label_a_movil {
+        display: inline;
+        font-size: 20px;
+        margin-left: 5px;
+        margin-right: 5px;
+        font-weight: bold;
+    }
+
+    .label_salidaMovil {
+        display: block;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    
+    .p_codigoOrigenMovil {
+        margin-right: 20px;
+        font-size: 20px;
+        display: none;
+    }
+    
+    .div_contenedorDatosVuelosMovil {
+        margin-top: -10px;
+        width: 400%;
+        border: 1px solid yellow;
+    }
+    
+    .label_directoMovil {
+        margin-right: 5px;
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.548);
+    }
+    
+    .codigoAvionMovil {
+        margin-left: 5px;
+        margin-right: 5px;
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.548);
+    }
+    
+    .label_barraMovil {
+        font-size: 10px;
+        color: rgba(0, 0, 0, 0.548);
+    }
+    
+    .label_detallesVueloMovil {
+        margin-left: 5px;
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.548);
+        cursor: pointer;
+        display: none;
+    }
+    
+    .img_rayaAvion {
+     display: none;
+    }
+
+    .label_rayaMovil{
+        display: block;
+        width: 100%;
+        height: 1px;
+        border-top: 1px solid gray;
+        margin: 0 auto;
+        margin-left: 2px;
+        margin-top: 1px;
+    }
+    
+    
+    .p_titulosDetallesMovil {
+        font-size: 30px;
+        width: 500px;
+    }
+    
+    .label_origenMovil {
+        font-size: 23px;
+        margin-right: 5px;
+        color: black;
+    
+    }
+    
+    .label_destinoMovil {
+        font-size: 23px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    
+    .label_aMovil {
+        font-size: 23px;
+    }
+    
+    .labelBarraMovil {
+        font-size: 23px;
+        margin-right: 5px;
+    
+    }
+    
+    .labelFechaMovil {
+        font-size: 23px;
+    
+    }
+    
+    .label_botonDirectoMovil {
+        border: 1px solid blue;
+        border-radius: 30px;
+        color: blue;
+        text-align: center;
+        width: 80px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    
+    .label_duracionMovil {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    
+    .contenedor_popoverAccordionMovil {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        border-top: 1px solid rgba(0, 0, 0, 0.247);
+    
+    }
+    
+    
+    .div_llegadaMovil {
+        margin-right: 180px;
+        border-right: none;
+        overflow: visible;
+        padding-right: 50px;
+        height: 30px;
+        border: 1px solid green;
+    }
+    
+    .label_llegadaMovil {
+        display: block;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    
+    .p_codigoDestinoMovil {
+        margin-left: 2px;
+        font-size: 20px;
+        display: none;
+    }
+    
+    .div_valorPasajeMovil {
+        margin-left: -350px;
+        margin-top: 40px;
+        width: 200%;
+    }
+    
+
+    .label_valorPasajeMovil {
+        margin: 0, ;
+        font-size: 15px;
+        font-weight: bold;  
+    }
+
+    .tituloTarifas{
+        margin-top: 10px !important; 
+        margin-bottom: 10px !important; 
+        font-size:  15px !important;
+        font-weight: bold !important;
+    }
+
+    .TypographyparrafoNegrita{
+        font-size: 13px !important;
+        font-weight: bold;
+       
+     }
+    
+     .TypographyparrafoPrimero{
+        font-size: 13px !important;
+        position: relative;
+        padding-left: 20px;
+       
+     }
+    
+     .Typographyparrafo{
+        font-size: 13px !important;
+        position: relative;
+        padding-left: 20px;
+        
+     }
+
+
+     .tabla1{
+        display: none;
+      }
+    
+      .tabla2{
+        display: none;
+      }
+    
+
+ .tabla1Movil{
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    font-size: 12px;
+  }
+
+  .tabla2Movil{
+    display: block;
+     width: 80%;
+    margin: 0 auto;
+    font-size: 12px;
+
+  }
+ 
+  .thMovil, .trMovil{
+    border: 1px solid black;
+    width: 10%;
+   text-align: center;
+   padding: 5px;
+  }
+
+
+}

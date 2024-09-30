@@ -1,47 +1,47 @@
-.paso3{
+.paso3 {
     min-height: 100vh;
-   
+
 }
 
-.contendorPaso3{
+.contendorPaso3 {
     margin-top: 100px;
-   
+
 }
 
-.nav1Paso3{
-  margin-left: 140px;
+.nav1Paso3 {
+    margin-left: 140px;
 }
 
-.titulo{
+.titulo {
     font-size: 25px;
     font-weight: bold;
     margin-left: 565px;
     margin-bottom: 15px;
-  
+
 
 }
 
-.label_total{
+.label_total {
     font-size: 20px;
     font-weight: bold;
 }
 
-.label_cop_pagos{
+.label_cop_pagos {
     margin-left: 5px;
     font-size: 20px;
 }
 
-.label_precio{
-  font-size: 20px;
-  margin-left: 10px;
+.label_precio {
+    font-size: 20px;
+    margin-left: 10px;
 }
 
-.label_directoPaso3{
-  font-size: 13px;
+.label_directoPaso3 {
+    font-size: 13px;
 }
 
 
-.botonPagar{
+.botonPagar {
     width: 250px;
     margin-top: 20px;
     padding-top: 7px;
@@ -52,10 +52,10 @@
     color: white;
     border-radius: 30px;
     font-weight: bold;
-   
+
 }
 
-.div_resumen{
+.div_resumen {
     background-color: white;
     width: 30%;
     margin: 0 auto;
@@ -66,7 +66,7 @@
     border-radius: 5px;
 }
 
-.div_seleccion{
+.div_seleccion {
     background-color: white;
     width: 30%;
     margin: 0 auto;
@@ -76,13 +76,120 @@
     border-radius: 5px;
 }
 
-.p_seleccion{
+.p_seleccion {
     font-size: 20px;
     font-weight: bold;
 }
 
-.resumenCompra{
+.resumenCompra {
     font-size: 20px;
     font-weight: bold;
-    
+
+}
+
+@media screen and (max-width: '768px') {
+
+    .paso3 {
+        min-height: 100vh;
+
+    }
+
+    .tabla{
+        display: none;
+    }
+    .div_datosPaso3Movil{
+        display: block;
+        background-color: white;
+    }
+
+    .contendorPaso3 {
+        margin-top: 100px;
+    }
+
+    .nav1Paso3 {
+        margin-left: 140px;
+    }
+
+    //
+    .titulo {
+        font-size: 25px;
+        font-weight: bold;
+        width: 100%;
+        margin-left: 0px;
+        margin-bottom: 15px;
+        text-align: center;
+
+
+    }
+
+    .label_total {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .label_cop_pagos {
+        margin-left: 5px;
+        font-size: 20px;
+    }
+
+    .label_precio {
+        font-size: 20px;
+        margin-left: 10px;
+    }
+
+    .label_directoPaso3 {
+        font-size: 13px;
+    }
+
+//
+    .botonPagar {
+        width: 100%;
+        margin-top: 20px;
+        padding-top: 7px;
+        margin-left: 0px;
+        margin-bottom: 30px;
+        padding-bottom: 7px;
+        background-color: black;
+        color: white;
+        border-radius: 30px;
+        font-weight: bold;
+
+    }
+
+    //
+    .div_resumen { 
+        background-color: white;
+        width: 100%;
+        margin: 0 auto;
+        margin-bottom: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 30px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+//
+    .div_seleccion {
+        background-color: white;
+        width: 100%;
+        margin: 0 auto;
+        padding-top: 10px;
+        padding-left: 30px;
+        padding-bottom: 10px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .p_seleccion {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .resumenCompra {
+        font-size: 20px;
+        font-weight: bold;
+
+    }
+
 }

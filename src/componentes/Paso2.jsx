@@ -98,14 +98,19 @@ const formatDate = (date) => {
 
 const Paso2 = () => {
 
-    const { ida, vuelta, precio, salida, llegada,tiempo, nombre, apellido } = useParams();
+    const { ida, vuelta, precio, salida, llegada, tiempo, nombre, apellido } = useParams();
     const { selectedDate } = useContext(DataContext);
     const [nombrePasajero, setNombrePasajero] = useState('Pasajero');
     const [apellidoPasajero, setApellidoPasajero] = useState('');
+    const [nombreInicial, setNombreInicial] = useState('');
+    const [apellidoInicial, setApellidoInicial] = useState('');
+    const [correo, setCorreo] = useState('');
     const [value, setValue] = useState(0);
     const [paisIndicativo, setPaisIndicativo] = useState('Colombia (+57)');
     const [telefono, setTelefono] = useState('');
     const [nombreAdulto, setNombreAdulto] = useState('Adulto');
+    const [activar, setActivar] = useState(false);
+    const [activarTodo, setActivarTodo] = useState(false);
     const [lifes, setLifes] = useState('lifemiles');
     const [checklifes, setChecklifes] = useState(false);
     const [checkservicios, setCheckservicios] = useState(false);
@@ -119,49 +124,87 @@ const Paso2 = () => {
     const navigate = useNavigate();
 
 
-    useEffect(()=>{
-        if(nombre == 'nombre' && apellido == 'apellido' && telefono ==  'telefono'){
-          setNombreAdulto('Adulto');
-          setNombrePasajero('Pasajero');
-          
-        
-        }else if(nombre != 'nombre' && apellido != 'apellido' && telefono !=  'telefono'){
+    useEffect(() => {
+        if (nombre == 'nombre' && apellido == 'apellido' && telefono == 'telefono') {
+            setNombreAdulto('Adulto');
+            setNombrePasajero('Pasajero');
+
+
+        } else if (nombre != 'nombre' && apellido != 'apellido' && telefono != 'telefono') {
             setNombreAdulto(nombre);
             setNombrePasajero(nombre);
             setApellidoPasajero(apellido);
             setTelefono(telefono);
         }
-    },[]);
+
+
+
+    }, []);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
+    useEffect(() => {
+
+        if (nombreInicial.trim() === 'Pasajero' || nombreInicial.trim() === '' || apellidoInicial.trim() === '') {
+            setActivar(false);
+
+
+        } else {
+            setActivar(true);
+        }
+        console.log('Activar: ' + activar);
+    }, [nombreInicial, apellidoInicial]);
+
+    useEffect(() => {
+
+        if (correo.trim() === '' || telefono.trim() === '') {
+            setActivarTodo(false);
+
+
+        } else {
+            setActivarTodo(true);
+        }
+
+    }, [correo, telefono]);
 
     const changeNombre = (e) => {
         setNombrePasajero(e.target.value);
         setNombreAdulto(e.target.value);
+        setNombreInicial(e.target.value);
 
         if (e.target.value.trim() === '') {
             setErrorNombre(true);
-          } else {
+        } else {
             setErrorNombre(false);
-          }
+        }
     }
 
     const changeApellido = (e) => {
         setApellidoPasajero(e.target.value);
+        setApellidoInicial(e.target.value);
 
         if (e.target.value.trim() === '') {
             setErrorApellido(true);
-          } else {
+        } else {
             setErrorApellido(false);
-          }
+        }
     }
 
     const changePaisIndicativo = (event) => {
         setPaisIndicativo(event.target.value);
         console.log('Valor: ' + paisIndicativo);
+    };
+
+    const changeCorreo = (event) => {
+        setCorreo(event.target.value);
+
+        if (e.target.value.trim() === '') {
+            setErrorCorreo(true);
+        } else {
+            setErrorCorreo(false);
+        }
     };
 
     const changeTelefono = (event) => {
@@ -170,9 +213,9 @@ const Paso2 = () => {
 
         if (e.target.value.trim() === '') {
             setErrorTelefono(true);
-          } else {
+        } else {
             setErrorTelefono(false);
-          }
+        }
     };
 
     const changelifes = (event) => {
@@ -236,9 +279,32 @@ const Paso2 = () => {
     }, []);
 
     // Función para cambiar de tab sin importar si hay validaciones
-  const cambiarTab = () => {
-    setValue(1); // Cambiar al Tab 2
-  };
+    const cambiarTab = () => {
+        // Validar ambos campos
+        let valid = true;
+
+        if (nombrePasajero.trim() === 'Pasajero' || nombrePasajero.trim() === '') {
+            setErrorNombre(true);
+            valid = false;
+        } else {
+            setErrorNombre(false);
+        }
+
+        if (apellidoPasajero.trim() === '') {
+            setErrorApellido(true);
+            valid = false;
+        } else {
+            setErrorApellido(false);
+        }
+
+        console.log('Hola');
+        // Si ambos campos son válidos, pasar al Tab 2
+        if (valid) {
+            setValue(1);
+        }
+    }
+
+
 
     return (
         <>
@@ -258,7 +324,7 @@ const Paso2 = () => {
                             <Typography variant="h1" paragraph style={{ marginTop: '10px', marginBottom: '10px', fontSize: '30px', fontWeight: 'bold' }}>Datos Personales</Typography>
                         </AccordionSummary >
                         <AccordionDetails >
-                            <Box sx={{ width: '100%', border: '1px solid violet' }}>
+                            <Box className='BoxPaso2' sx={{ width: '100%' }}>
                                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"
                                         TabIndicatorProps={{
@@ -271,10 +337,10 @@ const Paso2 = () => {
                                         }}
 
                                     >
-                                        <Tab icon={<Adulto />} label={nombreAdulto} 
-                                        
-                                        
-                                        {...a11yProps(0)}
+                                        <Tab icon={<Adulto />} label={nombreAdulto}
+
+
+                                            {...a11yProps(0)}
                                             onChange={changeNombre}
                                             iconPosition="start"
 
@@ -311,14 +377,16 @@ const Paso2 = () => {
                                         <label>Ingresa el nombre y primer apellido (de cada pasajero) tal y como aparecen en el pasaporte o documento de identidad.</label>
                                         <div>
                                             <TextField id="outlined-basic" label="Nombre" variant="standard"
-                                                 error={errorNombre}
-                                                 helperText={errorNombre ? 'Por favor, ingresa tu primer nombre.' : ''}
+                                                error={errorNombre}
+                                                helperText={errorNombre ? 'Por favor, ingresa tu primer nombre.' : ''}
                                                 onChange={changeNombre}
+                                                value={nombreInicial}
                                                 InputLabelProps={{
                                                     style: {
                                                         fontSize: '24px', // Tamaño inicial del label
                                                         transition: 'font-size 0.8s ease', // Transición lenta
                                                         color: 'black',
+
                                                     },
                                                 }}
                                                 InputProps={{
@@ -333,9 +401,10 @@ const Paso2 = () => {
 
                                             />
                                             <TextField id="outlined-basic" label="Apellido" variant="standard"
-                                                 error={errorApellido}
-                                                 helperText={errorApellido ? 'Por favor, ingresa tu primer apellido.' : ''}
+                                                error={errorApellido}
+                                                helperText={errorApellido ? 'Por favor, ingresa tu primer apellido.' : ''}
                                                 onChange={changeApellido}
+                                                value={apellidoInicial}
                                                 InputLabelProps={{
                                                     style: {
                                                         fontSize: '24px', // Tamaño inicial del label
@@ -382,7 +451,7 @@ const Paso2 = () => {
                                                                     }
                                                                 }}
 
-                                                            >Codigo de área</InputLabel>
+                                                            >Programa de viajero frecuente*</InputLabel>
                                                             <Select
 
                                                                 labelId="demo-simple-select-label"
@@ -415,8 +484,8 @@ const Paso2 = () => {
 
                                                             >
 
-                                                                {lifesMiles.map((pais, index) => (
-                                                                    <MenuItem key={index} value={`${pais.nombre}`}
+                                                                {lifesMiles.map((lista, index) => (
+                                                                    <MenuItem key={index} value={`${lista.nombre}`}
 
                                                                         sx={{
                                                                             '&:hover': {
@@ -425,15 +494,14 @@ const Paso2 = () => {
                                                                         }}
 
                                                                     >
-                                                                        {`${pais.nombre}`}
+                                                                        {`${lista.nombre}`}
                                                                     </MenuItem>
                                                                 ))}
                                                             </Select>
                                                         </FormControl>
 
-                                                        <TextField id="outlined-basic" label="Número de teléfono" variant="standard"
-                                                             error={error}
-                                                             helperText={error ? 'Este campo es requerido' : ''}
+                                                        <TextField id="outlined-basic" label="Programa de viajero frecuente*" variant="standard"
+
                                                             InputLabelProps={{
                                                                 style: {
                                                                     fontSize: '24px', // Tamaño inicial del label
@@ -486,18 +554,20 @@ const Paso2 = () => {
                                             </div>
                                         </div>
                                     </div>
-                                   {/*<button className="boton_infoContacto" onChange={cambiarTab}>Información de contacto</button>*/}
+                                    <button className="boton_infoContacto" onClick={cambiarTab} disabled={!activar} style={{ backgroundColor: activar ? 'black' : 'gray' }}>Información de contacto</button>
                                 </CustomTabPanel>
-                                {value === 1 && (
+
                                 <CustomTabPanel value={value} index={1}>
-                                
+
                                     <div>
                                         <label>Información de contacto {paisIndicativo}</label><br />
                                         <label>Utilizaremos este correo para informarte sobre tu reserva, administrar cambios y reembolsos. Al continuar aceptas nuestra política de privacidad.</label>
                                         <div>
                                             <TextField id="outlined-basic" label="Correo" variant="standard"
-                                                 error={errorCorreo}
-                                                 helperText={errorCorreo ? 'Por favor, ingresa tu correo electrónico.' : ''}
+                                                error={errorCorreo}
+                                                helperText={errorCorreo ? 'Por favor, ingresa tu correo electrónico.' : ''}
+                                                value={correo}
+                                                onChange={changeCorreo}
                                                 InputLabelProps={{
                                                     style: {
                                                         fontSize: '24px', // Tamaño inicial del label
@@ -579,8 +649,8 @@ const Paso2 = () => {
                                             </FormControl>
 
                                             <TextField id="outlined-basic" label="Número de teléfono" variant="standard"
-                                                 error={errorTelefono}
-                                                 helperText={errorTelefono ? 'Este campo es obligatorio.' : ''}
+                                                error={errorTelefono}
+                                                helperText={errorTelefono ? 'Este campo es obligatorio.' : ''}
                                                 onChange={changeTelefono}
                                                 value={telefono}
                                                 InputLabelProps={{
@@ -635,7 +705,7 @@ const Paso2 = () => {
 
 
                                             </div>
-                                            <button className="boton_infoContacto" onClick={enviar}>Guardar y continuar</button>
+                                            <button className="boton_infoContacto" onClick={enviar} disabled={!activarTodo} style={{ backgroundColor: activarTodo ? 'black' : 'gray' }}>Guardar y continuar</button>
 
 
 
@@ -644,8 +714,384 @@ const Paso2 = () => {
 
 
                                     </div>
-                                </CustomTabPanel>)}
+                                </CustomTabPanel>
                             </Box>
+
+
+                            {/** BoxMovil */}
+                            <Box className='BoxPaso2Movil' sx={{ width: '100%', border: '1px solid violet' }}>
+
+
+
+
+                                <div>
+                                    <label className='label_pasajero' >{`${nombrePasajero} ${apellidoPasajero}`}</label><label>-</label><label className="label_adulto">Adulto1</label><br />
+                                    <label className="label_NombreApellido">Ingresa el nombre y primer apellido (de cada pasajero) tal y como aparecen en el pasaporte o documento de identidad.</label>
+                                    <div>
+                                        <TextField id="standard-size-normal" label="Nombre" variant="standard"
+                                            error={errorNombre}
+                                            helperText={errorNombre ? 'Por favor, ingresa tu primer nombre.' : ''}
+                                            onChange={changeNombre}
+                                            value={nombreInicial}
+                                            InputLabelProps={{
+                                                style: {
+                                                    fontSize: '17px', // Tamaño inicial del label
+                                                    transition: 'font-size 0.8s ease', // Transición lenta
+                                                    color: 'black',
+
+                                                }
+                                            }}
+                                            sx={{
+
+                                                input: {
+                                                    fontSize: '17px',
+
+                                                },
+                                                marginTop: '15px'
+                                            }}
+                                            fullWidth
+
+                                        />
+                                        <TextField id="standard-size-normal" label="Apellido" variant="standard"
+                                            error={errorApellido}
+                                            helperText={errorApellido ? 'Por favor, ingresa tu primer apellido.' : ''}
+                                            onChange={changeApellido}
+                                            value={apellidoInicial}
+                                            InputLabelProps={{
+                                                style: {
+                                                    fontSize: '17px', // Tamaño inicial del label
+                                                    transition: 'font-size 0.8s ease', // Transición lenta
+                                                    color: 'black',
+                                                }
+                                            }}
+
+                                            sx={{
+                                                input: {
+                                                    fontSize: '17px',
+                                                }
+                                            }}
+                                            fullWidth
+                                        />
+                                        <div className="div_check" >
+                                            <FormControlLabel control={<Checkbox
+                                                checked={checklifes}
+                                                onChange={changeCheckLifes}
+
+                                                sx={{
+                                                    color: 'green',
+                                                    '&.Mui-checked': {
+                                                        color: 'green',
+                                                    },
+                                                }}
+                                            />} label="Tengo un número de viajero frecuente lifemiles o de otra aerolínea aliada (opcional)."
+
+                                                sx={{
+
+                                                    '& .MuiFormControlLabel-label': {
+                                                        fontSize: '12px', // Cambia el tamaño del label aquí
+                                                    }
+                                                }}
+
+                                            />
+
+                                            {checklifes && (
+                                                <div className="div_lifeMiles">
+                                                    <FormControl >
+                                                        <Select
+
+                                                            labelId="demo-simple-select-label"
+                                                            id="demo-simple-select"
+                                                            defaultValue={lifes}
+                                                            label="Programa de viajero frecuente*"
+                                                            onChange={changelifes}
+                                                            variant="standard"
+
+                                                            MenuProps={{
+                                                                PaperProps: {
+                                                                    style: {
+                                                                        // Ajusta el ancho y la posición según tus necesidades
+                                                                        width: '200px',
+                                                                        height: '200px',
+                                                                        // Usa Popper.placements para definir la posición
+                                                                        position: 'absolute',
+                                                                        top: '100%',
+                                                                    },
+                                                                },
+                                                            }}
+
+
+                                                            sx={{
+                                                                width: '300px',
+                                                                fontSize: '17px',
+                                                                color: 'black',
+
+                                                            }}
+
+                                                        >
+
+                                                            {lifesMiles.map((lista, index) => (
+                                                                <MenuItem key={index} value={`${lista.nombre}`}
+
+                                                                    sx={{
+                                                                        '&:hover': {
+                                                                            color: 'black', // Cambiar el color de la letra al pasar el cursor
+                                                                        }
+                                                                    }}
+
+                                                                >
+                                                                    {`${lista.nombre}`}
+                                                                </MenuItem>
+                                                            ))}
+                                                        </Select>
+                                                    </FormControl>
+
+                                                    <TextField id="standard-size-normal" label="Programa de viajero frecuente*" variant="standard"
+
+                                                        InputLabelProps={{
+                                                            style: {
+                                                                fontSize: '17px', // Tamaño inicial del label
+                                                                transition: 'font-size 0.8s ease', // Transición lenta
+                                                                color: 'black',
+
+                                                            }
+                                                        }}
+                                                        sx={{
+
+                                                            input: {
+                                                                fontSize: '17px',
+
+                                                            },
+                                                            marginTop: '15px'
+                                                        }}
+                                                        fullWidth
+
+                                                    />
+                                                </div>)}<br />
+                                            <FormControlLabel control={<Checkbox
+
+                                                checked={checkservicios}
+                                                onChange={changeCheckServicios}
+                                                sx={{
+                                                    color: 'green',
+                                                    '&.Mui-checked': {
+                                                        color: 'green',
+                                                    },
+                                                }}
+                                            />} label="Necesito asistencia especial (opcional)."
+
+                                                sx={{
+
+                                                    '& .MuiFormControlLabel-label': {
+                                                        fontSize: '13px', // Cambia el tamaño del label aquí
+                                                    }
+                                                }}
+
+                                            />
+
+                                            {checkservicios && (
+                                                <div className="div_asisteciaEspecial">
+                                                    <label className="label_servicios">Si alguno de los servicios que requieres no se encuentra en la lista, comunícate directamente con nuestro Contact Center y con gusto te ayudaremos.</label>
+                                                    <button className="boton_aisitenciaEspecial">Pasajero con discapcidad visual
+                                                        <img src={signoMas} className='signoMas' /> </button>
+
+                                                    <button className="boton_aisitenciaEspecial">Pasajero con discapcidad visual  <img src={signoMas} className='signoMas' /></button>
+                                                    <button className="boton_aisitenciaEspecial">Animal de servicio  <img src={signoMas} className='signoMas' /></button>
+                                                    <button className="boton_aisitenciaEspecial">Animal de soporte emocional  <img src={signoMas} className='signoMas' /></button>
+                                                    <button className="boton_aisitenciaEspecial">Silla de ruedas hasta asiento  <img src={signoMas} className='signoMas' /></button>
+                                                    <button className="boton_aisitenciaEspecial">Silla de ruedas hasta rampa  <img src={signoMas} className='signoMas' /></button>
+                                                    <button className="boton_aisitenciaEspecial">Silla de ruedas para subir y bajar escaleras  <img src={signoMas} className='signoMas' /></button>
+                                                    <button className="boton_aisitenciaEspecial">Silla de ruedas a bordo  <img src={signoMas} className='signoMas' /></button>
+                                                    <button className="boton_aisitenciaEspecial">Silla de rudas manual  <img src={signoMas} className='signoMas' /></button>
+                                                    <label className='label_sinCosto'>Los servicios de asistencia especial no tienen un costo adicional.  <img src={signoMas} className='signoMas' /></label>
+                                                </div>)}
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div>
+                                    <label>{<Contacto />}</label><label style={{ marginLeft: '5px' }}>Información de contacto</label><br />
+                                    <label style={{ fontSize: '13px' }} >Estos datos serán utilizados para informarte sobre tu reserva.
+                                    </label>
+                                    <div>
+                                        <TextField id="standard-size-normal" label="Correo" variant="standard"
+                                            error={errorCorreo}
+                                            helperText={errorCorreo ? 'Por favor, ingresa tu correo electrónico.' : ''}
+                                            value={correo}
+                                            onChange={changeCorreo}
+                                            InputLabelProps={{
+                                                style: {
+                                                    fontSize: '17px', // Tamaño inicial del label
+                                                    transition: 'font-size 0.8s ease', // Transición lenta
+                                                    color: 'black',
+
+                                                },
+                                            }}
+                                            sx={{
+
+                                                input: {
+                                                    fontSize: '17px',
+
+                                                },
+                                                marginTop: '15px',
+                                                marginBottom: '20px'
+                                            }}
+                                            fullWidth
+
+                                        />
+
+                                        <FormControl >
+
+                                            <InputLabel id="demo-simple-select-label"
+
+                                                sx={{
+                                                    '&.Mui-focused': {
+                                                        fontWeight: 'bold',
+                                                        marginTop: '10px',
+                                                        color: 'rgba(0, 0, 0, 0.521)'
+
+                                                    },
+                                                    fontWeight: 'bold',
+                                                    marginTop: '10px',
+                                                    color: 'rgba(0, 0, 0, 0.521)'
+                                                }}
+
+                                            >Codigo de área</InputLabel>
+                                            <Select
+
+                                                labelId="demo-simple-select-label"
+                                                id="demo-simple-select"
+                                                defaultValue={paisIndicativo}
+                                                label="Contacto"
+                                                onChange={changePaisIndicativo}
+                                                variant="standard"
+
+                                                MenuProps={{
+                                                    PaperProps: {
+                                                        style: {
+                                                            // Ajusta el ancho y la posición según tus necesidades
+                                                            width: '200px',
+                                                            height: '200px',
+                                                            // Usa Popper.placements para definir la posición
+                                                            position: 'absolute',
+                                                            top: '100%',
+                                                        },
+                                                    },
+                                                }}
+
+                                                sx={{
+                                                    width: '300px',
+                                                    fontSize: '17px',
+                                                    color: 'black',
+
+                                                }}
+
+                                            >
+
+                                                {codigosPaises.map((pais, index) => (
+                                                    <MenuItem key={index} value={`${pais.nombre} (${pais.código})`}
+
+                                                        sx={{
+                                                            '&:hover': {
+                                                                color: 'black', // Cambiar el color de la letra al pasar el cursor
+                                                            }
+                                                        }}
+
+                                                    >
+                                                        {`${pais.nombre} (${pais.código})`}
+                                                    </MenuItem>
+                                                ))}
+                                            </Select>
+                                        </FormControl>
+
+                                        <TextField id="standard-size-normal" label="Número de teléfono" variant="standard"
+                                            error={errorTelefono}
+                                            helperText={errorTelefono ? 'Este campo es obligatorio.' : ''}
+                                            onChange={changeTelefono}
+                                            value={telefono}
+                                            InputLabelProps={{
+                                                style: {
+                                                    fontSize: '17px', // Tamaño inicial del label
+                                                    transition: 'font-size 0.8s ease', // Transición lenta
+                                                    color: 'black',
+
+                                                },
+                                            }}
+                                            sx={{
+
+                                                input: {
+                                                    fontSize: '17px',
+
+                                                },
+                                                marginTop: '15px'
+                                            }}
+                                            fullWidth
+
+                                        />
+
+                                        <div>
+                                            <br />
+
+                                            <FormControlLabel control={<Checkbox
+
+                                                sx={{
+                                                    color: 'green',
+                                                    '&.Mui-checked': {
+                                                        color: 'green',
+                                                    },
+                                                }}
+
+                                                checked={checkAceptar}
+                                                onChange={changeCheckAceptar}
+
+                                            />} label="Acepto el uso de mis datos personales para recibir promociones, ofertas y novedades que Avianca tiene para mí."
+
+                                                sx={{
+
+                                                    '& .MuiFormControlLabel-label': {
+                                                        fontSize: '12px', // Cambia el tamaño del label aquí
+                                                    }
+                                                }}
+
+                                            /><br />
+                                            <FormControlLabel control={<Checkbox
+
+                                                sx={{
+                                                    color: 'green',
+                                                    '&.Mui-checked': {
+                                                        color: 'green',
+                                                    },
+                                                }}
+
+                                                checked={checkRecibir}
+                                                onChange={changeCheckRecibir}
+
+                                            />} label="Recibir mis datos para futuras compras."
+
+                                                sx={{
+
+                                                    '& .MuiFormControlLabel-label': {
+                                                        fontSize: '12px', // Cambia el tamaño del label aquí
+                                                    }
+                                                }}
+
+                                            />
+
+
+                                        </div>
+                                        <button className="boton_infoContacto" onClick={enviar} disabled={!activarTodo} style={{ backgroundColor: activarTodo ? 'black' : 'gray' }}>Guardar y continuar</button>
+
+
+
+                                    </div>
+
+
+
+                                </div>
+
+                            </Box>
+
 
 
                         </AccordionDetails>
@@ -686,6 +1132,15 @@ const Paso2 = () => {
                         </div>
 
                     </div>
+
+                    <div className="contenedor_datosPaso2Movil">
+                        <label className="TextorResumenViajeMovil">Resumen del viaje</label>
+                        <label className='label_precioPaso2Movil'>
+                            ${precio}<label className='label_copPaso2Movil'>COP
+                            </label>
+                            <p className="TotalReservaMovil">Total de tu reserva</p>
+                        </label>
+                    </div>
                 </div>
 
                 <div className={`div_datosPaso2 ${!showDiv1 ? 'show' : 'hide'}`} >
@@ -720,13 +1175,22 @@ const Paso2 = () => {
                         </div>
 
                     </div>
-
+                    <div className="contenedor_datosPaso2Movil">
+                        <label className="TextorResumenViajeMovil">Resumen del viaje</label>
+                        <label className='label_precioPaso2Movil'>
+                            ${precio}<label className='label_copPaso2Movil'>COP
+                            </label>
+                            <p className="TotalReservaMovil">Total de tu reserva</p>
+                        </label>
+                    </div>
 
                 </div>
 
+                <div className="div_piePaginaResumen">
+                    <label className="label_piePaginaResumen">© Avianca S.A 2024</label>
+                </div>
 
 
-                <PiePagina />
             </div>
 
         </>

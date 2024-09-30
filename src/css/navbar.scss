@@ -9,9 +9,10 @@
 
 .navbarModificarBusqueda {
     background-color: white;
-    margin-top: 60px !important;
+    margin-top: 80px !important;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    padding-top: 15px !important;
     width: 90%;
     margin: 0 auto;
     -webkit-box-shadow: -4px 7px 18px 0px rgba(0, 0, 0, 0.1);
@@ -20,11 +21,17 @@
 
 }
 
+.navbarMovil, .navbarMovilPasos{
+    display: none !important;
+}
+
+
 .logo {
     margin-left: 70px;
 }
 
 .navbarEscritorioPasos {
+    display: block !important;
     height: 80px;
     background-color: white;
     border-bottom: 1px solid rgba(128, 128, 128, 0.233);
@@ -51,21 +58,21 @@
 
 .nav1 {
 
-    margin-left: 200px;
+    margin-left: 190px;
     font-size: 18px;
 
 }
 
 .label_seleccion {
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .label_viaje {
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .label_pago {
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .nav2 {
@@ -140,212 +147,192 @@
 
 }
 
-
-.fondoPaso1 {
-    background-color: rgb(255, 255, 255);
-    margin: 0 auto;
-    margin-top: 200px;
-    width: 87%;
-}
-
-.fondoContenido {
-    background-color: white;
-    width: 90%;
-    overflow: visible;
-    margin: 0 auto;
+.navbarMovilPasos{
+    display: none !important;
 }
 
 
+@media screen and (max-width: 768px) {
+    .navbarMovil{
+       display: block !important;
+       background-color: white;
+       height: 50px;
+     }
 
-.td_ciudad {
-    width: 50%;
-}
+     .containerNavBar{
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+        height: 40px;
+        margin: 0 auto; 
+        width: 100%;
+        text-align: center;
+     }
 
-.input_ciudad {
-    display: flex;
-}
+     .navbarBrandMovilPasos{
+       width: 100%;
+     }
 
-.div_ciudadOrigen {
-    position: absolute;
-    margin-top: 150px;
-    margin-left: 100px;
-    border-radius: 10px;
-    overflow: visible;
-    z-index: 5;
-    background-color: white;
-    width: 20%;
+     .navPasoMovil{
+        width: 100%;
+        padding-left: 100px;
+        margin: 0 auto;
+     }
 
-}
+     .navbarBrandMovil{
+       width: 100% !important;
+       justify-content: center;
+       text-align: center;
+     }
+    
+     .logo{
+        width: 35px;
+        margin-left: 30px;
+        float: left;
+     }
 
-.div_ciudadDestino {
-    position: absolute;
-    margin-top: 150px;
-    border-radius: 5px;
-    margin-left: 280px;
-    overflow: visible;
-    z-index: 5;
-    background-color: white;
-    width: 20%;
-}
+    
 
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    position: fixed;
-}
+     .label_origen_movil{
+       font-size: 12px;
+       margin-left: 3%;
+       margin-right: 10px;
+       font-weight: 500;
+       width: 10%;
+     }
 
-li {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
-    background-color: black;
-    color: white;
-    margin-left: -30px;
-    position: fixed;
-}
+     .label_destino_movil{
+        font-size: 12px;
+        font-weight: 500;
+        width: 10%;
+     }
 
-li:hover {
-    background-color: black;
-    color: white
-}
+     .flechaNavMovil{
+        margin-top: -22px;
+        margin-left: 10px;
+       font-size: 12px;
+       border-left: 1px solid gray;
+       border-right: 1px solid gray ;
+       padding-left: 10px;
+       padding-right: 10px;
+       width: 25%;
+     }
 
-.label_aeropuerto {
-    font-size: 14px;
+     .editarMovil{
+        float: right;
+        margin-top: -25px;
+        margin-left: 200px;
+     }
 
-}
+     .navbarEscritorio {
+       display: none !important;
+    }
+    
+    .navbarModificarBusqueda {
+        display: none !important;
+    
+    }
 
-.label_abreviatura {
-    margin-left: 15px;
-}
+    /** Modal Movil en NanBar*/
 
-.td_botonBuscar {
-    width: 12%;
-}
+    .editarBusqueda{
+        font-size: 20px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+       text-align: center;
+       width: 100%;
+       border-bottom: 1px solid rgba(0, 0, 0, 0.226);
+       font-weight: normal;
+    }
 
+    .div_solo_ida{
+     text-decoration: underline;
+     font-size: 15px;
+     margin-bottom: 20px;
+    }
 
-.botonBuscar {
-    background-color: black;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 50px;
-    width: 100%;
-    padding: 8px;
+    .desdeHaciaModal{
+       
+        margin-top: 10px;
+        margin-bottom: 15px;
+       
+    }
 
-}
+    .fechaOrigenModal{
+       margin-bottom: 15px;
+       margin-left: -10px;
+       width: 100%;
+    }
 
-.div_origenDestino {
-    display: flex;
+    .datepickerMovil{
+      width: 100%;   
+    }
+   
+    .div_botonModificarModal{
+         text-align: center;
+    }
+    .botonModificarModal{
+        width: 95%;
+        font-size: 13px;
+        padding: 10px;
+        border: 0.5px solid rgba(0, 0, 0, 0.459);
+    }
+    
 
-}
+    .desdeHaciaModal{
+        display: flex;
+    }
 
-.fechaOrigen {
-    margin-top: -10px;
+    .div_ciudadOrigen{
+        display: none;
+    }
 
+    .div_ciudadDestino{
+        display: none;
+    }
+    
+    .desdeMovil, .haciaMovil{
+        width: 100%;
+    }
 
-}
+    .div_ciudadOrigenMovil{
+        margin-top: 5px ;
+        margin-right: 200px;
+        position: absolute;
+        z-index: 1000;
+        width: 100%;
+    }
 
-.botonModificar {
-    border-radius: 30px;
-    font-size: 18px;
-    width: 250px;
-    height: 50px;
-    background-color: black;
-    color: white;
-    font-weight: bold;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-top: 30px;
-}
+    .div_ciudadDestinoMovil{
+        margin-top: 5px ;
+        position: absolute;
+        z-index: 1000;
+        width: 100%;
+      
+    }
+  
+    .li_ciudadMovil, .label_aeropuertoMovil{
+       font-size: 13px;
+       background-color: black;
+       color: white;
+       height: 50px;
+      
+    }
 
-.fecha_desdeHacia {
-    margin-top: 10px;
-    font-size: 13px;
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.596);
-}
+    .navbarEscritorioPasos{
+        display: none !important;
+    }
 
-
-
-.datepicker {
-    margin-top: -15px !important;
-
-}
-
-.desdeHacia {
-    font-size: 13px;
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.596);
-}
-
-.textField {
-    margin-top: -15px !important;
-    background-color: white;
-}
-
-.botonPasajeros {
-    background-color: black;
-    color: white;
-    width: 90%;
-    margin: 0 auto;
-    border-radius: 30px;
-    font-size: 13px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.p_pasajeros {
-    font-size: 25px;
-    font-weight: bold;
-    margin-top: 25px;
-    margin-left: 15px;
-
-
-}
-
-
-
-.botonCerrarPasajeros {
-    border: none;
-    margin-top: 20px;
-    margin-right: 20px;
-    background-color: transparent;
-    font-size: 23px;
-
-}
-
-.contenedorPasajeros {
-    margin-top: 15px !important;
-}
-
-.tituloPasajero {
-
-    font-size: 18px;
-
-}
-
-.subtituloPasajero {
-    margin-top: -20px;
-    margin-bottom: 20px;
-    font-size: 15px;
-    color: rgba(0, 0, 0, 0.555);
-    font-weight: bold;
-}
+    .navbarMovilPasos{
+        display: inline !important;
+        background-color: white;
+    }
 
 
-#filled-number {
-    width: 280px;
-    height: 10px;
-    font-size: 23px;
-    margin-top: -20px;
-    padding-bottom: 20px;
-    background-color: white;
-}
+    .navbarMovil{
+        display: block;
+        width: 100%;
+        padding-left: 100px;
+        margin: 0 auto;
+    }
 
-.p_salida {
-    padding-top: 20px;
-    margin-left: 25px;
-    font-weight: bold;
-    font-size: 25px;
-
-}
+  }

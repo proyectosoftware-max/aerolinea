@@ -18,17 +18,25 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
+import Slide from '@mui/material/Slide';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
-import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import { FormControl, InputLabel } from '@mui/material';
+import datos from './vuelos.json';
 import Popover from '@mui/material/Popover';
 import dayjs from 'dayjs';
 import uno from '../material/1.jpg';
 import dos from '../material/2.jpg';
 import tres from '../material/3.jpg';
 import icono_idioma from '../material/icono_idioma.jpg';
-
+import flechaOrigenDestino from '../material/flechaOrigenDestino.jpg';
+import logoMovil from '../material/movil/iconoMovil.jpg';
+import flechaMovil from '../material/movil/flechaMovil.jpg';
+import lapiz from '../material/movil/lapiz.jpg';
+dayjs.locale('es');
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -40,6 +48,40 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
+// Función de transición para hacer que el modal aparezca desde abajo
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+const monthMap = {
+  'ene': 'Ene',
+  'feb': 'Feb',
+  'mar': 'Mar',
+  'abr': 'Abr',
+  'may': 'May',
+  'jun': 'Jun',
+  'jul': 'Jul',
+  'ago': 'Ago',
+  'sep': 'Sept',
+  'oct': 'Oct',
+  'nov': 'Nov',
+  'dic': 'Dic'
+};
+
+const formatDate = (date) => {
+  // Formato corto del día de la semana, número del día y mes
+  const formattedDate = dayjs(date).format('D MMM'); // Ej: "Thu 12 Sep"
+
+  // Separar el formato en partes
+  let [day, monthAbbreviation] = formattedDate.split(' ');
+
+
+  // Mapea la abreviación del mes al español usando el mapa personalizado
+  const capitalizedMonth = monthMap[monthAbbreviation.toLowerCase()] || monthAbbreviation;
+
+  // Retorna el formato final, por ejemplo "Jue, 12 Sept"
+  return `${day} ${capitalizedMonth}`;
+};
 
 
 /* https://www.avianca.com/es/booking/select/?origin1=BAQ&destination1=MDE&departure1=2024-09-02&adt1=1&tng1=0&chd1=0&inf1=0&currency=COP&posCode=CO */
@@ -51,7 +93,7 @@ const MenuNavBar = () => {
   const [ciudadOrigen, setCiudadOrigen] = useState("Barranquilla(BAQ)");
   const [ciudadDestino, setCiudadDestino] = useState("Medellín(MDE)");
   const [scrolled, setScrolled] = useState(false);
-  const {sharedData, setOrigen, setDestino, selectedDate, setSelectedDate } = useContext(DataContext);
+  const { sharedData, setOrigen, setDestino, selectedDate, setSelectedDate } = useContext(DataContext);
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [adulto, setAdulto] = useState(1);
@@ -62,6 +104,15 @@ const MenuNavBar = () => {
     setLanguage(event.target.value);
   };
 
+  const [abrirModal, setAbrirModal] = useState(false);
+
+  const clickAbrirModal = () => {
+    setAbrirModal(true);
+  };
+
+  const cerrarModal = () => {
+    setAbrirModal(false);
+  };
 
 
   const handleClickOpen = () => {
@@ -70,6 +121,8 @@ const MenuNavBar = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+
 
 
   useEffect(() => {
@@ -87,9 +140,13 @@ const MenuNavBar = () => {
   const [filteredData1, setFilteredData1] = useState([]);
   const [query2, setQuery2] = useState(ciudadDestino);
   const [filteredData2, setFilteredData2] = useState([]);
+  const [origenAbreviatura, setOrigenAbreviatura] = useState('');
+  const [destinoAbreviatura, setDestinoAbreviatura] = useState('');
 
   useEffect(() => {
-    // Si necesitas realizar alguna operación con los datos, puedes hacerlo aquí
+
+    setOrigenAbreviatura(ciudadOrigen.split('(')[1].replace(')', ''));
+    setDestinoAbreviatura(ciudadDestino.split('(')[1].replace(')', ''));
   }, []);
 
   const handleChange1 = (e) => {
@@ -106,8 +163,8 @@ const MenuNavBar = () => {
   };
 
   const escapeRegExp = (string) => {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // Escapar todos los caracteres especiales
-};
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // Escapar todos los caracteres especiales
+  };
 
   const highlightText1 = (text, query1) => {
     const escapedQuery = escapeRegExp(query1);
@@ -165,6 +222,80 @@ const MenuNavBar = () => {
     setQuery2(name);
     setFilteredData2([]);
   };
+
+  /* Origen, destino, fecha en busqueda Movil */
+
+  const handleChange1Movil = (e) => {
+    const value = e.target.value;
+    setQuery1(value);
+    if (value) {
+      const results = data.filter((item) =>
+        item.name.toLowerCase().includes(value.toLowerCase())
+      );
+      setFilteredData1(results);
+    } else {
+      setFilteredData1([]);
+    }
+  };
+
+
+  const highlightText1Movil = (text, query1) => {
+    const escapedQuery = escapeRegExp(query1);
+    const parts = text.split(new RegExp(`(${escapedQuery})`, 'gi'));
+    return (
+      <span>
+        {parts.map((part, index) =>
+          part.toLowerCase() === query1.toLowerCase() ? (
+            <strong key={index}>{part}</strong>
+          ) : (
+            part
+          )
+        )}
+      </span>
+    );
+  };
+
+
+  const handleClick1Movil = (name) => {
+    setQuery1(name);
+    setFilteredData1([]);
+  };
+
+  const handleChange2Movil = (e) => {
+    const value = e.target.value;
+    setQuery2(value);
+    if (value) {
+      const results = data.filter((item) =>
+        item.name.toLowerCase().includes(value.toLowerCase())
+      );
+      setFilteredData2(results);
+    } else {
+      setFilteredData2([]);
+    }
+  };
+
+  const highlightText2Movil = (text, query2) => {
+    const escapedQuery = escapeRegExp(query1);
+    const parts = text.split(new RegExp(`(${escapedQuery})`, 'gi'));
+    return (
+      <span>
+        {parts.map((part, index) =>
+          part.toLowerCase() === query2.toLowerCase() ? (
+            <strong key={index}>{part}</strong>
+          ) : (
+            part
+          )
+        )}
+      </span>
+    );
+  };
+
+
+  const handleClick2Movil = (name) => {
+    setQuery2(name);
+    setFilteredData2([]);
+  };
+
 
 
   const [startDate, setStartDate] = useState(null);
@@ -339,25 +470,12 @@ const MenuNavBar = () => {
   }
 
 
-  const formatDateWithYear = (date) => {
-    const options = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
-    const formattedDate = date.toLocaleDateString('es-ES', options);
+  const cambioValorAdulto = (event) => {
 
-    // Convertir la primera letra del mes y el día de la semana a mayúscula
-    const [weekdayWithComma, day, month, year] = formattedDate.split(' ');
-    const weekday = weekdayWithComma.replace(',', '').charAt(0).toUpperCase() + weekdayWithComma.slice(1, -1);
-    const capitalizedMonth = month.charAt(0).toUpperCase() + month.slice(1);
-
-    // Combinar todas las partes con puntos
-    return `${weekday}. ${day} ${capitalizedMonth}. ${year}`;
-  };
-
-  const cambioValorAdulto = (event) =>{
-     
-     setAdulto(event.target.value);
+    setAdulto(event.target.value);
   }
 
-  const clickBotonConfirmar = () =>{
+  const clickBotonConfirmar = () => {
     setInputAdulto(adulto);
     cerrarVentana();
   }
@@ -366,17 +484,21 @@ const MenuNavBar = () => {
     setCiudadOrigen(query1);
     setCiudadDestino(query2);
     setLgShow(false);
-    setSelectedDate(actualizarFecha);
-    
+    setOrigenAbreviatura(query1.split('(')[1].replace(')', ''));
+    setDestinoAbreviatura(query2.split('(')[1].replace(')', ''));
+    setAbrirModal(false);
+    //setSelectedDate(actualizarFecha);
+
     console.log('SelectedDate ' + selectedDate.format('DD MMM YYYY'));
   }
 
 
- useEffect(() => {
-  console.log("SelectedDate en MenuNavBar " + selectedDate);
-   localStorage.setItem('selectedDate', setSelectedDate(selectedDate));
-   setSelectedDate(selectedDate);
-}, [selectedDate]);
+
+  useEffect(() => {
+    console.log("SelectedDate en MenuNavBar " + formatDate(selectedDate));
+    localStorage.setItem('selectedDate', setSelectedDate(selectedDate));
+    setSelectedDate(selectedDate);
+  }, [selectedDate]);
 
 
   useEffect(() => {
@@ -427,27 +549,55 @@ const MenuNavBar = () => {
       <Navbar className={'navbarEscritorio'} expand="lg" fixed='top'>
         <Container className='container1'>
           <Navbar.Brand href="" className='navbar-brand'>
-            <img src={logo}  className='logo' />
-            <img src={icono_idioma}/>
-            <select style={{border:'none', outline:'none', borderRadius:'300px'}} value={language} onChange={idioma}>
-           <option style={{border:'none'}}>Español</option>
-          </select>
-  
-        </Navbar.Brand>
+            <img src={logo} className='logo' />
+            <img src={icono_idioma} />
+            <select style={{ border: 'none', outline: 'none', borderRadius: '300px' }} value={language} onChange={idioma}>
+              <option style={{ border: 'none' }}>Español</option>
+            </select>
+
+          </Navbar.Brand>
           <Navbar.Collapse id="bascic navbar-nav">
             <Nav className='flex-column'>
               <div className="nav1" >
-                <img src={uno}/>
-                <label className='label_seleccion'>Selección de vuelos</label>
-                <img src={dos}/>
+                <img src={uno} />
+                <label className='label_seleccion' style={{ fontWeight: 'bold' }} >Selección de vuelos</label>
+                <img src={dos} />
                 <label className='label_viaje'>Personaliza tu viaje</label>
-                <img src={tres}/>
+                <img src={tres} />
                 <label className='label_pago'>Pagos</label>
               </div>
-            
+
             </Nav>
           </Navbar.Collapse>
 
+        </Container>
+      </Navbar>
+
+      <Navbar className={'navbarMovil'} expand="lg" fixed='top'>
+        <Container className='containerNavBar'>
+          <Navbar.Brand href="" className='navbarBrandMovil'>
+            <img src={logoMovil} className='logo' />
+
+            <label className='label_origen_movil' >{origenAbreviatura}</label>
+            <img src={flechaMovil} />
+            <label className='label_destino_movil'>{destinoAbreviatura}</label>
+            <label className='flechaNavMovil'>{formatDate(selectedDate)}</label>
+
+            <img src={lapiz} className='editarMovil' onClick={clickAbrirModal} />
+          </Navbar.Brand>
+          <Navbar.Collapse id="bascic navbar-nav">
+            <Nav className='flex-column'>
+              <div className="nav1" >
+                <img src={uno} />
+                <label className='label_seleccion' style={{ fontWeight: 'bold' }} >Selección de vuelos</label>
+                <img src={dos} />
+                <label className='label_viaje'>Personaliza tu viaje</label>
+                <img src={tres} />
+                <label className='label_pago'>Pagos</label>
+              </div>
+
+            </Nav>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
 
@@ -462,77 +612,139 @@ const MenuNavBar = () => {
                   <tr>
                     <td>
                       <div className='desde'>
-                        <p className='desdeHacia'>Desde</p>
                         <TextField
                           defaultValue=""
                           variant="filled"
+                          label='Desde'
                           className='textField'
                           onFocus={focus}
                           onBlur={blur}
                           value={query1}
                           onChange={handleChange1}
+                          InputLabelProps={{
+                            shrink: true, // Mantiene el label siempre visible
+                            style: {
+                              color: 'rgba(0, 0, 0, 0.596)',
+                              fontSize: '17px',
+                              fontWeight: 'bold'
+                            },
+                          }}
+
                           sx={{
                             input: {
                               color: 'black', // Cambia el color del texto a blanco
                               backgroundColor: 'white', // Elimina el fondo gris predeterminado
-                            }}}
+                              fontSize: '18px',
+                            }
+                          }}
                         /></div></td>
+                    <td><img src={flechaOrigenDestino} /></td>
                     <td>
                       <div className='hacia'>
-                        <p className='desdeHacia'>Hacia</p>
                         <TextField
                           defaultValue=""
                           variant="filled"
+                          label="Hacia"
                           className='textField'
                           onFocus={focus}
                           onBlur={blur}
                           value={query2}
                           onChange={handleChange2}
+                          InputLabelProps={{
+                            shrink: true, // Mantiene el label siempre visible
+                            style: {
+                              color: 'rgba(0, 0, 0, 0.596)',
+                              fontSize: '17px',
+                              fontWeight: 'bold'
+                            },
+                          }}
+
                           sx={{
                             input: {
                               color: 'black', // Cambia el color del texto a blanco
                               backgroundColor: 'white', // Elimina el fondo gris predeterminado
-                            }}}
+                              fontSize: '18px',
+                            }
+                          }}
                         />
                       </div></td>
                     <td>
                       <div className='fechaOrigen' onFocus={focus}
                         onBlur={blur}>
-                        <p className='fecha_desdeHacia'>Fecha del viaje</p>
                         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
-  <DatePicker
-    className='datepicker'
-    value={dayjs(selectedDate)}
-    onChange={handleDateChange}
-    slotProps={{ textField: { variant: 'filled' }}}
-    inputFormat="DD MMM"
-    views={['day', 'month']}
-    format="DD MMM."
-    sx={{
-      input: {
-      color: 'black', // Cambia el color del texto a blanco
-      backgroundColor: 'white', // Elimina el fondo gris predeterminado
-      }}}
-  />
-</LocalizationProvider>
+                          <DatePicker
+                            className='datepicker'
+                            label='Fecha de viaje'
+                            value={dayjs(selectedDate)}
+                            onChange={handleDateChange}
+                            slotProps={{
+                              textField: { variant: 'standard' }
+                            }}
+                            inputFormat="DD MMM"
+                            views={['day', 'month']}
+                            format="DD MMM."
+                            sx={{
+                              input: {
+                                color: 'black', // Cambia el color del texto a blanco
+                                backgroundColor: 'white', // Elimina el fondo gris predeterminado
+                                fontSize: '18px',
+
+                              },
+                              label: {
+                                color: 'rgba(0, 0, 0, 0.596)',
+                                fontSize: '17px',
+                                fontWeight: 'bold'
+
+                              },
+
+                              '& .MuiInputLabel-root.Mui-focused': {
+                                color: 'rgba(0, 0, 0, 0.596)', // Cambia el color azul por gris cuando está enfocado
+                              }
+                            }}
+                          />
+                        </LocalizationProvider>
 
                       </div></td>
                     <td>
                       <div className='pasajeros'>
-                        <p className='desdeHacia'>Pasajeros</p>
                         <TextField
                           defaultValue=""
-                          variant="filled"
-                          className='textField'
+                          variant="standard"
+                          label='Pasajeros'
+                          className='textFieldPasajeros'
                           value={inputAdulto + " Adulto"}
                           onFocus={focus}
                           onBlur={blur}
                           onClick={abrirVentana}
+                          InputLabelProps={{
+                            shrink: true, // Mantiene el label siempre visible
+                            style: {
+                              color: 'rgba(0, 0, 0, 0.596)',
+                              fontSize: '17px',
+                              fontWeight: 'bold'
+                            },
+                          }}
+
+                          InputProps={{
+
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <PersonAddIcon />
+                              </InputAdornment>
+                            ),
+
+                          }}
+
                           sx={{
                             input: {
                               color: 'black', // Cambia el color del texto a blanco
                               backgroundColor: 'white', // Elimina el fondo gris predeterminado
-                            }}}
+                              fontSize: '18px',
+                            }
+                          }}
+
+
+
                         />
                       </div>
                     </td>
@@ -547,18 +759,13 @@ const MenuNavBar = () => {
 
               </div>
 
-
-
-
-
-
-
             </Nav>
           </Navbar.Collapse>
 
 
         </Container>
       </Navbar>
+
       <div className='div_ciudadOrigen'>
         {filteredData1.length > 0 && (
           <ul>
@@ -592,39 +799,39 @@ const MenuNavBar = () => {
           vertical: 'bottom',
           horizontal: 'left',
         }}
-       
+
       ><button onClick={cerrarVentana} className='botonCerrarPasajeros' style={{ float: 'right' }}>X</button>
-     <p className='p_pasajeros' > Añade Pasajeros</p>
-        <Typography sx={{ p: 2, marginTop: '-37px' }} > 
+        <p className='p_pasajeros' > Añade Pasajeros</p>
+        <Typography sx={{ p: 2, marginTop: '-37px' }} >
           <Typography gutterBottom className='contenedorPasajeros'>
-        <p className='tituloPasajero' >Adulto</p>
-        <p className='subtituloPasajero'>Igual o mayores de 12 años*</p>
-          <TextField
-            id="filled-number"
-            type="number"
-            variant="filled"
-            value={adulto}
-            onChange={cambioValorAdulto}
-            inputProps={{min:1}}
-            slotProps={{
-              inputLabel: {
-                shrink: true,
-              },
-            }}
-          />
+            <p className='tituloPasajero' >Adulto</p>
+            <p className='subtituloPasajero'>Igual o mayores de 12 años*</p>
+            <TextField
+              id="filled-number"
+              type="number"
+              variant="filled"
+              value={adulto}
+              onChange={cambioValorAdulto}
+              inputProps={{ min: 1 }}
+              slotProps={{
+                inputLabel: {
+                  shrink: true,
+                },
+              }}
+            />
 
 
 
-        </Typography>
+          </Typography>
           <Typography gutterBottom className='contenedorPasajeros'>
-          <p className='tituloPasajero'>Niños</p>
-          <p className='subtituloPasajero'>2 - 11 años*</p>
+            <p className='tituloPasajero'>Niños</p>
+            <p className='subtituloPasajero'>2 - 11 años*</p>
             <TextField
               id="filled-number"
               type="number"
               variant="filled"
               value={0}
-              inputProps={{min:0}}
+              inputProps={{ min: 0 }}
               slotProps={{
                 inputLabel: {
                   shrink: true,
@@ -633,14 +840,14 @@ const MenuNavBar = () => {
             />
           </Typography>
           <Typography gutterBottom className='contenedorPasajeros'>
-          <p className='tituloPasajero'>Bebés</p>
-          <p className='subtituloPasajero'>Menores de 2 años*</p>
+            <p className='tituloPasajero'>Bebés</p>
+            <p className='subtituloPasajero'>Menores de 2 años*</p>
             <TextField
               id="filled-number"
               type="number"
               variant="filled"
               value={0}
-              inputProps={{min:0}}
+              inputProps={{ min: 0 }}
               slotProps={{
                 inputLabel: {
                   shrink: true,
@@ -649,7 +856,7 @@ const MenuNavBar = () => {
             />
           </Typography>
           <button onClick={clickBotonConfirmar} >Confirmar</button>
-          </Typography>
+        </Typography>
       </Popover>
 
       <BootstrapDialog
@@ -776,8 +983,8 @@ const MenuNavBar = () => {
               </tbody>
             </table>
           </Modal.Body>
-        
-       
+
+
           <div>
             {activeKey === '0' && (
               <div className="accordion-content">
@@ -837,7 +1044,181 @@ const MenuNavBar = () => {
         </Modal>
 
 
+        <Dialog
+          open={abrirModal}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={cerrarModal}
+          aria-describedby="modal-desde-abajo"
+          className='Dialog'
+          sx={{
+            '& .MuiDialog-paper': {
+              margin: 0,
+              position: 'fixed',
+              bottom: 0,
+              width: '100%',
+              maxWidth: '100%', // Asegura que el modal ocupe todo el ancho de la pantalla
+              borderRadius: '10px 10px 0 0', // Bordes redondeados en la parte superior
+            },
+          }}
+        >
+          <DialogTitle
 
+          >
+            <div className='editarBusqueda'>Editar busqueda</div>
+            <IconButton
+              aria-label="cerrar"
+              onClick={cerrarModal}
+              sx={{
+                position: 'absolute',
+                right: 8,
+                top: 8,
+                color: (theme) => theme.palette.grey[500],
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </DialogTitle>
+
+          <DialogContent>
+
+
+
+            <div className='div_origenDestinoModal' >
+              <div className='div_solo_ida'>Solo ida</div>
+
+              <div className='desdeHaciaModal'>
+                <div className='desdeMovil'>
+                  <TextField
+                    defaultValue=""
+                    variant="filled"
+                    label='Desde'
+                    className='textField'
+                    onFocus={focus}
+                    onBlur={blur}
+                    value={query1}
+                    onChange={handleChange1}
+                    InputLabelProps={{
+                      shrink: true, // Mantiene el label siempre visible
+                      style: {
+                        color: 'rgba(0, 0, 0, 0.596)',
+                        fontSize: '17px',
+                        fontWeight: 'bold'
+                      },
+                    }}
+
+                    sx={{
+                      input: {
+                        color: 'black', // Cambia el color del texto a blanco
+                        backgroundColor: 'white', // Elimina el fondo gris predeterminado
+                        fontSize: '15px',
+                      }
+                    }}
+                  />
+                  <div className='div_ciudadOrigenMovil'>
+                    {filteredData1.length > 0 && (
+                      <ul >
+                        {filteredData1.map((item) => (
+                          <li className='li_ciudadMovil' key={item.id} onClick={() => handleClick1Movil(item.name)}>
+                            {highlightText1Movil(item.name, query1)}<p className='p_aeropuertoMovil'>{item.aeropuerto}</p>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+
+                </div>
+
+
+                <div className='haciaMovil'>
+                  <TextField
+                    defaultValue=""
+                    variant="filled"
+                    label="Hacia"
+                    className='textField'
+                    onFocus={focus}
+                    onBlur={blur}
+                    value={query2}
+                    onChange={handleChange2}
+                    InputLabelProps={{
+                      shrink: true, // Mantiene el label siempre visible
+                      style: {
+                        color: 'rgba(0, 0, 0, 0.596)',
+                        fontSize: '17px',
+                        fontWeight: 'bold'
+                      },
+                    }}
+
+                    sx={{
+                      input: {
+                        color: 'black', // Cambia el color del texto a blanco
+                        backgroundColor: 'white', // Elimina el fondo gris predeterminado
+                        fontSize: '15px',
+                      },
+
+                      marginLeft: '10px',
+                    }}
+                  />
+
+                  <div className='div_ciudadDestinoMovil'>
+                    {filteredData2.length > 0 && (
+                      <ul>
+                        {filteredData2.map((item) => (
+                          <li className='li_ciudadMovil' key={item.id} onClick={() => handleClick2Movil(item.name)}>
+                            {highlightText2Movil(item.name, query2)}<p className='p_aeropuertoMovil'>{item.aeropuerto}</p>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+
+              </div>
+              <div className='fechaOrigenModal' onFocus={focus}
+                onBlur={blur}>
+                <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
+                  <DatePicker
+                    className='datepickerMovil'
+                    label='Fecha de viaje'
+                    value={dayjs(selectedDate)}
+                    onChange={handleDateChange}
+                    slotProps={{
+                      textField: { variant: 'standard' }
+                    }}
+                    inputFormat="DD MMM"
+                    views={['day', 'month']}
+                    format="DD MMM."
+                    sx={{
+                      input: {
+                        color: 'black', // Cambia el color del texto a blanco
+                        backgroundColor: 'white', // Elimina el fondo gris predeterminado
+                        fontSize: '15px',
+
+                      },
+                      label: {
+                        color: 'rgba(0, 0, 0, 0.596)',
+                        fontSize: '17px',
+                        fontWeight: 'bold'
+
+                      },
+
+                      '& .MuiInputLabel-root.Mui-focused': {
+                        color: 'rgba(0, 0, 0, 0.596)', // Cambia el color azul por gris cuando está enfocado
+                      },
+
+                    }}
+                  />
+                </LocalizationProvider>
+
+              </div>
+
+              <div className='div_botonModificarModal'>
+                <button className='botonModificarModal' onClick={Buscar} >Modificar búsqueda</button> 
+                </div>
+            </div>
+
+          </DialogContent>
+        </Dialog>
 
       </div>
     </>

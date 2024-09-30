@@ -5,7 +5,8 @@ import unoAprobado from '../material/1aprobado.jpg';
 import dosResaltado from '../material/2resaltado.jpg';
 import tres from '../material/3.jpg';
 import icono_idioma from '../material/icono_idioma.jpg';
-
+import logoMovil from '../material/movil/iconoMovil.jpg';
+import SegundoPasoMovil from '../material/movil/SegundoPasoMovil.jpg';
 
 
 
@@ -40,7 +41,7 @@ const MenuNavBar = () => {
                 <img src={unoAprobado}/>
                 <label className='label_seleccion'>Selección de vuelos</label>
                 <img src={dosResaltado}/>
-                <label className='label_viaje'>Personaliza tu viaje</label>
+                <label className='label_viaje' style={{fontWeight:'bold'}} >Personaliza tu viaje</label>
                 <img src={tres}/>
                 <label className='label_pago'>Pagos</label>
               </div>
@@ -51,6 +52,17 @@ const MenuNavBar = () => {
         </Container>
 
         
+      </Navbar>
+
+      <Navbar className={'navbarMovilPasos'} expand="lg" fixed='top'>
+        <Container className='containerNavBar'>
+          <Navbar.Brand href="" className='navbarBrandMovilPasos'>
+            <img src={logoMovil} className='logo' />
+            <div className="navPasoMovil" >
+                <img src={SegundoPasoMovil}/>
+             </div>
+           </Navbar.Brand>
+        </Container>
       </Navbar>
 
      

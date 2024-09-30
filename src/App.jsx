@@ -6,6 +6,7 @@ import Resumen from './componentes/Resumen';
 import Paso2 from './componentes/Paso2';
 import Adicionales from './componentes/adicionales';
 import Paso3 from './componentes/Paso3';
+import Tab from './componentes/tab';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path='/resumen/:corigen/:cdestino/:ida/:vuelta/:tiempo/:precio/:salida/:llegada/:ao/:ad' element={<Resumen/>} />
           <Route path='/adicionales/:ida/:vuelta/:precio/:salida/:llegada/:tiempo/:nombre/:apellido/:telefono' element={<Adicionales />} />
           <Route path='/paso3/:ida/:vuelta/:precio/:salida/:llegada/:tiempo/:nombre/:apellido/:telefono' element={<Paso3 />} />
+          <Route path='/tab' element={<Tab/>}/>      
         </Routes>
       </BrowserRouter>
       </DataProvider>
