@@ -8,7 +8,7 @@
 /* background-color: red !important;*/
  border-radius: 10px !important;
  width: 100%;
- margin-top: 20px;
+ margin-top: 40px;
  border: none !important;
  /*box-shadow: 1px 5px 10px 5px rgba(0, 0, 0, 0.16) !important; 
  -moz-box-shadow: 1px 5px 10px 5px rgba(0, 0, 0, 0.16)!important; 
@@ -17,8 +17,9 @@
 
 .accordionTarifas{
  border-radius: 10px !important;
- background-color: rgba(236, 232, 232, 0.014) !important;
+ background-color: white!important;
  width: 100% !important;
+ margin-top: 40px;
  box-shadow: 1px 3px 10px 3px rgba(0, 0, 0, 0.16) !important; 
  -moz-box-shadow: 1px 3px 3px 3px rgba(0, 0, 0, 0.16)!important; 
  -webkit-box-shadow: 1px 3px 13px 3px rgba(0, 0, 0, 0.16)!important;
@@ -98,7 +99,13 @@
 
   .accordion{
     width: 100% !important;
+    margin-top: 30px !important;
   }
+.accordionTarifas{
+  background-color: white;
+  margin-top: 20px;
+}
+  
 
 
 }

@@ -12,7 +12,7 @@ import Tab from './componentes/tab';
 function App() {
 
   return (
-    <div className='claseApp' style={{ backgroundColor: 'rgb(235, 235, 235)', border:'1px solid rgb(235, 235, 235)'}}>
+    <div className='claseApp' style={{ backgroundColor: 'rgb(235, 235, 235)', border:'1px solid rgb(235, 235, 235)', width:'100%'}}>
       <DataProvider>
       <BrowserRouter>
         <Routes>
