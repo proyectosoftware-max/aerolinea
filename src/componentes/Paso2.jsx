@@ -321,11 +321,11 @@ const Paso2 = () => {
 
                             style={{ width: '97%' }}
                         >
-                            <Typography variant="h1" paragraph style={{ marginTop: '10px', marginBottom: '10px', fontSize: '30px', fontWeight: 'bold' }}>Datos Personales</Typography>
+                            <Typography variant="p" paragraph className='textoDatosPersonales'>Datos Personales</Typography>
                         </AccordionSummary >
                         <AccordionDetails >
                             <Box className='BoxPaso2' sx={{ width: '100%' }}>
-                                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                <Box sx={{ borderBottom: 1 }}>
                                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"
                                         TabIndicatorProps={{
                                             sx: {
@@ -719,7 +719,7 @@ const Paso2 = () => {
 
 
                             {/** BoxMovil */}
-                            <Box className='BoxPaso2Movil' sx={{ width: '100%', border: '1px solid violet' }}>
+                            <Box className='BoxPaso2Movil' sx={{ width: '100%'}}>
 
 
 

@@ -1,6 +1,6 @@
 .paso2 {
 
-    min-height: 100vh;
+    height: auto;
 }
 
 .div_accordion_paso2 {
@@ -9,6 +9,13 @@
     margin: 0 auto;
     width: 87%;
 
+}
+
+.textoDatosPersonales{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 30px;
+    font-weight: bold;
 }
 
 .label_pasajero {
@@ -66,6 +73,10 @@
     display: flex;
     width: 100%;
     justify-content: center;
+}
+
+.contenedor_datosPaso2Movil, .BoxPaso2Movil{
+    display: none;
 }
 
 .div_fecha {
@@ -238,11 +249,14 @@
 
 @media screen and (max-width: '768px') {
 
+  
+
     .div_accordion_paso2 {
         margin-top: 75px !important;
-        margin-bottom: 100px !important;
+        margin-bottom: 390px !important;
         margin: 0 auto;
         width: 87%;
+       
 
     }
 
@@ -252,6 +266,10 @@
 
     .BoxPaso2Movil {
         display: block !important;
+    }
+
+    .textoDatosPersonales{
+        font-size: 20px
     }
 
     .label_pasajero,
@@ -279,6 +297,10 @@
 
     .contenedor_datosPaso2 {
         display: none;
+    }
+
+    .div_datosPaso2 {
+        margin-bottom: -110px;
     }
 
     .div_datosPaso2Scroll {

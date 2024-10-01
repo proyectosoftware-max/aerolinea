@@ -509,14 +509,33 @@ li:hover {
 
     .div_contendedorMovil {
         display: flex;
-        margin-top: 20px;
-        padding-top: 20px;
-        text-align: center;
+        padding-top: 10px;
         width: 100%;
-        height: 80px;
-        margin: 0 auto;
+        height: 70px;
     }
 
+    .div_origenMovil{
+        margin-left: 2%;
+       margin-right: 15px;
+    }
+
+    .div_trayecto{
+      margin-top: 20px;
+      width: 100%;
+      position: absolute;
+    }
+    
+    .label_trayecto{
+        font-size: 10px;
+        color: rgba(0, 0, 0, 0.541);
+    }
+
+    .div_destinoMovil{
+        margin-left: 15px;
+        margin-right: 2%;
+  
+    }
+   
     .p_salida {
         display: none;
     }
@@ -557,19 +576,20 @@ li:hover {
 
     .div_contenedorDatosVuelosMovil {
         margin-top: -10px;
-        width: 400%;
+        width: 70%;
+        text-align: center;
     }
 
     .label_directoMovil {
         margin-right: 5px;
-        font-size: 12px;
+        font-size: 11px;
         color: rgba(0, 0, 0, 0.548);
     }
 
     .codigoAvionMovil {
         margin-left: 5px;
         margin-right: 5px;
-        font-size: 12px;
+        font-size: 11px;
         color: rgba(0, 0, 0, 0.548);
     }
 
@@ -635,7 +655,6 @@ li:hover {
     }
 
     .label_botonDirectoMovil {
-        border: 1px solid blue;
         border-radius: 30px;
         color: blue;
         text-align: center;
@@ -656,15 +675,6 @@ li:hover {
 
     }
 
-
-    .div_llegadaMovil {
-        margin-right: 180px;
-        border-right: none;
-        overflow: visible;
-        padding-right: 50px;
-        height: 30px;
-    }
-
     .label_llegadaMovil {
         display: block;
         font-size: 15px;
@@ -678,9 +688,9 @@ li:hover {
     }
 
     .div_valorPasajeMovil {
-        margin-left: -350px;
+        margin-left: -100px;
         margin-top: 40px;
-        width: 200%;
+        width: 50%;
     }
 
 

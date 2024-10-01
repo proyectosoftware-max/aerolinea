@@ -173,7 +173,7 @@ const Adicionales = () => {
                     <div className="accordionDesativado">
                         <p className="p_datosPersonalesAdicionales">Datos Personales</p>
                         <label className="label_verEditar" onClick={enviar} >ver/Editar</label>
-                        <img src={flechaAccordion} className='img_fechaAccordion' />
+                        <img  onClick={enviar} src={flechaAccordion} className='img_fechaAccordion' />
                     </div>
 
 

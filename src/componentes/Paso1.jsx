@@ -10,9 +10,9 @@ import { Card, CardContent, CardActions, Button, Grid, darken } from '@mui/mater
 import img_basic from '../material/barranquilla/precio bajo/basicActual.jpg';
 import img_classic from '../material/barranquilla/precio bajo/classicActual.jpg';
 import img_flex from '../material/barranquilla/precio bajo/flexActual.jpg';
-import img_basicMovil from '../material/barranquilla/precio bajo/basicMovil.jpg';
-import img_classicMovil from '../material/barranquilla/precio bajo/classicMovil.jpg';
-import img_flexMovil from '../material/barranquilla/precio bajo/flexMovil.jpg';
+import img_basicMovil from '../material/movil/basicMovil.png';
+import img_classicMovil from '../material/movil/classicMovil.png';
+import img_flexMovil from '../material/movil/flexMovil.png';
 import rayaAvion from '../material/rayaAvion.jpg';
 import PiePagina from './PiePagina.jsx';
 import { DataContext } from './Context';
@@ -196,8 +196,8 @@ const Paso1 = () => {
 
 
     useEffect(() => {
-        setOrigenNormal(origen.replace(/\s?\(.*?\)/, ''))
-        setDestinoNormal(destino.replace(/\s?\(.*?\)/, ''))
+        setOrigenNormal(origen.replace(/\s?\(.*?\)/, ''));
+        setDestinoNormal(destino.replace(/\s?\(.*?\)/, ''));
         const vuelosFiltrado = datos.vuelos.find(vuelo => vuelo.origen === origen && vuelo.destino === destino);
         const obtenerOrigen = datosAeropuertos.find(nombre => nombre.name === origen);
         const obtenerDestino = datosAeropuertos.find(nombre => nombre.name === destino);
@@ -243,6 +243,12 @@ const Paso1 = () => {
         setExpanded(isExpanded ? panel : false);
     };
 
+    const enviarDatosMovil = (vuelo) => {
+        const origenMovil = vuelo.codigo_origen.replace(/\s?\(.*?\)/, '');
+        const destinoMovil = vuelo.codigo_destino.replace(/\s?\(.*?\)/, '');
+        navigate(`/resumen/${origenMovil}/${destinoMovil}/${vuelo.codigo_origen}/${vuelo.codigo_destino}/${vuelo.tiempo_vuelo}/${vuelo.valor_pasaje}/${vuelo.hora_salida}/${vuelo.hora_llegada}/${aeropuertoOrigen.aeropuerto}/${aeropuertoDestino.aeropuerto}`);
+
+    };
 
     const clickBotonAccordion = () => {
 
@@ -370,31 +376,33 @@ const Paso1 = () => {
 
                                     <div className='div_contendedorMovil' >
 
-                                        <div>
+                                        <div className='div_origenMovil'>
                                             <label className='label_salidaMovil' >{vuelo.hora_salida}</label>
                                             <p className='p_codigoOrigenMovil'>{vuelo.codigo_origen}</p>
+                                        </div>
+                                        <div className='div_trayecto'>
+                                               <label className='label_trayecto'>
+                                               Incluye trayecto operado por Avianca
+                                            </label>
                                         </div>
 
                                         <div className='div_contenedorDatosVuelosMovil'>
                                             <label className='label_directoMovil' >Directo {vuelo.tiempo_vuelo}</label>
-                                            <label className='codigoAvionMovil'>codigo avión</label>
+                                            <label className='codigoAvionMovil'>Av 8401</label>
                                             <label className='label_barraMovil' >|</label>
                                             <img src={rayaAvion} alt="Avion" className='img_rayaAvion' />
                                             <label className='label_rayaMovil'></label>
 
                                         </div>
 
-                                        <div className='div_llegadaMovil'>
+                                        <div className='div_destinoMovil'>
                                             <label className='label_llegadaMovil'>{vuelo.hora_llegada}</label>
                                             <p className='p_codigoDestinoMovil'>{vuelo.codigo_destino}</p>
                                         </div>
 
                                         <div className='div_valorPasajeMovil'>
-
-                                            <label className='label_valorPasajeMovil'>
+                                               <label className='label_valorPasajeMovil'>
                                                 ${vuelo.valor_pasaje} COP
-
-
                                             </label>
                                         </div>
 
@@ -451,14 +459,14 @@ const Paso1 = () => {
 
                                                         </Typography>
                                                         <Typography variant="body2" color="text.secondary">
-                                                            <img src={img_basicMovil} style={{ marginTop: '-10px', marginBottom: '-5px' }} onClick={handleClickOpen} />
+                                                            <img src={img_basicMovil} style={{ marginTop: '-10px', marginBottom: '-5px' }} />
                                                         </Typography>
                                                     </CardContent>
                                                     <CardActions sx={{ justifyContent: 'center', marginTop:'30px'}}>
 
                                                         
                                                     </CardActions>
-                                                    <Typography variant="body2" color="text.secondary" onClick={clickBotonAccordion}   sx={{ backgroundColor:'rgb(226, 17, 17)' , width:'100%',height:'50px',borderBottomLeftRadius:'15px', borderBottomRightRadius:'15px', fontSize: '12px' }}>
+                                                    <Typography variant="body2" color="text.secondary" onClick={()=> enviarDatosMovil(vuelo)}   sx={{ backgroundColor:'rgb(226, 17, 17)' , width:'100%',height:'50px', cursor:'pointer', borderBottomLeftRadius:'15px', borderBottomRightRadius:'15px', fontSize: '12px' }}>
                                                        <p style={{textAlign:' center', fontSize:'15px', fontWeight:'bold', color:' white', paddingTop:'10px'}}>${vuelo.valor_pasaje} COP</p>
                                                         <p style={{textAlign:' center', fontSize:'13px',  color:' white', marginTop:'-20px'}}>Precio por pasajero</p>
                                                     </Typography>
@@ -512,7 +520,7 @@ const Paso1 = () => {
 
                                                         </Typography>
                                                         <Typography variant="body2" color="text.secondary">
-                                                            <img src={img_classicMovil} style={{ marginTop: '30px', marginBottom: '-5px' }} />
+                                                            <img src={img_classicMovil} style={{ marginTop: '-20px', marginBottom: '-5px' }} />
                                                         </Typography>
                                                     </CardContent>
                                                     <CardActions sx={{ justifyContent: 'center', marginTop:'-10px' }}>

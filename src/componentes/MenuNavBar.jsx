@@ -36,6 +36,7 @@ import flechaOrigenDestino from '../material/flechaOrigenDestino.jpg';
 import logoMovil from '../material/movil/iconoMovil.jpg';
 import flechaMovil from '../material/movil/flechaMovil.jpg';
 import lapiz from '../material/movil/lapiz.jpg';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 dayjs.locale('es');
 
 
@@ -577,9 +578,9 @@ const MenuNavBar = () => {
         <Container className='containerNavBar'>
           <Navbar.Brand href="" className='navbarBrandMovil'>
             <img src={logoMovil} className='logo' />
-
+            
             <label className='label_origen_movil' >{origenAbreviatura}</label>
-            <img src={flechaMovil} />
+            <ArrowRightAltIcon fontSize='Small' sx={{marginRight:'5px'}}/>
             <label className='label_destino_movil'>{destinoAbreviatura}</label>
             <label className='flechaNavMovil'>{formatDate(selectedDate)}</label>
 
