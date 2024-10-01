@@ -33,10 +33,9 @@ import dos from '../material/2.jpg';
 import tres from '../material/3.jpg';
 import icono_idioma from '../material/icono_idioma.jpg';
 import flechaOrigenDestino from '../material/flechaOrigenDestino.jpg';
-import logoMovil from '../material/movil/iconoMovil.jpg';
-import flechaMovil from '../material/movil/flechaMovil.jpg';
-import lapiz from '../material/movil/lapiz.jpg';
+import logoMovil from '../material/movil/iconoMovil.png';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import EditIcon from '@mui/icons-material/Edit';
 dayjs.locale('es');
 
 
@@ -578,13 +577,11 @@ const MenuNavBar = () => {
         <Container className='containerNavBar'>
           <Navbar.Brand href="" className='navbarBrandMovil'>
             <img src={logoMovil} className='logo' />
-            
             <label className='label_origen_movil' >{origenAbreviatura}</label>
             <ArrowRightAltIcon fontSize='Small' sx={{marginRight:'5px'}}/>
             <label className='label_destino_movil'>{destinoAbreviatura}</label>
             <label className='flechaNavMovil'>{formatDate(selectedDate)}</label>
-
-            <img src={lapiz} className='editarMovil' onClick={clickAbrirModal} />
+            <EditIcon className='editarMovil' sx={{fontSize:'20px', marginLeft:'10px'}} onClick={clickAbrirModal}/>
           </Navbar.Brand>
           <Navbar.Collapse id="bascic navbar-nav">
             <Nav className='flex-column'>

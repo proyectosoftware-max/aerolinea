@@ -5,7 +5,7 @@ import unoAprobado from '../material/1aprobado.jpg';
 import dosAprobado from '../material/2aprobado.jpg';
 import tresResaltado from '../material/3resaltado.jpg';
 import icono_idioma from '../material/icono_idioma.jpg';
-import logoMovil from '../material/movil/iconoMovil.jpg';
+import logoMovil from '../material/movil/iconoMovil.png';
 import TercerPasoMovil from '../material/movil/TercerPasoMovil.jpg';
 
 
@@ -60,7 +60,7 @@ const MenuNavBar = () => {
           <Navbar.Brand href="" className='navbarBrandMovilPasos'>
             <img src={logoMovil} className='logo' />
             <div className="navPasoMovil" >
-                <img src={TercerPasoMovil}/>
+                <img src={TercerPasoMovil} style={{width:'120px'}}/>
              </div>
            </Navbar.Brand>
         </Container>

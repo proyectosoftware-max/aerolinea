@@ -459,7 +459,7 @@ const Paso1 = () => {
 
                                                         </Typography>
                                                         <Typography variant="body2" color="text.secondary">
-                                                            <img src={img_basicMovil} style={{ marginTop: '-10px', marginBottom: '-5px' }} />
+                                                            <img src={img_basicMovil} style={{ marginTop: '-10px', marginBottom: '-5px', width:'100%'}} />
                                                         </Typography>
                                                     </CardContent>
                                                     <CardActions sx={{ justifyContent: 'center', marginTop:'30px'}}>
@@ -520,7 +520,7 @@ const Paso1 = () => {
 
                                                         </Typography>
                                                         <Typography variant="body2" color="text.secondary">
-                                                            <img src={img_classicMovil} style={{ marginTop: '-20px', marginBottom: '-5px' }} />
+                                                            <img src={img_classicMovil} style={{ marginTop: '-20px', marginBottom: '-5px', width:'100%' }} />
                                                         </Typography>
                                                     </CardContent>
                                                     <CardActions sx={{ justifyContent: 'center', marginTop:'-10px' }}>
@@ -578,7 +578,7 @@ const Paso1 = () => {
 
                                                         </Typography>
                                                         <Typography variant="body2" color="text.secondary">
-                                                            <img src={img_flexMovil} style={{ marginTop: '-15px', marginBottom: '1px' }} />
+                                                            <img src={img_flexMovil} style={{ marginTop: '-15px', marginBottom: '1px', width:'100%' }} />
                                                         </Typography>
                                                     </CardContent>
                                                     <CardActions sx={{ justifyContent: 'center', marginTop:'25px' }}>
