@@ -57,7 +57,7 @@
 }
 
 .nav1 {
-
+   display: inline;
     margin-left: 190px;
     font-size: 18px;
 
@@ -152,7 +152,7 @@
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
     .navbarMovil{
        display: block !important;
        background-color: white;
@@ -220,7 +220,7 @@
 
 
 
-     .navbarEscritorio {
+     .navbarEscritorio, .nav1 {
        display: none !important;
     }
     

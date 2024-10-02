@@ -173,7 +173,7 @@ const Adicionales = () => {
                     <div className="accordionDesativado">
                         <p className="p_datosPersonalesAdicionales">Datos Personales</p>
                         <label className="label_verEditar" onClick={enviar} >ver/Editar</label>
-                        <img  onClick={enviar} src={flechaAccordion} className='img_fechaAccordion' />
+                        <img onClick={enviar} src={flechaAccordion} className='img_fechaAccordion' />
                     </div>
 
 
@@ -182,8 +182,10 @@ const Adicionales = () => {
                         <label className="label_ServiciosAdicionales" >Servicios adicionales</label>
                         <div className="contendorAdicionales">
                             <div className="div_adicionales">
+                                <div className='contenedorImagen'>
+                                    <img className="img_adicionales" src={asiento} />
+                                </div>
 
-                                <img className="img_adicionales" src={asiento} />
                                 <div className="div_contendio">
                                     <p className="p_elije"> Elige tu asiento</p>
                                     <p className="p_texto">Vuela en tu asiento favorito y con mejor precio que en el aeropuerto.</p>
@@ -194,8 +196,9 @@ const Adicionales = () => {
                                 </div>
                             </div>
                             <div className="div_adicionales">
-
-                                <img className="img_adicionales" src={equipaje} />
+                                <div className='contenedorImagen'>
+                                    <img className="img_adicionales" src={equipaje} />
+                                </div>
                                 <div className="div_contendio">
                                     <p className="p_elije">Equipaje adicional</p>
                                     <p className="p_texto">¡No esperes al aeropuerto! Ahorra tiempo y dinero añadiéndolo ahora.</p>
@@ -206,8 +209,9 @@ const Adicionales = () => {
                                 </div>
                             </div>
                             <div className="div_adicionales">
-
-                                <img className="img_adicionales" src={asistencia} />
+                                <div className='contenedorImagen'>
+                                    <img className="img_adicionales" src={asistencia} />
+                                </div>
                                 <div className="div_contendio">
                                     <p className="p_elije"> Asistencia en viajes</p>
                                     <p className="p_texto">Cobertura médica, legal y de imprevistos, en tu próximo destino.</p>
@@ -218,8 +222,9 @@ const Adicionales = () => {
                                 </div>
                             </div>
                             <div className="div_adicionales" >
-
-                                <img className="img_adicionales" src={lounges} />
+                                <div className='contenedorImagen'>
+                                    <img className="img_adicionales" src={lounges} />
+                                </div>
                                 <div className="div_contendio">
                                     <p className="p_elije">Avianca Louges</p>
                                     <p className="p_texto">Espera tu vuelo con todas las comodidades</p>
@@ -231,8 +236,9 @@ const Adicionales = () => {
                                 </div>
                             </div>
                             <div className="div_adicionales" >
-
-                                <img className="img_adicionales" src={equipajeDeportivo} />
+                                <div className='contenedorImagen'>
+                                    <img className="img_adicionales" src={equipajeDeportivo} />
+                                </div>
                                 <div className="div_contendio">
                                     <p className="p_elije">Equipaje deportivo</p>
                                     <p className="p_texto">Con nosotros puedes volar y llevar tu pasión a todas partes!</p>
@@ -335,7 +341,7 @@ const Adicionales = () => {
                         Continuar y pagar
                     </button>
 
-                      <div className="contenedor_datosAdicionalesMovil">
+                    <div className="contenedor_datosAdicionalesMovil">
                         <label className="TextorResumenAdicionalesViajeMovil">Resumen del viaje</label>
                         <label className='label_precioAdicionalesMovil'>
                             ${precio}<label className='label_copAdicionalesMovil'>COP
@@ -345,10 +351,10 @@ const Adicionales = () => {
                     </div>
 
                 </div>
-                <div className="div_piePaginaAdicionales">
-                    <label className="label_piePaginaAdicionales">© Avianca S.A 2024</label>
-                </div>
-
+                <div className="div_piePagina">
+                <label className="label_piePagina1" >Consulta todas las condiciones de <a className='a_retracto' href="/">retracto y desistimiento </a> aplicables para Colombia.</label >
+                <label className="label_piePagina2">© Avianca S.A 2024</label>
+            </div>
             </div>
 
         </>

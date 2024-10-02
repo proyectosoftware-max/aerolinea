@@ -161,7 +161,7 @@ const Paso1 = () => {
     const [aeropuertoDestino, setAeropuertoDestino] = useState('');
     const navigate = useNavigate();
 
-    
+
 
 
 
@@ -281,7 +281,7 @@ const Paso1 = () => {
     }
 
 
-     
+
 
     return (
         <>
@@ -375,223 +375,242 @@ const Paso1 = () => {
                                     </table>
 
                                     <div className='div_contendedorMovil' >
+                                        <div className='div_subContenedorMovil'>
 
-                                        <div className='div_origenMovil'>
-                                            <label className='label_salidaMovil' >{vuelo.hora_salida}</label>
-                                            <p className='p_codigoOrigenMovil'>{vuelo.codigo_origen}</p>
+                                            <div className='div_origenMovil'>
+                                                <label className='label_salidaMovil' >{vuelo.hora_salida}</label>
+                                                <p className='p_codigoOrigenMovil'>{vuelo.codigo_origen}</p>
+                                            </div>
+                                            <div className='div_trayecto'>
+                                                <label className='label_trayecto'>
+                                                    Incluye trayecto operado por Avianca
+                                                </label>
+                                            </div>
+
+                                            <div className='div_contenedorDatosVuelosMovil'>
+                                                <label className='label_directoMovil' >Directo {vuelo.tiempo_vuelo}</label>
+                                                <label className='codigoAvionMovil'>Av 8401</label>
+                                                <label className='label_barraMovil' >|</label>
+                                                <label className='label_rayaMovil'></label>
+
+                                            </div>
+
+                                            <div className='div_destinoMovil'>
+                                                <label className='label_llegadaMovil'>{vuelo.hora_llegada}</label>
+                                                <p className='p_codigoDestinoMovil'>{vuelo.codigo_destino}</p>
+                                            </div>
+
+                                            <div className='div_valorPasajeMovil'>
+                                                <label className='label_valorPasajeMovil'>
+                                                    ${vuelo.valor_pasaje} COP
+                                                </label>
+                                            </div>
                                         </div>
-                                        <div className='div_trayecto'>
-                                               <label className='label_trayecto'>
-                                               Incluye trayecto operado por Avianca
-                                            </label>
-                                        </div>
-
-                                        <div className='div_contenedorDatosVuelosMovil'>
-                                            <label className='label_directoMovil' >Directo {vuelo.tiempo_vuelo}</label>
-                                            <label className='codigoAvionMovil'>Av 8401</label>
-                                            <label className='label_barraMovil' >|</label>
-                                            <img src={rayaAvion} alt="Avion" className='img_rayaAvion' />
-                                            <label className='label_rayaMovil'></label>
-
-                                        </div>
-
-                                        <div className='div_destinoMovil'>
-                                            <label className='label_llegadaMovil'>{vuelo.hora_llegada}</label>
-                                            <p className='p_codigoDestinoMovil'>{vuelo.codigo_destino}</p>
-                                        </div>
-
-                                        <div className='div_valorPasajeMovil'>
-                                               <label className='label_valorPasajeMovil'>
-                                                ${vuelo.valor_pasaje} COP
-                                            </label>
-                                        </div>
-
                                     </div>
                                 </AccordionSummary>
                                 <AccordionDetails>
-                                    <p style={{ textAlign: 'center', marginBottom: '30px', fontSize: '25px', fontWeight: 'bold' }}>Elige cómo quieres volar</p>
-                                    <Typography>
-                                        <Grid container spacing={3} >
-                                            <Grid item xs={12} sm={6} md={4} style={{ marginTop: '-10px' }}>
-                                                <Card sx={{
-                                                    maxWidth: 345, margin: '0 auto', borderRadius: '15px', height: '100%', paddingBottom: '50px', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
-                                                    WebkitBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
-                                                    MozBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)'
-                                                }}
-                                                 className='basic'
-                                                >
-                                                    <CardContent>
-                                                        <Typography variant="h5" component="div">
+                                    <div className='CardEscritorio'>
+                                        <p className='tituloCardMovil' >ECONOMICA</p>
+                                        <Typography>
+                                            <Grid container spacing={3}>
+                                                <Grid item xs={12} sm={6} md={4} sx={{ marginTop: '-10px' }}>
+                                                    <Card sx={{
+                                                        maxWidth: 345, margin: '0 auto', borderRadius: '15px', height: '100%', paddingBottom: '50px', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                                        WebkitBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                                        MozBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)'
+                                                    }}
+                                                        className='basic'
+                                                    >
+                                                        <CardContent>
+                                                            <Typography variant="h5" component="div">
 
+                                                            </Typography>
+                                                            <Typography variant="body2" color="text.secondary">
+                                                                <img src={img_basic} style={{ marginTop: '-10px', marginBottom: '-5px' }} onClick={handleClickOpen} />
+                                                            </Typography>
+                                                        </CardContent>
+                                                        <CardActions sx={{ justifyContent: 'center', marginTop: '30px' }}>
+
+                                                            <Button variant="contained" sx={{
+                                                                textTransform: 'none',
+                                                                backgroundColor: 'rgb(226, 17, 17)',
+                                                                borderRadius: '50px',
+                                                                fontSize: '14px',
+                                                                height: '45px',
+                                                                width: '250px',
+                                                                '&:hover': { backgroundColor: darken('rgb(226, 17, 17)', 0.2) }
+
+                                                            }} onClick={() => handleClickOpen(vuelo)}  >${vuelo.valor_pasaje} COP</Button>
+                                                        </CardActions>
+                                                        <Typography variant="p" color="text.secondary" sx={{ marginLeft: '120px', fontSize: '12px' }}>
+                                                            Precio por pasajero
                                                         </Typography>
-                                                        <Typography variant="body2" color="text.secondary">
-                                                            <img src={img_basic} style={{ marginTop: '-10px', marginBottom: '-5px' }} onClick={handleClickOpen} />
+
+                                                    </Card>
+
+                                                </Grid>
+                                                <Grid item xs={12} sm={6} md={4} style={{ paddingTop: '-10px' }}>
+                                                    <Card sx={{
+                                                        maxWidth: 345, margin: '0 auto', border: '2px solid rgb(204, 51, 140)', borderRadius: '15px', height: '100%', paddingBottom: '50px', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                                        WebkitBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                                        MozBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)'
+                                                    }}
+                                                        className='classic'
+                                                    >
+                                                        <CardContent>
+                                                            <Typography variant="h5" component="div">
+
+                                                            </Typography>
+                                                            <Typography variant="body2" color="text.secondary">
+                                                                <img src={img_classic} style={{ marginTop: '30px', marginBottom: '-5px' }} />
+                                                            </Typography>
+                                                        </CardContent>
+                                                        <CardActions sx={{ justifyContent: 'center', marginTop: '-10px' }}>
+                                                            <Button variant="contained" sx={{
+                                                                textTransform: 'none',
+                                                                backgroundColor: 'rgb(204, 51, 140)',
+                                                                borderRadius: '50px',
+                                                                fontSize: '14px',
+                                                                height: '45px',
+                                                                width: '250px',
+                                                                '&:hover': { backgroundColor: darken('rgb(204, 51, 140)', 0.2) }
+
+                                                            }} >${(parseFloat(vuelo.valor_pasaje.replace(/\./g, '')) + 70000).toLocaleString('es-CO')} COP</Button>
+                                                        </CardActions>
+                                                        <Typography variant="p" color="text.secondary" sx={{ marginLeft: '120px', fontSize: '12px' }}>
+                                                            Precio por pasajero
                                                         </Typography>
-                                                    </CardContent>
-                                                    <CardActions sx={{ justifyContent: 'center', marginTop:'30px' }}>
 
-                                                        <Button variant="contained" sx={{
-                                                            textTransform: 'none',
-                                                            backgroundColor: 'rgb(226, 17, 17)',
-                                                            borderRadius: '50px',
-                                                            fontSize: '14px',
-                                                            height: '45px',
-                                                            width: '250px',
-                                                            '&:hover': { backgroundColor: darken('rgb(226, 17, 17)', 0.2) }
+                                                    </Card>
 
-                                                        }} onClick={() => handleClickOpen(vuelo)}  >${vuelo.valor_pasaje} COP</Button>
-                                                    </CardActions>
-                                                    <Typography variant="p" color="text.secondary" sx={{ marginLeft: '120px', fontSize: '12px' }}>
-                                                        Precio por pasajero
-                                                    </Typography>
 
-                                                </Card>
+                                                </Grid>
+                                                <Grid item xs={12} sm={6} md={4} style={{ marginTop: '-10px' }}>
+                                                    <Card sx={{
+                                                        maxWidth: 345, margin: '0 auto', border: '15px', height: '100%', paddingBottom: '50px', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                                        WebkitBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                                        MozBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)'
+                                                    }}
+                                                        className='flex'
+                                                    >
+                                                        <CardContent>
+                                                            <Typography variant="h5" component="div">
 
-                                                <Card sx={{
-                                                    maxWidth: 345, margin: '0 auto', borderRadius: '15px', height: '100%', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
-                                                    WebkitBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
-                                                    MozBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)'
-                                                }}
-                                                 className='basicMovil'
-                                                >
-                                                    <CardContent>
-                                                        <Typography variant="h5" component="div">
+                                                            </Typography>
+                                                            <Typography variant="body2" color="text.secondary">
+                                                                <img src={img_flex} style={{ marginTop: '-15px', marginBottom: '1px' }} />
+                                                            </Typography>
+                                                        </CardContent>
+                                                        <CardActions sx={{ justifyContent: 'center', marginTop: '25px' }}>
+                                                            <Button variant="contained" sx={{
+                                                                textTransform: 'none',
+                                                                backgroundColor: 'rgb(247, 123, 8)',
+                                                                borderRadius: '50px',
+                                                                fontSize: '14px',
+                                                                height: '45px',
+                                                                width: '250px',
+                                                                '&:hover': { backgroundColor: darken('rgb(247, 123, 8)', 0.2) }
 
+                                                            }} >${(parseFloat(vuelo.valor_pasaje.replace(/\./g, '')) + 110000).toLocaleString('es-CO')} COP</Button>
+                                                        </CardActions>
+                                                        <Typography variant="p" color="text.secondary" sx={{ marginLeft: '120px', fontSize: '12px' }}>
+                                                            Precio por pasajero
                                                         </Typography>
-                                                        <Typography variant="body2" color="text.secondary">
-                                                            <img src={img_basicMovil} style={{ marginTop: '-10px', marginBottom: '-5px', width:'100%'}} />
-                                                        </Typography>
-                                                    </CardContent>
-                                                    <CardActions sx={{ justifyContent: 'center', marginTop:'30px'}}>
 
-                                                        
-                                                    </CardActions>
-                                                    <Typography variant="body2" color="text.secondary" onClick={()=> enviarDatosMovil(vuelo)}   sx={{ backgroundColor:'rgb(226, 17, 17)' , width:'100%',height:'50px', cursor:'pointer', borderBottomLeftRadius:'15px', borderBottomRightRadius:'15px', fontSize: '12px' }}>
-                                                       <p style={{textAlign:' center', fontSize:'15px', fontWeight:'bold', color:' white', paddingTop:'10px'}}>${vuelo.valor_pasaje} COP</p>
-                                                        <p style={{textAlign:' center', fontSize:'13px',  color:' white', marginTop:'-20px'}}>Precio por pasajero</p>
-                                                    </Typography>
+                                                    </Card>
 
-                                                </Card>
 
+                                                </Grid>
                                             </Grid>
-                                            <Grid item xs={12} sm={6} md={4} style={{ paddingTop: '-10px' }}>
-                                                <Card sx={{
-                                                    maxWidth: 345, margin: '0 auto', border: '2px solid rgb(204, 51, 140)', borderRadius: '15px', height: '100%', paddingBottom: '50px', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
-                                                    WebkitBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
-                                                    MozBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)'
-                                                }}
-                                                className='classic'
-                                                >
-                                                    <CardContent>
-                                                        <Typography variant="h5" component="div">
+                                        </Typography>
+                                    </div>
 
-                                                        </Typography>
-                                                        <Typography variant="body2" color="text.secondary">
-                                                            <img src={img_classic} style={{ marginTop: '30px', marginBottom: '-5px' }} />
-                                                        </Typography>
-                                                    </CardContent>
-                                                    <CardActions sx={{ justifyContent: 'center', marginTop:'-10px' }}>
-                                                        <Button variant="contained" sx={{
-                                                            textTransform: 'none',
-                                                            backgroundColor: 'rgb(204, 51, 140)',
-                                                            borderRadius: '50px',
-                                                            fontSize: '14px',
-                                                            height: '45px',
-                                                            width: '250px',
-                                                            '&:hover': { backgroundColor: darken('rgb(204, 51, 140)', 0.2) }
+                                    {/** Movil */}
 
-                                                        }} >${(parseFloat(vuelo.valor_pasaje.replace(/\./g, '')) + 70000).toLocaleString('es-CO')} COP</Button>
-                                                    </CardActions>
-                                                    <Typography variant="p" color="text.secondary" sx={{ marginLeft: '120px', fontSize: '12px' }}>
-                                                        Precio por pasajero
-                                                    </Typography>
+                                    <div className='CardMovil'>
+                                        <p className='tituloCardMovil' >ECONOMICA</p>
+                                        <Card sx={{
+                                            maxWidth: '100%', margin: '0 auto', marginTop: '30px', borderRadius: '15px', height: '100%', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                            WebkitBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                            MozBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                            width: '100%',
+                                        }}
+                                            className='basicMovil'
+                                        >
+                                            <CardContent>
+                                                <Typography variant="h5" component="div">
 
-                                                </Card>
+                                                </Typography>
+                                                <Typography variant="body2" color="text.secondary">
+                                                    <img src={img_basicMovil} style={{ marginTop: '-10px', marginBottom: '-5px', width: '100%' }} />
+                                                </Typography>
+                                            </CardContent>
+                                            <CardActions sx={{ justifyContent: 'center', marginTop: '30px' }}>
 
-                                                <Card sx={{
-                                                    maxWidth: 345, margin: '0 auto', border: '2px solid rgb(204, 51, 140)', borderRadius: '15px', height: '100%',  boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
-                                                    WebkitBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
-                                                    MozBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)'
-                                                }}
-                                                className='classicMovil'
-                                                >
-                                                    <CardContent>
-                                                        <Typography variant="h5" component="div">
 
-                                                        </Typography>
-                                                        <Typography variant="body2" color="text.secondary">
-                                                            <img src={img_classicMovil} style={{ marginTop: '-20px', marginBottom: '-5px', width:'100%' }} />
-                                                        </Typography>
-                                                    </CardContent>
-                                                    <CardActions sx={{ justifyContent: 'center', marginTop:'-10px' }}>
-                                                    </CardActions>
-                                                    <Typography variant="body2" color="text.secondary" onClick={() => handleClickOpen(vuelo)}  sx={{ backgroundColor:'rgb(204, 51, 140)' , width:'100%',height:'50px',borderBottomLeftRadius:'15px', borderBottomRightRadius:'15px', fontSize: '12px' }}>
-                                                       <p style={{textAlign:' center', fontSize:'15px', fontWeight:'bold', color:' white', paddingTop:'10px'}}>${vuelo.valor_pasaje} COP</p>
-                                                        <p style={{textAlign:' center', fontSize:'13px',  color:' white', marginTop:'-20px'}}>Precio por pasajero</p>
-                                                    </Typography>
+                                            </CardActions>
+                                            <Typography variant="body2" color="text.secondary" onClick={() => enviarDatosMovil(vuelo)} sx={{ backgroundColor: 'rgb(226, 17, 17)', width: '100%', height: '50px', cursor: 'pointer', borderBottomLeftRadius: '15px', borderBottomRightRadius: '15px', fontSize: '12px' }}>
+                                                <p style={{ textAlign: ' center', fontSize: '15px', fontWeight: 'bold', color: ' white', paddingTop: '10px' }}>${vuelo.valor_pasaje} COP</p>
+                                                <p style={{ textAlign: ' center', fontSize: '13px', color: ' white', marginTop: '-20px' }}>Precio por pasajero</p>
+                                            </Typography>
 
-                                                </Card>
-                                            </Grid>
-                                            <Grid item xs={12} sm={6} md={4} style={{ marginTop: '-10px' }}>
-                                                <Card sx={{
-                                                    maxWidth: 345, margin: '0 auto', border: '15px', height: '100%', paddingBottom: '50px', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
-                                                    WebkitBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
-                                                    MozBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)'
-                                                }}
-                                                 className='flex'
-                                                >
-                                                    <CardContent>
-                                                        <Typography variant="h5" component="div">
+                                        </Card>
 
-                                                        </Typography>
-                                                        <Typography variant="body2" color="text.secondary">
-                                                            <img src={img_flex} style={{ marginTop: '-15px', marginBottom: '1px' }} />
-                                                        </Typography>
-                                                    </CardContent>
-                                                    <CardActions sx={{ justifyContent: 'center', marginTop:'25px' }}>
-                                                        <Button variant="contained" sx={{
-                                                            textTransform: 'none',
-                                                            backgroundColor: 'rgb(247, 123, 8)',
-                                                            borderRadius: '50px',
-                                                            fontSize: '14px',
-                                                            height: '45px',
-                                                            width: '250px',
-                                                            '&:hover': { backgroundColor: darken('rgb(247, 123, 8)', 0.2) }
 
-                                                        }} >${(parseFloat(vuelo.valor_pasaje.replace(/\./g, '')) + 110000).toLocaleString('es-CO')} COP</Button>
-                                                    </CardActions>
-                                                    <Typography variant="p" color="text.secondary" sx={{ marginLeft: '120px', fontSize: '12px' }}>
-                                                        Precio por pasajero
-                                                    </Typography>
 
-                                                </Card>
 
-                                                <Card sx={{
-                                                    maxWidth: 345, margin: '0 auto', border: '15px', height: '100%', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
-                                                    WebkitBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
-                                                    MozBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)'
-                                                }}
-                                                 className='flexMovil'
-                                                >
-                                                    <CardContent>
-                                                        <Typography variant="h5" component="div">
+                                        <Card sx={{
+                                            maxWidth: '100%', margin: '0 auto', marginTop: '30px', border: '2px solid rgb(204, 51, 140)', borderRadius: '15px', height: '100%', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                            WebkitBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                            MozBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                            width: '100%'
+                                        }}
+                                            className='classicMovil'
+                                        >
+                                            <CardContent>
+                                                <Typography variant="h5" component="div">
 
-                                                        </Typography>
-                                                        <Typography variant="body2" color="text.secondary">
-                                                            <img src={img_flexMovil} style={{ marginTop: '-15px', marginBottom: '1px', width:'100%' }} />
-                                                        </Typography>
-                                                    </CardContent>
-                                                    <CardActions sx={{ justifyContent: 'center', marginTop:'25px' }}>
-                                                    </CardActions>
-                                                    <Typography variant="body2" color="text.secondary" onClick={() => handleClickOpen(vuelo)}  sx={{ backgroundColor:'rgb(247, 123, 8)' , width:'100%',height:'50px',borderBottomLeftRadius:'15px', borderBottomRightRadius:'15px', fontSize: '12px' }}>
-                                                       <p style={{textAlign:' center', fontSize:'15px', fontWeight:'bold', color:' white', paddingTop:'10px'}}>${vuelo.valor_pasaje} COP</p>
-                                                        <p style={{textAlign:' center', fontSize:'13px',  color:' white', marginTop:'-20px'}}>Precio por pasajero</p>
-                                                    </Typography>
+                                                </Typography>
+                                                <Typography variant="body2" color="text.secondary">
+                                                    <img src={img_classicMovil} style={{ marginTop: '-20px', marginBottom: '-5px', width: '100%' }} />
+                                                </Typography>
+                                            </CardContent>
+                                            <CardActions sx={{ justifyContent: 'center', marginTop: '-10px' }}>
+                                            </CardActions>
+                                            <Typography variant="body2" color="text.secondary" onClick={() => handleClickOpen(vuelo)} sx={{ backgroundColor: 'rgb(204, 51, 140)', width: '100%', height: '50px', borderBottomLeftRadius: '15px', borderBottomRightRadius: '15px', fontSize: '12px' }}>
+                                                <p style={{ textAlign: ' center', fontSize: '15px', fontWeight: 'bold', color: ' white', paddingTop: '10px' }}>${vuelo.valor_pasaje} COP</p>
+                                                <p style={{ textAlign: ' center', fontSize: '13px', color: ' white', marginTop: '-20px' }}>Precio por pasajero</p>
+                                            </Typography>
 
-                                                </Card>
-                                            </Grid>
-                                        </Grid>
-                                    </Typography>
+                                        </Card>
+
+
+                                        <Card sx={{
+                                            maxWidth: '100%', margin: '0 auto', marginTop: '30px', border: '15px', height: '100%', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                            WebkitBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                            MozBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                            width: '100%',
+                                        }}
+                                            className='flexMovil'
+                                        >
+                                            <CardContent>
+                                                <Typography variant="h5" component="div">
+
+                                                </Typography>
+                                                <Typography variant="body2" color="text.secondary">
+                                                    <img src={img_flexMovil} style={{ marginTop: '-15px', marginBottom: '1px', width: '100%' }} />
+                                                </Typography>
+                                            </CardContent>
+                                            <CardActions sx={{ justifyContent: 'center', marginTop: '25px' }}>
+                                            </CardActions>
+                                            <Typography variant="body2" color="text.secondary" onClick={() => handleClickOpen(vuelo)} sx={{ backgroundColor: 'rgb(247, 123, 8)', width: '100%', height: '50px', borderBottomLeftRadius: '15px', borderBottomRightRadius: '15px', fontSize: '12px' }}>
+                                                <p style={{ textAlign: ' center', fontSize: '15px', fontWeight: 'bold', color: ' white', paddingTop: '10px' }}>${vuelo.valor_pasaje} COP</p>
+                                                <p style={{ textAlign: ' center', fontSize: '13px', color: ' white', marginTop: '-20px' }}>Precio por pasajero</p>
+                                            </Typography>
+
+                                        </Card>
+
+                                    </div>
                                 </AccordionDetails>
                             </Accordion>
 
@@ -679,7 +698,7 @@ const Paso1 = () => {
 
                                 style={{ width: '100%' }}
                             >
-                                <Typography variant="body2"  paragraph className='tituloTarifas' ><ListIcon style={{ verticalAlign: 'middle', marginRight: '8px' }} />Condiciones tarifarias</Typography>
+                                <Typography variant="body2" paragraph className='tituloTarifas' ><ListIcon style={{ verticalAlign: 'middle', marginRight: '8px' }} />Condiciones tarifarias</Typography>
                             </AccordionSummary >
                             <AccordionDetails className='accordionDetails'>
                                 <Typography variant="h6" paragraph className='TypographyparrafoNegrita'><label className='flechaTarifas'>»</label>Cambios de vuelo:</Typography>
@@ -710,13 +729,13 @@ const Paso1 = () => {
                                         </tbody>
                                     </table>
 
-                                    <table  cellPadding="10" className='tabla1Movil' >
+                                    <table cellPadding="10" className='tabla1Movil' >
                                         <thead>
                                             <tr>
-                                                <th className='thMovil'>Vuelos nacionales en Colombia</th> 
+                                                <th className='thMovil'>Vuelos nacionales en Colombia</th>
                                                 <td className='trMovil'>COP 110.000</td>
-                                                
-                                                </tr>
+
+                                            </tr>
                                             <tr>
                                                 <th className='thMovil'>Vuelos nacionales en Ecuador</th>
                                                 <td className='trMovil'>USD 28</td>
@@ -728,9 +747,9 @@ const Paso1 = () => {
                                             <tr>
                                                 <th className='thMovil'>Otros vuelos internacionales*</th>
                                                 <td className='trMovil'>USD 200</td>
-                                                
+
                                             </tr>
-                                            
+
                                         </thead>
                                     </table>
                                 </Typography><br />
@@ -798,10 +817,10 @@ const Paso1 = () => {
                                     <table cellPadding="10" className='tabla1Movil' >
                                         <thead>
                                             <tr>
-                                                <th className='thMovil'>Estatus</th> 
+                                                <th className='thMovil'>Estatus</th>
                                                 <th className='thMovil'>Bono Elite</th>
-                                                
-                                                </tr>
+
+                                            </tr>
                                             <tr>
                                                 <td className='thMovil'>Diamond</td>
                                                 <td className='trMovil'>70%</td>
@@ -813,7 +832,7 @@ const Paso1 = () => {
                                             <tr>
                                                 <td className='thMovil'>Silver</td>
                                                 <td className='trMovil'>30%</td>
-                                                
+
                                             </tr>
 
                                             <tr>
@@ -823,9 +842,9 @@ const Paso1 = () => {
                                             <tr>
                                                 <td className='thMovil'>lifemiles</td>
                                                 <td className='trMovil'>0%</td>
-                                                
+
                                             </tr>
-                                            
+
                                         </thead>
                                     </table>
                                 </Typography>
@@ -834,7 +853,7 @@ const Paso1 = () => {
                     </div>
                 </div>
 
-              
+
 
                 <React.Fragment>
 
@@ -870,9 +889,9 @@ const Paso1 = () => {
 
             </div>
             <div className="div_piePagina">
-        <label className="label_piePagina1" >Consulta todas las condiciones de <a className='a_retracto' href="/">retracto y desistimiento </a> aplicables para Colombia.</label >
-        <label className="label_piePagina2">© Avianca S.A 2024</label>
-     </div>
+                <label className="label_piePagina1" >Consulta todas las condiciones de <a className='a_retracto' href="/">retracto y desistimiento </a> aplicables para Colombia.</label >
+                <label className="label_piePagina2">© Avianca S.A 2024</label>
+            </div>
         </>
     );
 
