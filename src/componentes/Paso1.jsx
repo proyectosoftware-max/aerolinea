@@ -43,7 +43,7 @@ const generateDatesWithPrices = (startDate, count) => {
     for (let i = 0; i < count; i++) {
         const date = new Date(currentDate);
         //const price = Math.floor(Math.random() * 100000 + 123490); // Genera precios aleatorios
-        const price = 223490
+        const price = 80000
         datesWithPrices.push({ date, price });
         currentDate.setDate(currentDate.getDate() + 1); // Incrementa la fecha en 1 día
     }
