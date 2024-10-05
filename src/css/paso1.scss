@@ -86,6 +86,14 @@ li:hover {
     width: 12%;
 }
 
+.tituloCard{
+ display: block;
+}
+
+.tituloCardMovil{
+    display: none;
+}
+
 
 .botonBuscar {
     background-color: black;
@@ -488,11 +496,11 @@ li:hover {
     }
 
 
-    .CardEscritorio{
+    .CardEscritorio, .tituloCard{
         display: none;
     }
 
-    .CardMovil{
+    .CardMovil, .tituloCardMovil{
         display: block;
     }
 

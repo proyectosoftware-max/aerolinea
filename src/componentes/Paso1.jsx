@@ -25,6 +25,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import ListIcon from '@mui/icons-material/List';
 import imagen_opcion from '../material/opcion.jpg';
+import imagen_opcion_classic from '../material/opcionClassic.jpg';
 import { useNavigate } from 'react-router-dom';
 import Popover from '@mui/material/Popover';
 import dayjs from 'dayjs';
@@ -36,20 +37,7 @@ dayjs.locale('es');
 
 
 
-const generateDatesWithPrices = (startDate, count) => {
-    const datesWithPrices = [];
-    const currentDate = new Date(startDate);
 
-    for (let i = 0; i < count; i++) {
-        const date = new Date(currentDate);
-        //const price = Math.floor(Math.random() * 100000 + 123490); // Genera precios aleatorios
-        const price = 80000
-        datesWithPrices.push({ date, price });
-        currentDate.setDate(currentDate.getDate() + 1); // Incrementa la fecha en 1 día
-    }
-
-    return datesWithPrices;
-};
 
 const monthMap = {
     'ene': 'Ene',
@@ -135,14 +123,8 @@ const formatoCompleto = (date) => {
 
 
 const Paso1 = () => {
-    const datesWithPrices = generateDatesWithPrices(new Date(), 300); // Genera 30 fechas con precios
-
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const visibleItems = 7; // Cantidad de fechas visibles a la vez
-    const itemWidth = 170; // Ancho de cada elemento del carrusel
-    const totalWidth = itemWidth;
-    const carouselWidth = totalWidth * visibleItems; // Ancho total del carrusel visible
-    const maxIndex = datesWithPrices.length - visibleItems; // Índice máximo permitido
+   
+    
     const { setSharedData, origen, destino, setPrecio, selectedDate, setSelectedDate } = useContext(DataContext);
     const [vuelos, setVuelos] = useState(null);
     const [vueloOrigen, setVueloOrigen] = useState('');
@@ -166,6 +148,7 @@ const Paso1 = () => {
 
 
     const [open, setOpen] = useState(false);
+    const [openClassic, setOpenClassic] = useState(false);
 
     const handleClickOpen = (vuelo) => {
         setVueloOrigen(vuelo.codigo_origen);
@@ -175,12 +158,44 @@ const Paso1 = () => {
         setVueloLlegada(vuelo.hora_llegada);
         setVueloPrecio(vuelo.valor_pasaje);
         setOpen(true);
-
-
     };
+
+    const handleClickOpenClassic = (vuelo) => {
+        setVueloOrigen(vuelo.codigo_origen);
+        setVueloDestino(vuelo.codigo_destino);
+        setVueloTiempo(vuelo.tiempo_vuelo);
+        setVueloSalida(vuelo.hora_salida);
+        setVueloLlegada(vuelo.hora_llegada);
+        setVueloPrecio(vuelo.valor_pasaje);
+        setOpenClassic(true);
+    };
+
+    const handleClickVueloPrecioClassic = (vuelo) => {
+        setVueloOrigen(vuelo.codigo_origen);
+        setVueloDestino(vuelo.codigo_destino);
+        setVueloTiempo(vuelo.tiempo_vuelo);
+        setVueloSalida(vuelo.hora_salida);
+        setVueloLlegada(vuelo.hora_llegada);
+        setVueloPrecio((parseFloat(selectedPrice) + 119000).toLocaleString('es-CO'));
+        setOpen(true);
+    }
+
+    const handleClickVueloPrecioFlex = (vuelo) => {
+        setVueloOrigen(vuelo.codigo_origen);
+        setVueloDestino(vuelo.codigo_destino);
+        setVueloTiempo(vuelo.tiempo_vuelo);
+        setVueloSalida(vuelo.hora_salida);
+        setVueloLlegada(vuelo.hora_llegada);
+        setVueloPrecio((parseFloat(selectedPrice) + 120000).toLocaleString('es-CO'));
+        setOpen(true);
+    }
 
     const handleClose = () => {
         setOpen(false);
+    };
+
+    const handleCloseClassic = () => {
+        setOpenClassic(false);
     };
 
 
@@ -193,7 +208,73 @@ const Paso1 = () => {
         setCurrentIndex((prevIndex) => Math.min(prevIndex + visibleItems, maxIndex));
     };
 
+    const [datesWithPrices, setDatesWithPrices] = useState([]);
+    const [selectedPrice, setSelectedPrice] = useState(null); // Estado para almacenar el precio seleccionado
 
+    // Función para generar fechas y precios
+    const generateDatesWithPrices = (startDate, count) => {
+      const datesWithPrices = [];
+      const currentDate = new Date(startDate);
+  
+      for (let i = 0; i < count; i++) {
+        const date = new Date(currentDate);
+        const price = Math.floor(Math.random() * 10000 + 70000); // Genera precios aleatorios
+        datesWithPrices.push({ date, price });
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+  
+      return datesWithPrices;
+    };
+  
+    // Guardar y obtener precios en el localStorage
+    const getStoredPrices = () => {
+      const today = new Date().toLocaleDateString(); // Obtenemos la fecha actual en formato de string
+      const storedPrices = JSON.parse(localStorage.getItem('prices'));
+  
+      if (storedPrices && storedPrices.date === today) {
+        // Si ya hay precios guardados para hoy, los utilizamos
+        // return storedPrices.prices;
+
+        // Si no hay precios para hoy, los generamos y los guardamos
+        const startDate = new Date();
+        const itemCount = 300; // Número de elementos en el carrusel
+        const newPrices = generateDatesWithPrices(startDate, itemCount);
+  
+        // Guardar los precios con la fecha actual en el localStorage
+        localStorage.setItem('prices', JSON.stringify({ date: today, prices: newPrices }));
+  
+        return newPrices;
+
+      } else {
+        // Si no hay precios para hoy, los generamos y los guardamos
+        const startDate = new Date();
+        const itemCount = 300; // Número de elementos en el carrusel
+        const newPrices = generateDatesWithPrices(startDate, itemCount);
+  
+        // Guardar los precios con la fecha actual en el localStorage
+        localStorage.setItem('prices', JSON.stringify({ date: today, prices: newPrices }));
+  
+        return newPrices;
+      }
+    };
+  
+    // Al cargar el componente, obtenemos o generamos los precios
+    useEffect(() => {
+      const prices = getStoredPrices();
+      setDatesWithPrices(prices);
+
+       // Selecciona el precio del primer elemento al cargar el componente
+    if (prices.length > 0) {
+        setSelectedPrice(prices[0].price);
+      }
+    }, []);
+  
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const visibleItems = 7; // Cantidad de fechas visibles a la vez
+    const itemWidth = 170; // Ancho de cada elemento del carrusel
+    const totalWidth = itemWidth;
+    const carouselWidth = totalWidth * visibleItems; // Ancho total del carrusel visible
+    const maxIndex = datesWithPrices.length - visibleItems; // Índice máximo permitido
 
     useEffect(() => {
         setOrigenNormal(origen.replace(/\s?\(.*?\)/, ''));
@@ -226,8 +307,9 @@ const Paso1 = () => {
         setSelectedDate(date);
     }
 
-    const handleDateClick = (date) => {
+    const handleDatePriceClick = (date, price) => {
         setSelectedDate(date);
+        setSelectedPrice(price);
         change(date);
 
     };
@@ -243,16 +325,43 @@ const Paso1 = () => {
         setExpanded(isExpanded ? panel : false);
     };
 
-    const enviarDatosMovil = (vuelo) => {
+    const enviarDatosMovilPrecioBasic = (vuelo) => {
         const origenMovil = vuelo.codigo_origen.replace(/\s?\(.*?\)/, '');
         const destinoMovil = vuelo.codigo_destino.replace(/\s?\(.*?\)/, '');
-        navigate(`/resumen/${origenMovil}/${destinoMovil}/${vuelo.codigo_origen}/${vuelo.codigo_destino}/${vuelo.tiempo_vuelo}/${vuelo.valor_pasaje}/${vuelo.hora_salida}/${vuelo.hora_llegada}/${aeropuertoOrigen.aeropuerto}/${aeropuertoDestino.aeropuerto}`);
+        const precioBasic = selectedPrice.toLocaleString('es-CO');
+        navigate(`/resumen/${origenMovil}/${destinoMovil}/${vuelo.codigo_origen}/${vuelo.codigo_destino}/${vuelo.tiempo_vuelo}/${precioBasic}/${vuelo.hora_salida}/${vuelo.hora_llegada}/${aeropuertoOrigen.aeropuerto}/${aeropuertoDestino.aeropuerto}`);
 
     };
 
-    const clickBotonAccordion = () => {
+    const enviarDatosMovilPrecioClassic = (vuelo) => {
+        const origenMovil = vuelo.codigo_origen.replace(/\s?\(.*?\)/, '');
+        const destinoMovil = vuelo.codigo_destino.replace(/\s?\(.*?\)/, '');
+        const precioClassic = (parseFloat(selectedPrice) + 119000).toLocaleString('es-CO');
+        navigate(`/resumen/${origenMovil}/${destinoMovil}/${vuelo.codigo_origen}/${vuelo.codigo_destino}/${vuelo.tiempo_vuelo}/${precioClassic}/${vuelo.hora_salida}/${vuelo.hora_llegada}/${aeropuertoOrigen.aeropuerto}/${aeropuertoDestino.aeropuerto}`);
 
-        navigate(`/resumen/${origenNormal}/${destinoNormal}/${vueloOrigen}/${vueloDestino}/${vueloTiempo}/${vueloPrecio}/${vueloSalida}/${vueloLlegada}/${aeropuertoOrigen.aeropuerto}/${aeropuertoDestino.aeropuerto}`);
+    };
+
+    const enviarDatosMovilPrecioFlex = (vuelo) => {
+        const origenMovil = vuelo.codigo_origen.replace(/\s?\(.*?\)/, '');
+        const destinoMovil = vuelo.codigo_destino.replace(/\s?\(.*?\)/, '');
+       const precioFlex = (parseFloat(selectedPrice) + 160650).toLocaleString('es-CO');
+        navigate(`/resumen/${origenMovil}/${destinoMovil}/${vuelo.codigo_origen}/${vuelo.codigo_destino}/${vuelo.tiempo_vuelo}/${precioFlex}/${vuelo.hora_salida}/${vuelo.hora_llegada}/${aeropuertoOrigen.aeropuerto}/${aeropuertoDestino.aeropuerto}`);
+
+    };
+
+    const clickBasic = () => {
+        const precioBasic = selectedPrice.toLocaleString('es-CO')
+        navigate(`/resumen/${origenNormal}/${destinoNormal}/${vueloOrigen}/${vueloDestino}/${vueloTiempo}/${precioBasic}/${vueloSalida}/${vueloLlegada}/${aeropuertoOrigen.aeropuerto}/${aeropuertoDestino.aeropuerto}`);
+    }
+
+    const clickClassic = () => {
+        const precioClassic = (parseFloat(selectedPrice) + 119000).toLocaleString('es-CO')
+        navigate(`/resumen/${origenNormal}/${destinoNormal}/${vueloOrigen}/${vueloDestino}/${vueloTiempo}/${precioClassic}/${vueloSalida}/${vueloLlegada}/${aeropuertoOrigen.aeropuerto}/${aeropuertoDestino.aeropuerto}`);
+    }
+
+    const clickFlex = () => {
+        const precioFlex = (parseFloat(selectedPrice) + 160650).toLocaleString('es-CO')
+        navigate(`/resumen/${origenNormal}/${destinoNormal}/${vueloOrigen}/${vueloDestino}/${vueloTiempo}/${precioFlex}/${vueloSalida}/${vueloLlegada}/${aeropuertoOrigen.aeropuerto}/${aeropuertoDestino.aeropuerto}`);
     }
 
     const abrirVentana = (event, id) => {
@@ -300,9 +409,15 @@ const Paso1 = () => {
                                 width: `${carouselWidth}px` // Ancho total del carrusel para visualizar 7 elementos
                             }}
                         >
-                            {datesWithPrices.map(({ date, price }, index) => (
+                            {datesWithPrices.map(({ date, price }, index) => {
+            // Almacenar el precio en el estado al renderizar el carrusel
+            if (index === 0 && selectedPrice === null) {
+              setSelectedPrice(price); // Guardar el precio del primer elemento al cargarse
+            }
+
+            return ( 
                                 <div className="carousel-item-content"
-                                    key={index} onChange={change} onClick={() => handleDateClick(date)}
+                                    key={index} onChange={change} onClick={() => handleDatePriceClick(date, price)}
                                     style={{
                                         border: isSelectedDate(date) ? '1px solid rgb(123, 214, 123)' : 'none',
                                         fontWeight: isSelectedDate(date) ? 'bold' : 'normal',
@@ -311,8 +426,8 @@ const Paso1 = () => {
                                 >
                                     <label className='label_fecha'>{formatDate(date)}</label>
                                     <label className='label_copCarrusel'>Desde<label className='label_precioCarrusel' >${`${formatPrice(price)}`}</label> COP </label>
-                                </div>
-                            ))}
+                                </div>);
+                            })}
                         </div>
                     </div>
                     <button className="carousel-control next" onClick={handleNext}>&#10095;</button>
@@ -364,7 +479,7 @@ const Paso1 = () => {
                                                     <div className='div_valorPasaje'>
 
                                                         <label className='label_valorPasaje'>
-                                                            ${vuelo.valor_pasaje} COP
+                                                        ${`${formatPrice(selectedPrice)}`} COP
 
 
                                                         </label>
@@ -402,7 +517,7 @@ const Paso1 = () => {
 
                                             <div className='div_valorPasajeMovil'>
                                                 <label className='label_valorPasajeMovil'>
-                                                    ${vuelo.valor_pasaje} COP
+                                                ${`${formatPrice(selectedPrice)}`} COP
                                                 </label>
                                             </div>
                                         </div>
@@ -410,12 +525,13 @@ const Paso1 = () => {
                                 </AccordionSummary>
                                 <AccordionDetails>
                                     <div className='CardEscritorio'>
-                                        <p className='tituloCardMovil' >ECONOMICA</p>
+                                    <p className='tituloCard' style={{textAlign:'center', fontWeight:'bold'}} >ECONOMICA</p>
+                                        <p className='tituloCardMovil' style={{textAlign:'center'}} >ECONOMICA</p>
                                         <Typography>
                                             <Grid container spacing={3}>
                                                 <Grid item xs={12} sm={6} md={4} sx={{ marginTop: '-10px' }}>
                                                     <Card sx={{
-                                                        maxWidth: 345, margin: '0 auto', borderRadius: '15px', height: '100%', paddingBottom: '50px', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                                        maxWidth: 345, margin: '0 auto', borderRadius: '15px', height: '100%', paddingBottom: '10px', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
                                                         WebkitBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
                                                         MozBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)'
                                                     }}
@@ -429,7 +545,7 @@ const Paso1 = () => {
                                                                 <img src={img_basic} style={{ marginTop: '-10px', marginBottom: '-5px' }} onClick={handleClickOpen} />
                                                             </Typography>
                                                         </CardContent>
-                                                        <CardActions sx={{ justifyContent: 'center', marginTop: '30px' }}>
+                                                        <CardActions sx={{ justifyContent: 'center' }}>
 
                                                             <Button variant="contained" sx={{
                                                                 textTransform: 'none',
@@ -440,10 +556,10 @@ const Paso1 = () => {
                                                                 width: '250px',
                                                                 '&:hover': { backgroundColor: darken('rgb(226, 17, 17)', 0.2) }
 
-                                                            }} onClick={() => handleClickOpen(vuelo)}  >${vuelo.valor_pasaje} COP</Button>
+                                                            }} onClick={() => handleClickOpen(vuelo)}  >${`${formatPrice(selectedPrice)}`} COP</Button>
                                                         </CardActions>
                                                         <Typography variant="p" color="text.secondary" sx={{ marginLeft: '120px', fontSize: '12px' }}>
-                                                            Precio por pasajero
+                                                         Precio por pasajero
                                                         </Typography>
 
                                                     </Card>
@@ -451,7 +567,7 @@ const Paso1 = () => {
                                                 </Grid>
                                                 <Grid item xs={12} sm={6} md={4} style={{ paddingTop: '-10px' }}>
                                                     <Card sx={{
-                                                        maxWidth: 345, margin: '0 auto', border: '2px solid rgb(204, 51, 140)', borderRadius: '15px', height: '100%', paddingBottom: '50px', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
+                                                        maxWidth: 345, margin: '0 auto', border: '2px solid rgb(204, 51, 140)', borderRadius: '15px', height: '100%', paddingBottom: '10px', boxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
                                                         WebkitBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)',
                                                         MozBoxShadow: '1px 5px 10px 5px rgba(0, 0, 0, 0.16)'
                                                     }}
@@ -462,10 +578,10 @@ const Paso1 = () => {
 
                                                             </Typography>
                                                             <Typography variant="body2" color="text.secondary">
-                                                                <img src={img_classic} style={{ marginTop: '30px', marginBottom: '-5px' }} />
+                                                                <img src={img_classic} style={{ marginTop: '-17px', marginBottom: '-5px' }} />
                                                             </Typography>
                                                         </CardContent>
-                                                        <CardActions sx={{ justifyContent: 'center', marginTop: '-10px' }}>
+                                                        <CardActions sx={{ justifyContent: 'center', marginTop: '2px' }}>
                                                             <Button variant="contained" sx={{
                                                                 textTransform: 'none',
                                                                 backgroundColor: 'rgb(204, 51, 140)',
@@ -475,7 +591,11 @@ const Paso1 = () => {
                                                                 width: '250px',
                                                                 '&:hover': { backgroundColor: darken('rgb(204, 51, 140)', 0.2) }
 
-                                                            }} >${(parseFloat(vuelo.valor_pasaje.replace(/\./g, '')) + 70000).toLocaleString('es-CO')} COP</Button>
+                                                            }}
+                                                            
+                                                            onClick={() => handleClickOpenClassic(vuelo)} 
+                                                            
+                                                            >${(parseFloat(selectedPrice) + 119000).toLocaleString('es-CO')} COP</Button>
                                                         </CardActions>
                                                         <Typography variant="p" color="text.secondary" sx={{ marginLeft: '120px', fontSize: '12px' }}>
                                                             Precio por pasajero
@@ -493,15 +613,15 @@ const Paso1 = () => {
                                                     }}
                                                         className='flex'
                                                     >
-                                                        <CardContent>
+                                                        <CardContent >
                                                             <Typography variant="h5" component="div">
 
                                                             </Typography>
                                                             <Typography variant="body2" color="text.secondary">
-                                                                <img src={img_flex} style={{ marginTop: '-15px', marginBottom: '1px' }} />
+                                                                <img src={img_flex} style={{ marginTop: '-9px', marginBottom: '1px' }} />
                                                             </Typography>
                                                         </CardContent>
-                                                        <CardActions sx={{ justifyContent: 'center', marginTop: '25px' }}>
+                                                        <CardActions sx={{ justifyContent: 'center', marginTop: '-5px' }}>
                                                             <Button variant="contained" sx={{
                                                                 textTransform: 'none',
                                                                 backgroundColor: 'rgb(247, 123, 8)',
@@ -511,7 +631,11 @@ const Paso1 = () => {
                                                                 width: '250px',
                                                                 '&:hover': { backgroundColor: darken('rgb(247, 123, 8)', 0.2) }
 
-                                                            }} >${(parseFloat(vuelo.valor_pasaje.replace(/\./g, '')) + 110000).toLocaleString('es-CO')} COP</Button>
+                                                            }}
+                                                            
+                                                            onClick={() => clickFlex(vuelo)}
+                                                            
+                                                            >${(parseFloat(selectedPrice) + 160650).toLocaleString('es-CO')} COP</Button>
                                                         </CardActions>
                                                         <Typography variant="p" color="text.secondary" sx={{ marginLeft: '120px', fontSize: '12px' }}>
                                                             Precio por pasajero
@@ -549,8 +673,8 @@ const Paso1 = () => {
 
 
                                             </CardActions>
-                                            <Typography variant="body2" color="text.secondary" onClick={() => enviarDatosMovil(vuelo)} sx={{ backgroundColor: 'rgb(226, 17, 17)', width: '100%', height: '50px', cursor: 'pointer', borderBottomLeftRadius: '15px', borderBottomRightRadius: '15px', fontSize: '12px' }}>
-                                                <p style={{ textAlign: ' center', fontSize: '15px', fontWeight: 'bold', color: ' white', paddingTop: '10px' }}>${vuelo.valor_pasaje} COP</p>
+                                            <Typography variant="body2" color="text.secondary" onClick={() => enviarDatosMovilPrecioBasic(vuelo)} sx={{ backgroundColor: 'rgb(226, 17, 17)', width: '100%', height: '50px', cursor: 'pointer', borderBottomLeftRadius: '15px', borderBottomRightRadius: '15px', fontSize: '12px' }}>
+                                                <p style={{ textAlign: ' center', fontSize: '15px', fontWeight: 'bold', color: ' white', paddingTop: '10px' }}>${`${formatPrice(selectedPrice)}`} COP</p>
                                                 <p style={{ textAlign: ' center', fontSize: '13px', color: ' white', marginTop: '-20px' }}>Precio por pasajero</p>
                                             </Typography>
 
@@ -577,8 +701,8 @@ const Paso1 = () => {
                                             </CardContent>
                                             <CardActions sx={{ justifyContent: 'center', marginTop: '-10px' }}>
                                             </CardActions>
-                                            <Typography variant="body2" color="text.secondary" onClick={() => handleClickOpen(vuelo)} sx={{ backgroundColor: 'rgb(204, 51, 140)', width: '100%', height: '50px', borderBottomLeftRadius: '15px', borderBottomRightRadius: '15px', fontSize: '12px' }}>
-                                                <p style={{ textAlign: ' center', fontSize: '15px', fontWeight: 'bold', color: ' white', paddingTop: '10px' }}>${vuelo.valor_pasaje} COP</p>
+                                            <Typography variant="body2" color="text.secondary" onClick={() => enviarDatosMovilPrecioClassic(vuelo)} sx={{ backgroundColor: 'rgb(204, 51, 140)', width: '100%', height: '50px', cursor: 'pointer', borderBottomLeftRadius: '15px', borderBottomRightRadius: '15px', fontSize: '12px' }}>
+                                                <p style={{ textAlign: ' center', fontSize: '15px', fontWeight: 'bold', color: ' white', paddingTop: '10px' }}>${(parseFloat(selectedPrice) + 119000).toLocaleString('es-CO')} COP</p>
                                                 <p style={{ textAlign: ' center', fontSize: '13px', color: ' white', marginTop: '-20px' }}>Precio por pasajero</p>
                                             </Typography>
 
@@ -603,8 +727,8 @@ const Paso1 = () => {
                                             </CardContent>
                                             <CardActions sx={{ justifyContent: 'center', marginTop: '25px' }}>
                                             </CardActions>
-                                            <Typography variant="body2" color="text.secondary" onClick={() => handleClickOpen(vuelo)} sx={{ backgroundColor: 'rgb(247, 123, 8)', width: '100%', height: '50px', borderBottomLeftRadius: '15px', borderBottomRightRadius: '15px', fontSize: '12px' }}>
-                                                <p style={{ textAlign: ' center', fontSize: '15px', fontWeight: 'bold', color: ' white', paddingTop: '10px' }}>${vuelo.valor_pasaje} COP</p>
+                                            <Typography variant="body2" color="text.secondary" onClick={() => enviarDatosMovilPrecioFlex(vuelo)} sx={{ backgroundColor: 'rgb(247, 123, 8)', width: '100%', height: '50px', cursor: 'pointer', borderBottomLeftRadius: '15px', borderBottomRightRadius: '15px', fontSize: '12px' }}>
+                                                <p style={{ textAlign: ' center', fontSize: '15px', fontWeight: 'bold', color: ' white', paddingTop: '10px' }}>${(parseFloat(selectedPrice) + 160650).toLocaleString('es-CO')} COP</p>
                                                 <p style={{ textAlign: ' center', fontSize: '13px', color: ' white', marginTop: '-20px' }}>Precio por pasajero</p>
                                             </Typography>
 
@@ -863,17 +987,23 @@ const Paso1 = () => {
                         aria-labelledby="alert-dialog-title"
                         aria-describedby="alert-dialog-description"
                     >
-                        <DialogTitle id="alert-dialog-title">
-
-                        </DialogTitle>
-                        <DialogContent>
+                        
+                        <DialogContent
+                        >
                             <DialogContentText id="alert-dialog-description">
                                 <img src={imagen_opcion} />
 
                             </DialogContentText>
+                            <label style={{textDecoration:'underline',
+                                 color: '#558bff ',
+                                 marginTop:'10px', 
+                                 marginLeft:'70px',
+                                 fontSize:'15px',
+                                 cursor:'pointer'
+                                 
+                                 }} onClick={clickBasic} >Continuar con basic</label>
                             <button style={{
                                 textAlign: 'center',
-                                marginTop: '20px',
                                 backgroundColor: 'black',
                                 width: '250px',
                                 color: 'white',
@@ -881,8 +1011,47 @@ const Paso1 = () => {
                                 borderRadius: '30px',
                                 fontSize: '17px',
                                 fontWeight: 'bold',
-                                marginLeft: '150px'
-                            }} onClick={clickBotonAccordion} >¡Quiero basic!</button>
+                                float:'right'
+                            }} onClick={clickClassic} >¡Quiero classic!</button>
+                        </DialogContent>
+                    </Dialog>
+                </React.Fragment>
+
+                <React.Fragment>
+
+                    <Dialog
+                        open={openClassic}
+                        onClose={handleCloseClassic}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                    >
+                        
+                        <DialogContent
+                        >
+                            <DialogContentText id="alert-dialog-description">
+                                <img src={imagen_opcion_classic}  style={{ marginTop:'-30px'}}/>
+
+                            </DialogContentText>
+                            <label style={{textDecoration:'underline',
+                                 color: 'black ',
+                                 marginTop:'10px', 
+                                 marginLeft:'70px',
+                                 fontSize:'15px',
+                                 cursor: 'pointer'
+                                 
+                                 }} onClick={clickClassic} >Continuar con classic</label>
+                            <button style={{
+                                textAlign: 'center',
+                                backgroundColor: 'orange',
+                                width: '250px',
+                                color: 'white',
+                                padding: '10px',
+                                border:'none',
+                                borderRadius: '30px',
+                                fontSize: '17px',
+                                fontWeight: 'bold',
+                                float:'right'
+                            }} onClick={clickFlex} >¡Quiero flex!</button>
                         </DialogContent>
                     </Dialog>
                 </React.Fragment>
